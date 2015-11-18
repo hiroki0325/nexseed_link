@@ -2,6 +2,9 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
+  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   <title>オンライン英会話</title>
 </head>
 <body>
@@ -10,31 +13,18 @@
   &nbsp;&nbsp;&nbsp;&nbsp;
   <button type="button" onclick="connect();">授業開始</button>
   <button type="button" onclick="hangUp();">授業終了</button>
-  <br />
+  <br>
   <div>
    <video id="local-video" autoplay style="width: 240px; height: 180px; border: 1px solid black;"></video>
    <video id="remote-video" autoplay style="width: 240px; height: 180px; border: 1px solid black;"></video>
   </div>
 
-  <p>
-<br />
-   <textarea id="text-for-send-sdp" rows="0" cols="0" disabled="1"></textarea>
-  </p>
-  <p>
-   <br />
-   <textarea id="text-for-receive-sdp" rows="0" cols="0"></textarea><br />
-   <button type="button" onclick="onSDP();"></button>
-  </p>
+  <div id="layer2">
+    <input type="text" name="message" placeholder="発言を入力">
+  </div>
 
-  <p>
-<br />
-   <textarea id="text-for-send-ice" rows="0" cols="0" disabled="1"></textarea>
-  </p>
-  <p>
-<br />
-   <textarea id="text-for-receive-ice" rows="0" cols="0"></textarea><br />
-   <button type="button" onclick="onICE();"></button>
-  </p>
+  <div id="tmpl" style="display:none;">
+  </div>
 
   <!-- socket -->
   <script src="https://cdn.socket.io/socket.io-1.3.7.js"></script>
@@ -97,10 +87,10 @@ function getRoomName() { // たとえば、 URLに  ?roomname  とする
 
 
   // ----------------- handshake --------------
-  var textForSendSDP = document.getElementById('text-for-send-sdp');
-  var textForSendICE = document.getElementById('text-for-send-ice');
-  var textToReceiveSDP = document.getElementById('text-for-receive-sdp');
-  var textToReceiveICE = document.getElementById('text-for-receive-ice');
+  // var textForSendSDP = document.getElementById('text-for-send-sdp');
+  // var textForSendICE = document.getElementById('text-for-send-ice');
+  // var textToReceiveSDP = document.getElementById('text-for-receive-sdp');
+  // var textToReceiveICE = document.getElementById('text-for-receive-ice');
   var iceSeparator = '------ ICE Candidate -------';
   var CR = String.fromCharCode(13);
 
@@ -155,7 +145,7 @@ function getRoomName() { // たとえば、 URLに  ?roomname  とする
     var text = JSON.stringify(sdp);
   console.log("---sending sdp text ---");
   console.log(text);
-  textForSendSDP.value = text;
+  textForSendSDP = text;
 
   // send via socket
   socket.json.send(sdp);
@@ -165,6 +155,7 @@ function getRoomName() { // たとえば、 URLに  ?roomname  とする
     var text = JSON.stringify(candidate);
   console.log("---sending candidate text ---");
   console.log(text);
+  textForSendICE = text;
   textForSendICE.value = (textForSendICE.value + CR + iceSeparator + CR + text + CR);
   textForSendICE.scrollTop = textForSendICE.scrollHeight;
 
@@ -307,6 +298,39 @@ function prepareNewConnection(id) {
     peerConnection.close();
     peerConnection = null;
     peerStarted = false;
+  }
+
+
+  var ENTER_KEY = 13;
+
+  $('input[name="message"]').on('keydown', function(e){
+    if (ENTER_KEY == e.keyCode) {
+      socket.emit('send-message',$(this).val() );
+      $(this).val('');
+    }
+  });
+
+  socket.on('push-message', function(text){
+      var $message;
+      $message = time()+ escapeHTML2(text) + "<br>";
+      // $($message).html('<br>');
+      $('#tmpl').prepend($message).fadeIn();
+  });
+
+  function escapeHTML2(html) {
+    return jQuery('<div>').text(html).html();
+  }
+
+  function time(){
+    //時刻データを取得して変数jikanに格納する
+    var jikan= new Date();
+
+   //時・分・秒を取得する
+   var hour = jikan.getHours();
+   var minute = jikan.getMinutes();
+   var second = jikan.getSeconds();
+
+    return (hour+":"+minute+":"+second+"　");
   }
 
   </script>

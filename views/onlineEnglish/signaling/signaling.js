@@ -17,6 +17,13 @@ io.sockets.on('connection', function(socket) {
     emitMessage('user disconnected');
   });
 
+  socket.on('send-message', function(text){
+    if (text.length) {
+      io.sockets.in(socket.name).emit('push-message', text);
+      console.log('recieved text');
+    }
+  });
+
   // 会議室名が指定されていたら、室内だけに通知
   function emitMessage(type, message) {
     var roomname;
