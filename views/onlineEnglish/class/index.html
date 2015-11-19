@@ -13,8 +13,6 @@
    <video id="remote-video" autoplay style="width: 240px; height: 180px; border: 1px solid black;"></video>
   </div>
   <br>
-  <button type="button" onclick="startVideo();">ビデオ開始</button>
-  <button type="button" onclick="stopVideo();">ビデオ停止</button>
   <button type="button" onclick="connect();">授業開始</button>
   <button type="button" onclick="hangUp();">授業終了</button>
 
@@ -165,10 +163,10 @@ function getRoomName() { // たとえば、 URLに  ?roomname  とする
   // ---------------------- video handling -----------------------
   // start local video
     function startVideo() {
-      navigator.webkitGetUserMedia({video: true, audio: true},  // <--- audio: true に変更
+      navigator.webkitGetUserMedia({video: true, audio: true},
         function (stream) { // success
           localStream = stream;
-          localVideo.src = window.webkitURL.createObjectURL(stream);
+          localVideo.src = window.URL.createObjectURL(stream);
           localVideo.play();
           localVideo.volume = 0;
         },
@@ -179,11 +177,9 @@ function getRoomName() { // たとえば、 URLに  ?roomname  とする
       );
     }
 
-  // stop local video
-  function stopVideo() {
-    localVideo.src = "";
-    localStream.stop();
-  }
+    $(document).ready( function(){
+    startVideo();
+    });
 
   // ---------------------- connection handling -----------------------
 function prepareNewConnection(id) {
@@ -218,7 +214,7 @@ function prepareNewConnection(id) {
     // when remote adds a stream, hand it on to the local video element
     function onRemoteStreamAdded(event) {
       console.log("Added remote stream");
-      remoteVideo.src = window.webkitURL.createObjectURL(event.stream);
+      remoteVideo.src = window.URL.createObjectURL(event.stream);
     }
 
     // when remote removes a stream, remove it from the local video element
@@ -299,10 +295,8 @@ function prepareNewConnection(id) {
     peerStarted = false;
   }
 
-
-  var ENTER_KEY = 13;
-
   $('input[name="message"]').on('keydown', function(e){
+    var ENTER_KEY = 13;
     if (ENTER_KEY == e.keyCode) {
       socket.emit('send-message',$(this).val() );
       $(this).val('');
