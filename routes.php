@@ -17,7 +17,8 @@
     }
 
     // リソース名を複数形に変換する処理
-    $plural_resorce = singular2plural($resource);
+    //// 今は完全なMVCフレームワークでないため、コメントアウト
+    // $plural_resorce = singular2plural($resource);
 
     // viewの形成を楽にするヘルパーを読み込み
     // include('./views/helpers/application_helper.php');
