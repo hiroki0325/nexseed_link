@@ -3,10 +3,6 @@
 
     session_start();
 
-    function h($value){
-      return htmlspecialchars($value,ENT_QUOTES,'UTF-8');
-    }
-
     if(isset($_COOKIE['email'])){
       if($_COOKIE['email']!=''){
         $_POST['email']=$_COOKIE['email'];
@@ -55,7 +51,7 @@
 </head>
 <body>
   <h1>ログイン</h1>
-  <p>&raquo;<a href="join/">入会手続きをする</a></p>
+  <p>&raquo;<a href="">入会手続きをする</a></p>
   <form action="" method="post">
 
     <div>

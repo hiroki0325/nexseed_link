@@ -7,6 +7,6 @@
 <body>
   <h1>会員登録完了</h1>
   <p>ユーザーの登録処理が完了しました。</p>
-  <p><a href="../login.php">ログインする</a></p>
+  <p><a href="../login/login">ログインする</a></p>
 </body>
 </html>

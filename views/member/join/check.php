@@ -1,15 +1,12 @@
 <?php
   session_start();
-  require('../dbconnect.php');
     date_default_timezone_set('Asia/Tokyo');
 
-  function h($value){
-    return htmlspecialchars($value,ENT_QUOTES,'UTF-8');
-  }
+ 
 
   //情報が入っていなかった場合、index.phpにもどる
   if(!isset($_SESSION["join"])){
-    header("Location: index.php");
+    header("Location: index");
     exit();
   }
 
@@ -32,7 +29,7 @@
       mysqli_query($db,$sql)or die(mysqli_error($db));
       unset($_SESSION["join"]);
 
-      header('Location: thanks.php');
+      header('Location: thanks');
       exit();
     }
 ?>
@@ -104,7 +101,7 @@
   </div>
 
   <div>
-    <a href="index.php?action=rewrite">&laquo;&nbsp;書き直す</a> |
+    <a href="index?action=rewrite">&laquo;&nbsp;書き直す</a> |
     <button type="submit">登録する</button>
   </div>
  

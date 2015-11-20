@@ -1,11 +1,7 @@
 <?php
     session_start();
-    require('../dbconnect.php');
+  
     date_default_timezone_set('Asia/Tokyo');
-
-    function h($value){
-      return htmlspecialchars($value,ENT_QUOTES,'UTF-8');
-    }
 
     //入力しなかった場合入力を促す
     if(!empty($_POST)){
@@ -68,11 +64,11 @@
 
       if(empty($error)){
         $image=date('YmdHis').$_FILES["image"]["name"];
-        move_uploaded_file($_FILES["image"]["tmp_name"], '../user_picture/'.$image);
+        move_uploaded_file($_FILES["image"]["tmp_name"], 'user_picture/'.$image);
         $_SESSION["join"]=$_POST;
         $_SESSION["join"]["image"]=$image;
         $_SESSION["join"]["status"]=$status;
-        header('Location: check.php');
+        header('Location: check');
         exit();
       }
 
@@ -81,7 +77,7 @@
     //書き直し処理
   if(isset($_REQUEST['action'])){
     if($_REQUEST['action']=='rewrite'){
-      $_SESSION['join']=$_POST;
+      $_POST = $_SESSION['join'];
       $error['rewrite']=true;
     }
   }

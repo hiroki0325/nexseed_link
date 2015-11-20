@@ -1,7 +1,4 @@
 <?php 
-    function h($value){
-      return htmlspecialchars($value,ENT_QUOTES,'UTF-8');
-    }
 
     //入力しなかった場合入力を促す
     if(!empty($_POST)){
@@ -13,7 +10,7 @@
       }
 
       if(empty($error)){
-          header('Location: index.php');
+          header('Location: index');
           exit();
       }
     }
