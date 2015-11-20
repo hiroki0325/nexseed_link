@@ -64,7 +64,7 @@
 
       if(empty($error)){
         $image=date('YmdHis').$_FILES["image"]["name"];
-        move_uploaded_file($_FILES["image"]["tmp_name"], 'user_picture/'.$image);
+        move_uploaded_file($_FILES["image"]["tmp_name"], './views/member/user_picture/'.$image);
         $_SESSION["join"]=$_POST;
         $_SESSION["join"]["image"]=$image;
         $_SESSION["join"]["status"]=$status;
@@ -75,12 +75,12 @@
     }
 
     //書き直し処理
-  if(isset($_REQUEST['action'])){
-    if($_REQUEST['action']=='rewrite'){
-      $_POST = $_SESSION['join'];
-      $error['rewrite']=true;
+    if(isset($_REQUEST['action'])){
+      if($_REQUEST['action']=='rewrite'){
+          $_POST = $_SESSION['join'];
+          $error['rewrite']=true;
+      }
     }
-  }
 ?>
 
 
@@ -99,17 +99,17 @@
   <div>
     <label for="">名前</label>
     <?php
-    if(isset($_POST["name"])){
-      echo sprintf('<input type="text" name="name" value="%s">',
-        h($_POST["name"])
+      if(isset($_POST["name"])){
+          echo sprintf('<input type="text" name="name" value="%s">',
+          h($_POST["name"])
         );
-     }else{
-      echo'<input type="text" name="name">';
-     }
+      }else{
+          echo'<input type="text" name="name">';
+      }
     ?>
     <?php if(isset($error["name"])): ?>
-     <?php if ($error["name"]=='blank'): ?>
-      <p class="error">* 名前を入力してください</p>
+      <?php if ($error["name"]=='blank'): ?>
+        <p class="error">* 名前を入力してください</p>
       <?php endif; ?>
     <?php endif; ?>
   </div>
@@ -117,17 +117,17 @@
   <div>
     <label for="">English Name</label>
     <?php
-    if(isset($_POST["eg_name"])){
-      echo sprintf('<input type="text" name="eg_name" pattern="^[0-9A-Za-z]+$" value="%s">＊半角英字',
-        h($_POST["eg_name"])
+      if(isset($_POST["eg_name"])){
+          echo sprintf('<input type="text" name="eg_name" pattern="^[0-9A-Za-z]+$" value="%s">＊半角英字',
+          h($_POST["eg_name"])
         );
-     }else{
-      echo'<input type="text" name="eg_name" pattern="^[0-9A-Za-z]+$">＊半角英字';
-     }
+      }else{
+          echo'<input type="text" name="eg_name" pattern="^[0-9A-Za-z]+$">＊半角英字';
+      }
     ?>
     <?php if(isset($error["eg_name"])): ?>
-     <?php if ($error["eg_name"]=='blank'): ?>
-      <p class="error">* 名前を入力してください</p>
+    <?php if ($error["eg_name"]=='blank'): ?>
+        <p class="error">* 名前を入力してください</p>
       <?php endif; ?>
     <?php endif; ?>
   </div>
@@ -136,19 +136,19 @@
     <label for="">メールアドレス</label>
     <?php 
       if(isset($_POST["email"])){
-        echo sprintf(' <input type="text" name="email" value="%s">',
-            h($_POST["email"])
-          );
+          echo sprintf(' <input type="text" name="email" value="%s">',
+          h($_POST["email"])
+        );
       }else{
         echo '<input type="text" name="email">';
       }
     ?>
     <?php if(isset($error["email"])): ?>
-      <?php if ($error["email"]=='blank'): ?>
-        <p class="error">* メールアドレスを入力してください。</p>
-      <?php endif;?>
+        <?php if ($error["email"]=='blank'): ?>
+            <p class="error">* メールアドレスを入力してください。</p>
+        <?php endif;?>
         <?php if($error['email']=='duplicate'): ?>
-          <p class="error">*指定されたメールアドレスはすでに登録さています</p>
+            <p class="error">*指定されたメールアドレスはすでに登録さています</p>
         <?php endif; ?>
     <?php endif;?>
   </div>
@@ -157,20 +157,20 @@
     <label for="">パスワード</label>
       <?php 
         if(isset($_POST["password"])){
-          echo sprintf(' <input type="password" name="password" value="%s">',
-              h($_POST["password"])
-            );
+            echo sprintf(' <input type="password" name="password" value="%s">',
+            h($_POST["password"])
+          );
         }else{
-          echo '<input type="password" name="password">';
+            echo '<input type="password" name="password">';
         }
       ?>
       <?php if(isset($error["password"])): ?>
-        <?php if ($error["password"]=='blank'): ?>
-        <p class="error">* パスワードを入力してください。</p>
-        <?php endif;?>
-        <?php if ($error["password"]=='length'): ?>
-        <p class="error">* パスワードは４文字以上入力してください</p>
-        <?php endif;?>
+          <?php if ($error["password"]=='blank'): ?>
+              <p class="error">* パスワードを入力してください。</p>
+          <?php endif;?>
+          <?php if ($error["password"]=='length'): ?>
+              <p class="error">* パスワードは４文字以上入力してください</p>
+          <?php endif;?>
       <?php endif;?>
   </div>
 
@@ -178,17 +178,17 @@
     <label for="">留学開始日</label>  
     <?php 
       if(isset($_POST["start_day"])){
-        echo sprintf(' <input type="date" name="start_day" min="2013-04-01" max="2017-12-31" value=%d >',
-            h($_POST["start_day"])
-          );
+          echo sprintf(' <input type="date" name="start_day" min="2013-04-01" max="2017-12-31" value=%d >',
+          h($_POST["start_day"])
+        );
       }else{
-        echo '<input type="date" name="start_day">';
+          echo '<input type="date" name="start_day">';
       }
     ?>
     <?php if(isset($error["start_day"])): ?>
-      <?php if ($error["start_day"]=='blank'): ?>
-        <p class="error">* 日付を選択してください</p>
-      <?php endif;?>
+        <?php if ($error["start_day"]=='blank'): ?>
+            <p class="error">* 日付を選択してください</p>
+        <?php endif;?>
     <?php endif; ?>
   </div>
 
@@ -196,29 +196,29 @@
     <label for="">留学終了日</label>
     <?php 
       if(isset($_POST["end_day"])){
-        echo sprintf(' <input type="date" name="end_day" min="2013-04-01" max="2017-12-31" value=%d >',
-            h($_POST["end_day"])
-          );
+          echo sprintf(' <input type="date" name="end_day" min="2013-04-01" max="2017-12-31" value=%d >',
+          h($_POST["end_day"])
+        );
       }else{
-        echo '<input type="date" name="end_day">';
+          echo '<input type="date" name="end_day">';
       }
     ?>
     <?php if(isset($error["end_day"])): ?>
-      <?php if ($error["end_day"]=='blank'):  ?>
-        <p class="error">* 日付を選択してください</p>
-      <?php endif;?>
+        <?php if ($error["end_day"]=='blank'):  ?>
+            <p class="error">* 日付を選択してください</p>
+        <?php endif;?>
     <?php endif; ?>
   </div>
 
     <div>
       <lavel for="">プロフィール画像</lavel>
       <?php if(isset($error["image"])): ?>
-        <?php if ($error["image"]=='type'): ?>
-        <p class="error">* 画像形式はjpgもしくはgifを指定してください。</p>
-        <?php endif;?>
-        <?php if (!empty($error)): ?>
-        <p class="error">* 画像を改めて指定してください。</p>
-        <?php endif;?>
+          <?php if ($error["image"]=='type'): ?>
+              <p class="error">* 画像形式はjpgもしくはgifを指定してください。</p>
+          <?php endif;?>
+          <?php if (!empty($error)): ?>
+              <p class="error">* 画像を改めて指定してください。</p>
+          <?php endif;?>
       <?php endif;?>
       <input type="file" name="image">
     </div>
