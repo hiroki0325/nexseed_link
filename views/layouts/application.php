@@ -7,7 +7,7 @@
 <body>
   <h1>NexSeedLink</h1>
   <?php
-      if (isset($page)) {
+      if (!isset($page)) {
         include('./views/' . $function . '/' . $directry . '.php');
       } else {
         include('./views/' . $function . '/' . $directry .  '/' . $page . '.php');
