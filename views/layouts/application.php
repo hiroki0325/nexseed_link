@@ -7,8 +7,11 @@
 <body>
   <h1>NexSeedLink</h1>
   <?php
-      // require()関数と同じく、指定したパスのファイルを読み込む
-      include('./views/' . $function . '/' . $directry .  '/' . $page . '.php');
+      if (isset($page)) {
+        include('./views/' . $function . '/' . $directry . '.php');
+      } else {
+        include('./views/' . $function . '/' . $directry .  '/' . $page . '.php');
+      }
    ?>
 </body>
 </html>
