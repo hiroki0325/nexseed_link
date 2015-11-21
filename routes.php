@@ -1,4 +1,6 @@
 <?php
+    session_start();
+
     //// +++ DB接続 +++ ////
     require('dbconnect.php');
 
