@@ -1,4 +1,6 @@
 <?php
+    session_start();
+
     //// +++ DB接続 +++ ////
     require('dbconnect.php');
 
@@ -10,10 +12,13 @@
 
     $function = $params[0];
     $directry = $params[1];
-    $page = $params[2];
 
-    if (count($params) > 3) {
-        $id = $params[3];
+
+    if (count($params) > 2) {
+        $page = $params[2];
+        if (count($params) > 3) {
+            $id = $params[3];
+        }
     }
 
     // リソース名を複数形に変換する処理
