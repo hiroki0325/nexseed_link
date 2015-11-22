@@ -10,28 +10,30 @@
 
     if(!empty($_POST)){
       //ログインの処理
-        if($_POST['email']!='' && $_POST['password'] !=''){
-          $sql=sprintf('SELECT*FROM users WHERE email="%s" AND password="%s"',
-            mysqli_real_escape_string($db,$_POST['email']),
-            mysqli_real_escape_string($db,sha1($_POST['password']))
-          );
-          $record=mysqli_query($db,$sql)or die(mysqli_error($db));
+        if(isset($_POST['email'])){
+            if($_POST['email']!='' && $_POST['password'] !=''){
+              $sql=sprintf('SELECT*FROM users WHERE email="%s" AND password="%s"',
+                mysqli_real_escape_string($db,$_POST['email']),
+                mysqli_real_escape_string($db,sha1($_POST['password']))
+              );
+              $record=mysqli_query($db,$sql)or die(mysqli_error($db));
 
-          if($table = mysqli_fetch_assoc($record)){
-            $_SESSION['id']=$table['id'];
-            $_SESSION['time']=time();
-            //ログイン情報を記録する
-              if($_POST['save']=='on'){
-                setcookie('email',$_POST['email'],time()+60*60*24*14);
-                setcookie('password',$_POST['password'],time()+60*60*24*14);
+              if($table = mysqli_fetch_assoc($record)){
+                $_SESSION['id']=$table['id'];
+                $_SESSION['time']=time();
+                //ログイン情報を記録する
+                  if($_POST['save']=='on'){
+                    setcookie('email',$_POST['email'],time()+60*60*24*14);
+                    setcookie('password',$_POST['password'],time()+60*60*24*14);
+                  }
+                header('Location: ../index');
+                exit();
+              }else{
+                $error['login']='failed';
               }
-            header('Location: ../index');
-            exit();
-          }else{
-            $error['login']='failed';
-          }
-        }else{
-          $error['login']='blank';
+            }else{
+              $error['login']='blank';
+            }
         }
     }
 
