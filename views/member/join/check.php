@@ -1,17 +1,10 @@
 <?php
-    session_start();
-    date_default_timezone_set('Asia/Tokyo');
-
- 
-
   //情報が入っていなかった場合、index.phpにもどる
     if(!isset($_SESSION["join"])){
       header("Location: index");
       exit();
     }
 
-    $start_date = $_SESSION["join"]["start_day"];
-    $end_date = $_SESSION["join"]["end_day"];
 
     if(!empty($_POST)){
       $sql=sprintf('INSERT INTO users SET name="%s",eg_name="%s",
@@ -20,8 +13,8 @@
         mysqli_real_escape_string($db,$_SESSION["join"]["eg_name"]),
         mysqli_real_escape_string($db,$_SESSION["join"]["email"]),
         mysqli_real_escape_string($db,sha1($_SESSION["join"]["password"])),
-        mysqli_real_escape_string($db,$start_date),
-        mysqli_real_escape_string($db,$end_date),
+        mysqli_real_escape_string($db,$_SESSION["join"]["start_day"]),
+        mysqli_real_escape_string($db,$_SESSION["join"]["end_day"]),
         mysqli_real_escape_string($db,$_SESSION["join"]["status"]),
         mysqli_real_escape_string($db,$_SESSION["join"]["image"])
       );

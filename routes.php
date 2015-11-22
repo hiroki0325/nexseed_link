@@ -1,5 +1,7 @@
 <?php
     session_start();
+    date_default_timezone_set('Asia/Tokyo');
+
 
     //// +++ DB接続 +++ ////
     require('dbconnect.php');
