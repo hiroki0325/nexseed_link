@@ -1,6 +1,4 @@
 <?php
-    session_start();
-  
     date_default_timezone_set('Asia/Tokyo');
 
     //入力しなかった場合入力を促す

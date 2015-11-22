@@ -1,7 +1,4 @@
 <?php
-    require('dbconnect.php');
-    session_start();
-
     if(isset($_COOKIE['email'])){
         if($_COOKIE['email']!=''){
           $_POST['email']=$_COOKIE['email'];
@@ -28,7 +25,7 @@
                 setcookie('email',$_POST['email'],time()+60*60*24*14);
                 setcookie('password',$_POST['password'],time()+60*60*24*14);
               }
-            header('Location: index.php');
+            header('Location: ../index');
             exit();
           }else{
             $error['login']='failed';
@@ -50,7 +47,7 @@
 </head>
 <body>
   <h1>ログイン</h1>
-  <p>&raquo;<a href="">入会手続きをする</a></p>
+  <p>&raquo;<a href="../join/index">入会手続きをする</a></p>
   <form action="" method="post">
 
   <div>
@@ -60,7 +57,7 @@
     <?php else: ?>
         <input type="text" name="email">
     <?php endif; ?>
-    
+
     <?php if(isset($error)): ?>
         <?php if($error['login']=='blank'): ?>
             <p class="error"> *メールアドレスとパスワードをご記入ください</p>
