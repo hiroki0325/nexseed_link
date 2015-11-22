@@ -10,7 +10,7 @@
 
     if(!empty($_POST)){
       //ログインの処理
-        if(isset($_POST['email'])){
+        if(isset($_POST['password'])){
             if($_POST['email']!='' && $_POST['password'] !=''){
               $sql=sprintf('SELECT*FROM users WHERE email="%s" AND password="%s"',
                 mysqli_real_escape_string($db,$_POST['email']),
