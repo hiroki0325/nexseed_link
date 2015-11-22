@@ -92,7 +92,7 @@
 
     //ログアウト
     function logout(){
-       $_SESSION=$arrayName = array();
+       $_SESSION= array();
        if(ini_get("session.use_cokkie_params")){
          $params=session_get_cookie_params();
          setcookie(session_name(),'', time() - 42000,
