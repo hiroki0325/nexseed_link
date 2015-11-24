@@ -1,0 +1,10 @@
+#parent_box {
+  position:relative;
+  width:810px;
+  }
+#child_box {
+  position:absolute;
+  left:400px;
+  top:300px;
+  width:300px;
+  }
