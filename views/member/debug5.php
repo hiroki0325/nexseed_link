@@ -22,17 +22,27 @@
     }
 
     echo "<br>";
-    echo "status()の中身 = " . status();
+    echo "status()の中身 = " . status('id');
 
     echo "<br>";
 
+    $status = current_user('status_id');
+    if($status == 2) {
+        echo 'ステータス：来学予定者';
+    } elseif($status == 3) {
+        echo 'ステータス：在学生';
+    } elseif($status == 4) {
+        echo 'ステータス：卒業生';
+    } elseif($status == 5) {
+        echo 'ステータス：teacher';
+    } elseif($status == 1) {
+        echo 'ステータス：管理者';
+    } else {
+        echo 'ステータス：current_user()関数のエラー';
+    }
+
     echo "<br>";
-    // echo "current_user('email')の中身 = " . current_user('email');
-    echo "ユーザー名 : " . current_user('first_name') . ' ' . current_user('last_name');
-    echo "<br>";
-    echo "メールアドレス : " . current_user('email');
-    echo "<br>";
-    echo "留学期間 : " . current_user('start_day') . ' ~ ' . current_user('end_day');
+    echo "current_user('email')の中身 = " . current_user('email');
 
 
 ?>
@@ -44,8 +54,7 @@
   <title>hoge</title>
 </head>
 <body>
-  <h1>来学予定者</h1>
-    <img src="">
+  <h1>teacher</h1>
   <div>
     <a href="logout/logout">ログアウト</a>
   </div>

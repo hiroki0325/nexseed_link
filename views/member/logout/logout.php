@@ -1,14 +1,12 @@
 <?php 
-    session_start();
- 
     //セッション情報を削除
-    $_SESSION=$arrayName = array();
+    $_SESSION = array();
     if(ini_get("session.use_cokkie_params")){
-      $params=session_get_cookie_params();
+      $params = session_get_cookie_params();
       setcookie(session_name(),'', time() - 42000,
         $params["path"],$params["domain"],
         $params["secure"],$params["httponly"]
-        );
+      );
     }
     session_destroy();
 

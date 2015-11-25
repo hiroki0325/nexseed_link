@@ -19,7 +19,20 @@
               $record=mysqli_query($db,$sql)or die(mysqli_error($db));
 
               if($table = mysqli_fetch_assoc($record)){
-                $_SESSION['id']=$table['id'];
+                  $_SESSION['join']['id']=$table['id'];
+                  $_SESSION['join']['first_name']=$table['first_name'];
+                  $_SESSION['join']['last_name']=$table['last_name'];
+                  $_SESSION['join']['eg_first_name']=$table['eg_first_name'];
+                  $_SESSION['join']['eg_last_name']=$table['eg_last_name'];
+                  $_SESSION['join']['email']=$table['email'];
+                  $_SESSION['join']['password']=$table['password'];
+                  $_SESSION['join']['start_day']=$table['start_day'];
+                  $_SESSION['join']['end_day']=$table['end_day'];
+                  $_SESSION['join']['status_id']=$table['status_id'];
+                  $_SESSION['join']['picture']=$table['picture'];
+                  $_SESSION['join']['created']=$table['created'];
+
+
                 $_SESSION['time']=time();
                 //ログイン情報を記録する
                   if($_POST['save']=='on'){
