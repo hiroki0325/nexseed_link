@@ -266,6 +266,8 @@ function prepareNewConnection(id) {
     peerStarted = false;
   }
 
+  // チャット欄
+
   $('input[name="message"]').on('keydown', function(e){
     var ENTER_KEY = 13;
     if (ENTER_KEY == e.keyCode) {
@@ -277,8 +279,7 @@ function prepareNewConnection(id) {
   socket.on('push-message', function(text){
       var $message;
       $message = time()+ escapeHTML2(text) + "<br>";
-      // $($message).html('<br>');
-      $('#tmpl').prepend($message).fadeIn();
+      $('#tmpl').append($message).fadeIn();
   });
 
   function escapeHTML2(html) {
