@@ -53,4 +53,59 @@
         }
         return $plural;
     }
+
+    //htmlspecialchars
+    function h($value){
+      return htmlspecialchars($value,ENT_QUOTES,'UTF-8');
+    }
+
+
+    //ログイン判定
+    function isLoginSuccess(){
+      if(isset($_SESSION['id']) && $_SESSION['time']+3600 > time()){
+        //ログインしている
+          return true;
+      }else{
+        //ログインしていない
+        return false;
+      }
+    }
+
+
+    //ステータス判定
+    function status(){
+      include('dbconnect.php');
+      $sql=sprintf('SELECT*FROM users WHERE id=%d',
+          mysqli_real_escape_string($db,$_SESSION['id'])
+      );
+      $record=mysqli_query($db,$sql)or die(mysqli_error($db));
+      $user=mysqli_fetch_assoc($record);
+
+      //来学予定者
+      return $user['status']=='future_student';
+      //在学生
+      return $user['status']=='stay_student';
+      //卒業生
+      return $user['status']=='graduate_student';
+    }
+
+
+    //ログアウト
+    function logout(){
+       $_SESSION= array();
+       if(ini_get("session.use_cokkie_params")){
+         $params=session_get_cookie_params();
+         setcookie(session_name(),'', time() - 42000,
+           $params["path"],$params["domain"],
+           $params["secure"],$params["httponly"]
+           );
+       }
+       session_destroy();
+
+       setcookie('email','',time()-3600);
+       setcookie('password','',time()-3600);
+
+       header('Location: login/login');
+       exit();
+    }
 ?>
