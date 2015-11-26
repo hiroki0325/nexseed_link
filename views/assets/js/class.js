@@ -280,6 +280,7 @@ function prepareNewConnection(id) {
       var $message;
       $message = time()+ escapeHTML2(text) + "<br>";
       $('#tmpl').append($message).fadeIn();
+      // scTarget();
   });
 
   function escapeHTML2(html) {
@@ -306,3 +307,11 @@ function prepareNewConnection(id) {
 
     return (hour+":"+minute+":"+second+"　");
   }
+
+  // function scTarget(){
+  //    var pos = $(".panel-body").offset().top;
+  //    $("panel-body").animate({
+  //       scrollTop:pos
+  //    }, 0, "swing"); //swingで0が良さそう？
+  //       return false;
+  // }
