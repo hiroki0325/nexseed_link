@@ -35,16 +35,3 @@
     include('./views/layouts/application.php');
 
 ?>
-
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <title>Document</title>
-</head>
-<body>
-  <?php
-      echo current_user_image(300,300,"circle");
-  ?>
-</body>
-</html>
