@@ -1,7 +1,4 @@
 <?php
-  session_start();
-  require('dbconnect.php');
-  //$_SESSION[id]は画像を投稿したユーザのid
   if (isset($_REQUEST['id'])){
       //idは画像のid
       $id = $_REQUEST['id'];
@@ -21,6 +18,6 @@
           mysqli_query($db, $sql) or die (mysqli_error($db));
       }
   }
- header('Location:form.php');
- exit();
-?>
+    header('Location:../student_cebu/form');
+    exit();
+?>  

@@ -1,7 +1,4 @@
 <?php
-    require('dbconnect.php');
-    session_start();
-    var_dump($_SESSION);
     $sql = sprintf(
         'UPDATE logistic_posts SET thing="%s", category="%s", image="%s", insentive="%s", payment="%s", due="%s" WHERE id=%d',
         $_SESSION['thing'],
@@ -17,8 +14,7 @@
 
     $id = $_REQUEST['id'];
 
-    header(sprintf('Location:show.php?id=%d',$id));
+    header(sprintf('Location:show?id=%d',$id));
     exit();
-
 ?>
 
