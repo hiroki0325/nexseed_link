@@ -5,8 +5,17 @@
         echo "ログインしていなかった場合の処理";
     }
 
-    echo "<br>";
+?>
 
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>hoge</title>
+</head>
+<body>
+  <h1>先生</h1>
+  <?php 
     if (status() == 1) {
         echo '管理者としてログイン中';
     } elseif (status() == 2) {
@@ -23,28 +32,17 @@
 
     echo "<br>";
     echo "status()の中身 = " . status();
-
     echo "<br>";
-
-    echo "<br>";
-    // echo "current_user('email')の中身 = " . current_user('email');
     echo "ユーザー名 : " . current_user('first_name') . ' ' . current_user('last_name');
     echo "<br>";
     echo "メールアドレス : " . current_user('email');
     echo "<br>";
     echo "留学期間 : " . current_user('start_day') . ' ~ ' . current_user('end_day');
+    echo "<br>";
+    var_dump($_SESSION['join']['image']);
+    echo current_user_image(); 
 
-
-?>
-
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <title>hoge</title>
-</head>
-<body>
-  <h1>teacher</h1>
+    ?>
   <div>
     <a href="logout/logout">ログアウト</a>
   </div>

@@ -29,7 +29,7 @@
                   $_SESSION['join']['start_day']=$table['start_day'];
                   $_SESSION['join']['end_day']=$table['end_day'];
                   $_SESSION['join']['status_id']=$table['status_id'];
-                  $_SESSION['join']['picture']=$table['picture'];
+                  $_SESSION['join']['image']=$table['picture'];
                   $_SESSION['join']['created']=$table['created'];
 
 
