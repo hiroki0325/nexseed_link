@@ -284,6 +284,7 @@ function prepareNewConnection(id) {
       var $message;
       $message = time()+ escapeHTML2(text) +"<br>";
       $('#tmpl').append($message).fadeIn();
+      $(".panel-body").scrollTop( $("#tmpl")[0].scrollHeight );
   });
 
   function escapeHTML2(html) {
