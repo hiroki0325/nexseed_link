@@ -80,20 +80,20 @@
         );
         $record = mysqli_query($db,$sql)or die(mysqli_error($db));
         $user = mysqli_fetch_assoc($record);
-        
+
         return $user['status_id'];
     }
 
 
     //ログイしているユーザーの情報を取り出す関数
-    function current_user($column){ 
+    function current_user($column){
         return $_SESSION['join'][$column];
     }
 
     // ログインユーザーの画像を表示する
     // サイズ指定と、第三引数に 「square」もしくは「circle」といれることで
     // 画像の形を指定できる。
-    function current_user_image($width,$height,$shape){ 
+    function current_user_image($width,$height,$shape){
         if ($shape == "circle"){
             return sprintf('<img class="circle" src="%s/views/member/user_picture/%s" width="%s" height="%s">',
                 root_path(),
