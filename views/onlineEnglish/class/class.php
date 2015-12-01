@@ -1,6 +1,11 @@
+<?php
+    // ToDo ユーザー名を動的に代入するように書き換える
+    $name = "tencho";
+?>
+
 <link rel="stylesheet" href="../../views/assets/css/bootstrap.css">
 <link rel="stylesheet" type="text/css" href="../../views/assets/css/class.css">
-<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script type="text/javascript" src="../../views/assets/js/jquery.min.js"></script>
 <script type="text/javascript" src="../../views/assets/js/bootstrap.js"></script>
 
 <!-- 授業の開始と終了は先生のみ可能 -->
@@ -57,7 +62,9 @@
 </div>
 
 <!-- socket -->
-<script src="https://cdn.socket.io/socket.io-1.3.7.js"></script>
+<script src="../../views/assets/js/socket.io.js"></script>
 
 <!-- online英会話メインjs -->
-<script type="text/javascript" src="../../views/assets/js/class.js"></script>
+<script id="script" type="text/javascript" src="../../views/assets/js/class.js"
+  data-name = '<?php echo json_safe_encode($name); ?>'
+></script>

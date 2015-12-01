@@ -268,19 +268,22 @@ function prepareNewConnection(id) {
 
   // チャット欄
 
+  var $script = $('#script');
+  var user_name = JSON.parse($script.attr('data-name'));
+
   $('input[name="message"]').on('keydown', function(e){
     var ENTER_KEY = 13;
     if (ENTER_KEY == e.keyCode) {
-      socket.emit('send-message',$(this).val() );
+      var message = $(this).val() + "　(" + user_name + ")" ;
+      socket.emit('send-message',message );
       $(this).val('');
     }
   });
 
   socket.on('push-message', function(text){
       var $message;
-      $message = time()+ escapeHTML2(text) + "<br>";
+      $message = time()+ escapeHTML2(text) +"<br>";
       $('#tmpl').append($message).fadeIn();
-      // scTarget();
   });
 
   function escapeHTML2(html) {
@@ -308,10 +311,3 @@ function prepareNewConnection(id) {
     return (hour+":"+minute+":"+second+"　");
   }
 
-  // function scTarget(){
-  //    var pos = $(".panel-body").offset().top;
-  //    $("panel-body").animate({
-  //       scrollTop:pos
-  //    }, 0, "swing"); //swingで0が良さそう？
-  //       return false;
-  // }
