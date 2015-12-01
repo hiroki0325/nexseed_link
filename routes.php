@@ -43,8 +43,6 @@
     <title>Document</title>
 </head>
 <body>
-  <?php
-      echo current_user_image(300,300,"circle");
-  ?>
+
 </body>
 </html>
