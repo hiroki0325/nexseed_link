@@ -1,15 +1,20 @@
 <?php
-    session_start();
+    //仮のアカウント情報設定
+    $_SESSION["join"]["id"] = 38;
+    $_SESSION["join"]["picture"]["name"] = "default2.png";
+    $_SESSION["join"]["eg_name"] = "koichi";
+
     date_default_timezone_set('Asia/Tokyo');
 
     if (isset($_POST["confirm"])) {
         if ($_POST["confirm"] == "on") {
             $sql = sprintf('UPDATE lessons SET student_id=%d, reserve_status_id=2, modified=NOW() WHERE id=%d',
-                          $_POST["lesson_id"],
-                          $_SESSION["id"]
-                          
+                          $_SESSION["join"]["id"],
+                          $_POST["lesson"]
             );
-            mysqli_query($db, $sql);
+            mysqli_query($db, $sql)or die(mysqli_error($db));
+            header('Location: thanks');
+            exit();
         }
     }
 ?>
@@ -24,7 +29,6 @@
     <div class="container">
     <?php 
         var_dump($_POST);
-        var_dump($_SESSION);
     ?>
       <div class="row">
         <h1>予約情報の確認</h1>
@@ -36,14 +40,17 @@
         <?php
             if (isset($_POST)) {
                 echo $_POST["eg_name"];
-                echo date("n月j日", strtotime($_POST["lesson_date"]));
+                echo "<br>";
+                echo date("n月j日", strtotime($_POST["date"]));
+                echo "<br>";
+                echo date("H時i分", strtotime($_POST["date"]));
             }
         ?>
       </div>
 
       <div class="row">
         <p>※必ず内容をご確認の上で、「予約する」ボタンを押してください。</p>
-        <input type="button" value="選択画面に戻る" onClick="document.location='reserve.php';">
+        <input type="button" value="選択画面に戻る" onClick="document.location='reserve';">
         <form action="" method="post">       
           <input type="hidden" name="lesson" value="<?php echo $_POST["lesson_id"]; ?>" >
           <input type="hidden" name="eg_name" value="<?php echo $_POST["eg_name"]; ?>" >
