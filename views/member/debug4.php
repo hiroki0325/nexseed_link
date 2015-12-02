@@ -14,7 +14,7 @@
   <title>hoge</title>
 </head>
 <body>
-  <h1>在学生</h1>
+  <h1>卒業生</h1>
   <?php 
     if (status() == 1) {
         echo '管理者としてログイン中';
@@ -40,7 +40,8 @@
     echo "留学期間 : " . current_user('start_day') . ' ~ ' . current_user('end_day');
     echo "<br>";
     var_dump($_SESSION['join']['image']);
-    echo current_user_image(100,100,"circle");
+    echo current_user_image(100,100,"circle"); 
+
     ?>
   <div>
     <a href="logout/logout">ログアウト</a>

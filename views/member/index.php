@@ -1,27 +1,29 @@
 <?php
-    if(isset($_SESSION['id'])&& $_SESSION['time']+3600>time()){
-      //ログインしている
-      $_SESSION['time']=time();
-      $sql=sprintf('SELECT*FROM users WHERE id=%d',
-        mysqli_real_escape_string($db,$_SESSION['id'])
-        );
 
-      $record=mysqli_query($db,$sql)or die(mysqli_error($db));
-      $user=mysqli_fetch_assoc($record);
+    if(isset($_SESSION['join']['id'])&& $_SESSION['time']+3600>time()){
+      //ログインしている
+      echo "ユーザのステータス = " . current_user('status_id');
+      $user_status = current_user('status_id');
+
     }else{
       //ログインしていない
-      header('Location: login');
+      header('Location: login/login');
       exit();
     }
 
     //ユーザーステータスによる分岐
-    if($user['status']=='future_student'){
-      echo header('Location: debug1');
-    }else
-    if($user['status']=='stay_student'){
-      echo header('Location: debug2');
+    if($user_status == 1){
+      header('Location: debug1');
+    }elseif($user_status == 2){
+      header('Location: debug2');
+    }elseif($user_status == 3){
+      header('Location: debug3');
+    }elseif($user_status == 4){
+      header('Location: debug4');
+    }elseif($user_status == 5){
+      header('Location: debug5');
     }else{
-      echo header('Location: debug3');
+      echo "例外発生";
     }
 
 

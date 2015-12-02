@@ -19,7 +19,20 @@
               $record=mysqli_query($db,$sql)or die(mysqli_error($db));
 
               if($table = mysqli_fetch_assoc($record)){
-                $_SESSION['id']=$table['id'];
+                  $_SESSION['join']['id']=$table['id'];
+                  $_SESSION['join']['first_name']=$table['first_name'];
+                  $_SESSION['join']['last_name']=$table['last_name'];
+                  $_SESSION['join']['eg_first_name']=$table['eg_first_name'];
+                  $_SESSION['join']['eg_last_name']=$table['eg_last_name'];
+                  $_SESSION['join']['email']=$table['email'];
+                  $_SESSION['join']['password']=$table['password'];
+                  $_SESSION['join']['start_day']=$table['start_day'];
+                  $_SESSION['join']['end_day']=$table['end_day'];
+                  $_SESSION['join']['status_id']=$table['status_id'];
+                  $_SESSION['join']['image']=$table['picture'];
+                  $_SESSION['join']['created']=$table['created'];
+
+
                 $_SESSION['time']=time();
                 //ログイン情報を記録する
                   if($_POST['save']=='on'){
@@ -46,46 +59,79 @@
 <head>
   <meta charset="UTF-8">
   <title>ログイン</title>
+      <link rel="stylesheet" type="text/css" href="../../views/assets/css/login.css">
 </head>
 <body>
-  <h1>ログイン</h1>
-  <p>&raquo;<a href="../join/index">入会手続きをする</a></p>
-  <form action="" method="post">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-offset-4 col-xs-4">
+        <form action="" method="post" class="form-signin mg-btm">
+        <h3 class="heading-desc">Login</h3>
 
-  <div>
-    <lavel for="">メールアドレス</lavel>
-    <?php if(isset($_POST['email'])): ?>
-        <input type="text" name="email" value="<?php echo h($_POST['email']); ?>">
-    <?php else: ?>
-        <input type="text" name="email">
-    <?php endif; ?>
+        <div class="main">
+            <div>
+                <lavel>Email</lavel>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <?php if(isset($_POST['email'])): ?>
+                            <input type="text" name="email" value="<?php echo h($_POST['email']); ?>"
+                             class="form-control" placeholder="" autofocus>
+                        <?php else: ?>
+                            <input type="text" name="email" class="form-control" placeholder="" autofocus>
+                        <?php endif; ?>
+                    </div>
 
-    <?php if(isset($error)): ?>
-        <?php if($error['login']=='blank'): ?>
-            <p class="error"> *メールアドレスとパスワードをご記入ください</p>
-        <?php endif; ?>
-        <?php if($error['login']=='failed'): ?>
-            <p class="error"> *ログインに失敗しました。正しく情報をご記入ください</p>
-        <?php endif; ?>
-    <?php endif; ?>
+                <?php if(isset($error)): ?>
+                    <?php if($error['login']=='blank'): ?>
+                        <p class="error"> *メールアドレスとパスワードをご記入ください</p>
+                    <?php endif; ?>
+                    <?php if($error['login']=='failed'): ?>
+                        <p class="error"> *ログインに失敗しました。正しく情報をご記入ください</p>
+                    <?php endif; ?>
+                <?php endif; ?>
+            </div>
+
+            <div>
+                <lavel>Password</lavel>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                        <input type="password" name="password" class="form-control" placeholder="Password">
+                    </div>
+            </div>
+
+            <div>
+              <input type="checkbox" id="save" name="save" value="on">
+              <label for="">次回から自動ログインする</label>
+            </div>
+
+            <div class="row">
+                  <div class="col-xs-6 col-md-6">
+                       
+                  </div>
+                  <div class="col-xs-6 col-md-6 pull-right">
+                      <button type="submit" class="btn btn-large btn-success pull-right">Login</button>
+                  </div>
+            </div>
+        </div>
+
+            <span class="clearfix"></span>  
+
+            <div class="login-footer">
+                <div class="row">
+                    <div class="col-xs-6 col-md-6">
+                        <div class="left-section">
+                            <a href="../join/index">管理者はこちら</a>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-md-6 pull-right"></div>
+                </div>
+            </div>
+
+        </form>
+      </div>
+    </div>
   </div>
-
-  <div>
-    <lavel for="">パスワード</lavel>
-    <input type="password" name="password">
-  </div>
-
-  <p>ログイン情報の記録</p>
-  <div>
-    <input type="checkbox" id="save" name="save" value="on">
-    <label for="">次回から自動でログインする</label>
-  </div>
-
-  <div>
-    <input type="submit" value="ログインする">
-  </div>
-
-
-  </form>
 </body>
 </html>
+
+
