@@ -79,10 +79,10 @@
         <span>イメージ画像を入力</span>
         <input type="file" name="image"> 
         <span>いつまでに欲しい?（必須）</span>
-        <?php if (isset($error_image['due'])):?>
+        <?php if (isset($error['due'])):?>
           <input type="date" name="due">
           <span>ご記入ください。</span> 
-        <?php elseif (isset($error_image)):?>
+        <?php elseif (isset($error)):?>
           <input type="date" name="due" value="<?php echo $_POST['due']?>"> 
         <?php else : ?>
           <input type="date" name="due">
