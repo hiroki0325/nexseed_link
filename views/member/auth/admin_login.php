@@ -1,11 +1,12 @@
 <?php
-    if(isset($_COOKIE['email'])){
-        if($_COOKIE['email']!=''){
-          $_POST['email']=$_COOKIE['email'];
-          $_POST['passsword']=$_COOKIE['password'];
-          $_POST['save']='on';
-        }
-    }
+
+    // if(isset($_COOKIE['email'])){
+    //     if($_COOKIE['email']!=''){
+    //       $_POST['email']=$_COOKIE['email'];
+    //       $_POST['password']=$_COOKIE['password'];
+    //       $_POST['save']='on';
+    //     }
+    // }
 
 
     if(!empty($_POST)){
@@ -55,12 +56,11 @@
 
 
   
-<link rel="stylesheet" type="text/css" href="../../views/assets/css/login.css">
 <div class="container">
   <div class="row">
     <div class="col-xs-offset-4 col-xs-4">
       <form action="" method="post" class="form-signin mg-btm">
-        <h3 class="heading-desc">Login</h3>
+        <h3 class="heading-desc">管理者用Login</h3>
 
         <div class="main">
 
@@ -114,7 +114,7 @@
             <div class="row">
               <div class="col-xs-6 col-md-6">
                 <div class="left-section">
-                  <a href="../join/index">管理者はこちら</a>
+                  <a href="login">一般ユーザーの方はこちら</a>
                 </div>
               </div>
               <div class="col-xs-6 col-md-6 pull-right"></div>
