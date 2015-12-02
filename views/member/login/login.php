@@ -60,8 +60,6 @@
   <meta charset="UTF-8">
   <title>ログイン</title>
       <link rel="stylesheet" type="text/css" href="../../views/assets/css/login.css">
-      <link rel="stylesheet" href="../../views/assets/css/bootstrap.css">
-      <link rel="stylesheet" href="../../views/assets/font-awesome/css/font-awesome.css">
 </head>
 <body>
   <div class="container">
