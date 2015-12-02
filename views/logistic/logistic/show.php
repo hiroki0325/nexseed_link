@@ -154,12 +154,7 @@
 </div>
 
 <!-- 投稿に対するコメント -->
-<form action=""method='post'enctype="multipart/form-data">
-  <p>コメントを入力します</p>
-  <input type="text" name="comment">
-  <input type="file" name="comment_image">
-  <input type="submit" name="comment_push">
-</form>
+
 <?php while($comment = mysqli_fetch_assoc($comments)):?>
     <p><?php echo $comment['user_id'].' '.$comment['comment'];?></p>
     <?php if(!empty($comment['comment_image'])):?>
