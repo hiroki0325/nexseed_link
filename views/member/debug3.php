@@ -40,7 +40,7 @@
     echo "留学期間 : " . current_user('start_day') . ' ~ ' . current_user('end_day');
     echo "<br>";
     var_dump($_SESSION['join']['image']);
-    echo current_user_image(100,100,"square");
+    echo current_user_image(100,100,"circle");
     ?>
   <div>
     <a href="logout/logout">ログアウト</a>

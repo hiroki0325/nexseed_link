@@ -95,14 +95,14 @@
     // 画像の形を指定できる。
     function current_user_image($width,$height,$shape){
         if ($shape == "circle"){
-            return sprintf('<img class="circle" src="%s/views/member/user_picture/%s" width="%s" height="%s">',
+            return sprintf('<img class="circle" src="%s/views/member/user_picture/%s" width=%d height=%d>',
                 root_path(),
                 current_user('image'),
                 $width,
                 $height
             );
         } elseif ($shape == "square") {
-            return sprintf('<img src="%s/views/member/user_picture/%s" width="%s" height="%s">',
+            return sprintf('<img src="%s/views/member/user_picture/%s" width=%d height=%d>',
                 root_path(),
                 current_user('image'),
                 $width,

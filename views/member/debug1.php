@@ -39,7 +39,7 @@
     echo "<br>";
     echo "留学期間 : " . current_user('start_day') . ' ~ ' . current_user('end_day');
     echo "<br>";
-    echo current_user_image();
+    echo current_user_image(100,100,"square");
 
     ?>
   <div>
