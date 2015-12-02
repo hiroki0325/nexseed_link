@@ -54,84 +54,76 @@
 
 
 
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <title>ログイン</title>
-      <link rel="stylesheet" type="text/css" href="../../views/assets/css/login.css">
-</head>
-<body>
-  <div class="container">
-    <div class="row">
-      <div class="col-xs-offset-4 col-xs-4">
-        <form action="" method="post" class="form-signin mg-btm">
+  
+<link rel="stylesheet" type="text/css" href="../../views/assets/css/login.css">
+<div class="container">
+  <div class="row">
+    <div class="col-xs-offset-4 col-xs-4">
+      <form action="" method="post" class="form-signin mg-btm">
         <h3 class="heading-desc">Login</h3>
 
         <div class="main">
-            <div>
-                <lavel>Email</lavel>
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <?php if(isset($_POST['email'])): ?>
-                            <input type="text" name="email" value="<?php echo h($_POST['email']); ?>"
-                             class="form-control" placeholder="" autofocus>
-                        <?php else: ?>
-                            <input type="text" name="email" class="form-control" placeholder="" autofocus>
-                        <?php endif; ?>
-                    </div>
-
-                <?php if(isset($error)): ?>
-                    <?php if($error['login']=='blank'): ?>
-                        <p class="error"> *メールアドレスとパスワードをご記入ください</p>
-                    <?php endif; ?>
-                    <?php if($error['login']=='failed'): ?>
-                        <p class="error"> *ログインに失敗しました。正しく情報をご記入ください</p>
-                    <?php endif; ?>
-                <?php endif; ?>
-            </div>
-
-            <div>
-                <lavel>Password</lavel>
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                        <input type="password" name="password" class="form-control" placeholder="Password">
-                    </div>
-            </div>
-
-            <div>
-              <input type="checkbox" id="save" name="save" value="on">
-              <label for="">次回から自動ログインする</label>
-            </div>
-
-            <div class="row">
-                  <div class="col-xs-6 col-md-6">
-                       
+          <div>
+              <lavel>Email</lavel>
+                  <div class="input-group">
+                      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                      <?php if(isset($_POST['email'])): ?>
+                          <input type="text" name="email" value="<?php echo h($_POST['email']); ?>"
+                           class="form-control" placeholder="" autofocus>
+                      <?php else: ?>
+                          <input type="text" name="email" class="form-control" placeholder="" autofocus>
+                      <?php endif; ?>
                   </div>
-                  <div class="col-xs-6 col-md-6 pull-right">
-                      <button type="submit" class="btn btn-large btn-success pull-right">Login</button>
+
+              <?php if(isset($error)): ?>
+                  <?php if($error['login']=='blank'): ?>
+                      <p class="error"> *メールアドレスとパスワードをご記入ください</p>
+                  <?php endif; ?>
+                  <?php if($error['login']=='failed'): ?>
+                      <p class="error"> *ログインに失敗しました。正しく情報をご記入ください</p>
+                  <?php endif; ?>
+              <?php endif; ?>
+          </div>
+
+          <div>
+              <lavel>Password</lavel>
+                  <div class="input-group">
+                      <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                      <input type="password" name="password" class="form-control" placeholder="Password">
                   </div>
+          </div>
+
+          <div>
+            <input type="checkbox" id="save" name="save" value="on">
+            <label for="">次回から自動ログインする</label>
+          </div>
+
+          <div class="row">
+            <div class="col-xs-6 col-md-6">
+                 
             </div>
-        </div>
-
-            <span class="clearfix"></span>  
-
-            <div class="login-footer">
-                <div class="row">
-                    <div class="col-xs-6 col-md-6">
-                        <div class="left-section">
-                            <a href="../join/index">管理者はこちら</a>
-                        </div>
-                    </div>
-                    <div class="col-xs-6 col-md-6 pull-right"></div>
-                </div>
+            <div class="col-xs-6 col-md-6 pull-right">
+                <button type="submit" class="btn btn-large btn-success pull-right">Login</button>
             </div>
-
-        </form>
+          </div>
       </div>
+
+          <span class="clearfix"></span>  
+
+          <div class="login-footer">
+              <div class="row">
+                  <div class="col-xs-6 col-md-6">
+                      <div class="left-section">
+                          <a href="../join/index">管理者はこちら</a>
+                      </div>
+                  </div>
+                  <div class="col-xs-6 col-md-6 pull-right"></div>
+              </div>
+          </div>
+
+      </form>
     </div>
   </div>
-</body>
-</html>
+</div>
 
 
