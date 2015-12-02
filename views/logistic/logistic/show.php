@@ -89,7 +89,7 @@
     );
     $comments = mysqli_query($db,$sql) or die (mysqli_error($db));
 
-    //依頼requestのインサート
+    //投稿のインサート
     if (isset($_POST['request'])){
         var_dump($_POST);
         $sql = sprintf(
@@ -137,9 +137,9 @@
 <!-- 編集と削除のトリガー -->
 <div>
     <?php if (!empty($_POST)):?>
-        <a href="update?id=<?php echo $_REQUEST['id']?>">編集を実行</a>
+        <a href="../show/update?id=<?php echo $_REQUEST['id']?>">編集を実行</a>
     <?php endif ; ?>
-    <a href="delete?id=<?php echo $_REQUEST['id']?>">削除を実行</a>
+    <a href="../show/delete?id=<?php echo $_REQUEST['id']?>">削除を実行</a>
 </div>
 
 <!-- 承認依頼フォーム -->

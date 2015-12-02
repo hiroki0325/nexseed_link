@@ -30,7 +30,7 @@
         if (empty($error)) {
             if($filename != "" ) {
                 $image = $filename;  
-                move_uploaded_file($_FILES['image']['tmp_name'],'/var/www/html/nexseed_link/views/logistic/page_cebu/image_thing/'.$image);  
+                move_uploaded_file($_FILES['image']['tmp_name'],'/var/www/html/nexseed_link/views/logistic/logistic/image_thing/'.$image);  
             }
         }
         //エラーがない場合logistic_postsにinsert
@@ -54,21 +54,26 @@
 
     //データの表示
     //全自分の投稿データ
-    $sql = sprintf('SELECT * FROM logistic_posts WHERE client_id=%d ORDER BY created DESC',
+    $sql=sprintf('SELECT * FROM logistic_posts WHERE client_id=%d ORDER BY created DESC',
        $_SESSION['login_id']
     );
-    $posts = mysqli_query($db, $sql) or die (mysqli_error($db));
+    $posts=mysqli_query($db, $sql) or die (mysqli_error($db));
     //承認されたデータのみ
-    $sql = sprintf('SELECT * FROM logistic_posts WHERE client_id=%d AND candidate_id IS NOT NULL ORDER BY due ASC',
+    $sql=sprintf('SELECT * FROM logistic_posts WHERE client_id=%d AND candidate_id IS NOT NULL ORDER BY created DESC',
        $_SESSION['login_id']
     );
-    $accepted_posts = mysqli_query($db, $sql) or die (mysqli_error($db));
+    $accepted_posts=mysqli_query($db, $sql) or die (mysqli_error($db));
 
     //承認されていないデータのみ
-    $sql = sprintf('SELECT * FROM logistic_posts WHERE client_id=%d AND candidate_id IS NULL ORDER BY due ASC',
+    $sql=sprintf('SELECT * FROM logistic_posts WHERE client_id=%d AND candidate_id IS NULL ORDER BY created DESC',
        $_SESSION['login_id']
     );
-    $unverified_posts = mysqli_query($db, $sql) or die (mysqli_error($db));
+    $unverified_posts=mysqli_query($db, $sql) or die (mysqli_error($db));
+
+    $sql=sprintf('SELECT * FROM logistic_posts WHERE client_id=%d ORDER BY due ASC',
+       $_SESSION['login_id']
+    );
+    $deadline_posts=mysqli_query($db, $sql) or die (mysqli_error($db));
 ?>
 
 <span>新入生に日本からの救援物資を依頼できます。</span>
@@ -77,10 +82,11 @@
     <div class="thing_form">
       <p>
         <span>日本から持ってきてもらいたいもの(必須)</span>
-        <?php if (isset($_POST['thing']) && empty($error['thing'])):?>
+        <?php if (isset($error['thing'])):?>
+          <input type="text" name="thing">
+          <span>ご記入ください。</span>
+        <?php elseif (isset($error)):?> 
           <input type="text" name="thing" value="<?php echo $_POST['thing']?>"> 
-        <?php elseif (isset($error['thing'])):?>
-          <input type="text" name="thing" placeholder="入力してください"> 
         <?php else : ?>
           <input type="text" name="thing">
         <?php endif; ?>
@@ -98,10 +104,11 @@
         <span>イメージ画像を入力</span>
         <input type="file" name="image"> 
         <span>いつまでに欲しい?（必須）</span>
-        <?php if (isset($_POST['due']) && empty($error['due'])):?>
+        <?php if (isset($error['due'])):?>
+          <input type="date" name="due">
+          <span>ご記入ください。</span> 
+        <?php elseif (isset($error)):?>
           <input type="date" name="due" value="<?php echo $_POST['due']?>"> 
-        <?php elseif (isset($error['due'])):?>
-          <input type="date" name="due" placeholder="入力してください"> 
         <?php else : ?>
           <input type="date" name="due">
         <?php endif; ?>
@@ -110,20 +117,22 @@
     <div class="info_form">
       <p>
         <span>謝礼を入力 (必須)</span>
-        <?php if (isset($_POST['insentive']) && empty($error['insentive'])):?>
-          <input type="text" name="insentive" value="<?php echo $_POST['insentive']?>"> 
-        <?php elseif (isset($error['insentive'])):?>
-          <input type="text" name="insentive" placeholder="入力してください"> 
-        <?php else : ?>
+        <?php if (isset($error['insentive'])):?>
+          <input type="text" name="insentive">
+          <span>ご記入ください。</span> 
+        <?php elseif (isset($error)):?>
+          <input type="text" name="insentive" value="<?php echo $_POST['insentive']?>">
+        <?php elseif (empty($error['insentive'])): ?>
           <input type="text" name="insentive">
         <?php endif; ?>
         <span>お支払いする金額を入力（必須）</span>
-        <?php if (isset($_POST['payment']) && empty($error['payment'])):?>
-          <input type="text" name="payment" value="<?php echo $_POST['payment']?>"> 
-        <?php elseif (isset($error['payment'])):?>
-          <input type="text" name="payment" placeholder="入力して下さい"> 
+        <?php if (isset($error['payment'])):?>
+          <input type="text" name="payment" placeholder="pessoで入力してください">
+          <span>ご記入ください。</span> 
+        <?php elseif (isset($error)):?>
+          <input type="text" name="payment" value="<?php echo $_POST['payment']?>">
         <?php else : ?>
-          <input type="text" name="payment">
+          <input type="text" name="payment" placeholder="pessoで入力してください">
         <?php endif; ?>
       </p>
     </div>
@@ -136,7 +145,7 @@
     <div>
       <h3>投稿できたデータはこちらです</h3>
       <p><?php echo h($_POST['thing'])?></p>
-      <img src="../../views/logistic/page_cebu/image_thing/<?php echo h($image)?>" width=100 hight=100>
+      <img src="../../views/logistic/logistic/image_thing/<?php echo h($image)?>" width=100 hight=100>
       <p>カテゴリー:<?php echo h($_POST['category'])?></p>
       <p><?php echo h($_POST['insentive'])?></p>
       <p><?php echo h($_POST['payment'])?>pesso</p>
@@ -147,22 +156,23 @@
   <?php endif; ?>
 <?php } ?>
 <!-- 表示の切り替え -->
-<a href="form?sort=accepted">承認済み</a>
-<a href="form?sort=unaccepted">承認待ち</a>
-<a href="form?sort=all">全投稿データ</a>
+<a href="top?sort=accepted">承認済み</a>
+<a href="top?sort=unaccepted">承認待ち</a>
+<a href="top?sort=all">全投稿データ</a>
+<a href="top?sort=deadline">期限の近い順</a>
 <!--全件表示 -->
 <?php if ( empty($_REQUEST['sort']) || $_REQUEST['sort'] == 'all'):?>
   <h4>いままでの投稿</h4>
   <?php while ($post=mysqli_fetch_assoc($posts)):?>
     <div>
       <p><?php echo h($post['thing'])?></p>
-      <img src="../../views/logistic/page_cebu/image_thing/<?php echo h($post['image'])?>" width=100 hight=100>
+      <img src="../../views/logistic/logistic/image_thing/<?php echo h($post['image'])?>" width=100 hight=100>
       <p>カテゴリー:<?php echo h($post['category'])?></p>
       <p><?php echo h($post['insentive'])?></p>
       <p><?php echo h($post['payment'])?> pessos</p>
       <p>期限:<?php echo h($post['due'])?></p>
       <p>投稿日:<?php echo h($post['created'])?></p> 
-      [<a href="../post_show/show?id=<?php echo h($post['id'])?>">show</a>]
+      [<a href="./show?id=<?php echo h($post['id'])?>">show</a>]
     </div>
   <?php endwhile;?>
 <?php elseif ($_REQUEST['sort'] == 'accepted'):?>
@@ -171,13 +181,13 @@
   <?php while ($post=mysqli_fetch_assoc($accepted_posts)):?>
     <div>
       <p><?php echo h($post['thing'])?></p>
-      <img src="../../views/logistic/page_cebu/image_thing/<?php echo h($post['image'])?>" width=100 hight=100>
+      <img src="../../views/logistic/logistic/image_thing/<?php echo h($post['image'])?>" width=100 hight=100>
       <p>カテゴリー:<?php echo h($post['category'])?></p>
       <p><?php echo h($post['insentive'])?></p>
       <p><?php echo h($post['payment'])?> pessos</p>
       <p>期限:<?php echo h($post['due'])?></p>
       <p>投稿日:<?php echo h($post['created'])?></p> 
-      [<a href="../post_show/show?id=<?php echo h($post['id'])?>">show</a>]
+      [<a href="./show?id=<?php echo h($post['id'])?>">show</a>]
     </div>
   <?php endwhile;?>
 <?php elseif ($_REQUEST['sort'] == 'unaccepted'):?>
@@ -186,13 +196,28 @@
   <?php while ($post=mysqli_fetch_assoc($unverified_posts)):?>
     <div>
       <p><?php echo h($post['thing'])?></p>
-      <img src="../../views/logistic/page_cebu/image_thing/<?php echo h($post['image'])?>" width=100 hight=100>
+      <img src="../../views/logistic/logistic/image_thing/<?php echo h($post['image'])?>" width=100 hight=100>
       <p>カテゴリー:<?php echo h($post['category'])?></p>
       <p><?php echo h($post['insentive'])?></p>
       <p><?php echo h($post['payment'])?>pesso</p>
       <p>期限:<?php echo h($post['due'])?></p>
       <p>投稿日:<?php echo h($post['created'])?></p>
-      [<a href="../post_show/show?id=<?php echo h($post['id'])?>">show</a>]
+      [<a href="./show?id=<?php echo h($post['id'])?>">show</a>]
+    </div>
+  <?php endwhile;?>
+<?php elseif ($_REQUEST['sort'] == 'deadline'):?>
+  <!-- 期限の近い順 -->
+  <h4>期限の近い順</h4>
+  <?php while ($post=mysqli_fetch_assoc($deadline_posts)):?>
+    <div>
+      <p><?php echo h($post['thing'])?></p>
+      <img src="../../views/logistic/logistic/image_thing/<?php echo h($post['image'])?>" width=100 hight=100>
+      <p>カテゴリー:<?php echo h($post['category'])?></p>
+      <p><?php echo h($post['insentive'])?></p>
+      <p><?php echo h($post['payment'])?>pesso</p>
+      <p>期限:<?php echo h($post['due'])?></p>
+      <p>投稿日:<?php echo h($post['created'])?></p>
+      [<a href="./show?id=<?php echo h($post['id'])?>">show</a>]
     </div>
   <?php endwhile;?>
 <?php endif; ?>
