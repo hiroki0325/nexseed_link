@@ -1,0 +1,8 @@
+.circle {
+  /*角を丸める*/
+  /*border: 4px solid #000;*/
+  /*.thumbnail img {*/
+    border-radius: 1000px;
+/*    height: 80px;
+    width: 80px;*/
+}
