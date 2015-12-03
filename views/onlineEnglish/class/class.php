@@ -39,9 +39,9 @@
                 <div class="panel-heading">
                     <span class="glyphicon glyphicon-comment"></span>  ChatSpace
                 </div>
-                <div class="panel-body" style="overflow: auto;">
+                <div class="panel-body" style="overflow: auto; padding-bottom: 0px;padding-top: 0px;" >
                     <ul class="chat">
-                        <li class="right clearfix">
+                        <li class="right clearfix" style="margin-bottom: 0px;">
                             <div class="chat-body clearfix">
                               <div id="tmpl" style="display:none;">
                               </div>
