@@ -1,24 +1,29 @@
 #parent_box {
   position:relative;
+  background-color: black;
   }
 
 #child_box {
   position:absolute;
-  left:680px;
-  top:280px;
+  left:560px;
+  top:310px;
   width:300px;
   }
 
 #remote-video{
   width: 880px;
   height: 450px;
-  border: 1px solid black;
+  border: 1px solid white;
+  background-color: black;
 }
 
 #local-video{
   width: 160px;
   height: 120px;
-  border: 1px solid black;
+}
+
+#onlineclass{
+  background-color: black;
 }
 
 .log{
