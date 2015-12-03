@@ -1,6 +1,4 @@
 <?php
-    date_default_timezone_set('Asia/Tokyo');
-
     //入力しなかった場合入力を促す
     if (!empty($_POST)) {
       if ($_POST["nickname"]=='') {
@@ -25,6 +23,7 @@
     }
 
        var_dump($_POST);
+       var_dump($_SESSION);
 
       $sql=sprintf('UPDATE users SET nickname="%s" picture="%s" WHERE id=%d',
         mysqli_real_escape_string($db,$_POST['nickname']),
@@ -72,11 +71,10 @@
     <input type="file" name="image">
   </div>
 
-  <button type="submit">追加する</button>
+<button type="submit">追加する</button>
 
 
 </form>
-
 
 </body>
 </html>

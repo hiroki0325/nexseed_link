@@ -10,7 +10,7 @@
 
 
     if(!empty($_POST)){
-      //ログインの処理
+      //ログインの処理1
         if(isset($_POST['password'])){
             if($_POST['email']!='' && $_POST['password'] !=''){
               $sql=sprintf('SELECT*FROM users WHERE email="%s" AND password="%s"',
@@ -45,6 +45,25 @@
             }else{
               $error['login']='blank';
             }
+
+
+
+            // $result = array();
+
+            // $name = $_SESSIN['join']['id'];
+            // if (!isset($result[$name])) {
+            //   $result[$name] = 1;
+            // } else {
+            //   $result[$name] += 1;
+            // }
+
+            // $sql=sprintf('UPDATE users SET login_count=%d WHERE id=%d',
+            //     mysqli_real_escape_string($db,$result),
+            //     mysqli_real_escape_string($db,$post_check['id'])
+            //     );
+            //     mysqli_query($db,$sql)or die(mysqli_error($db));
+            
+
         }
     }
 

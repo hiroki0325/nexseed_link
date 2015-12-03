@@ -1,12 +1,12 @@
 <?php
 
-    // if(isset($_COOKIE['email'])){
-    //     if($_COOKIE['email']!=''){
-    //       $_POST['email']=$_COOKIE['email'];
-    //       $_POST['password']=$_COOKIE['password'];
-    //       $_POST['save']='on';
-    //     }
-    // }
+    if(isset($_COOKIE['email'])){
+        if($_COOKIE['email']!=''){
+          $_POST['email']=$_COOKIE['email'];
+          $_POST['password']=$_COOKIE['password'];
+          $_POST['save']='on';
+        }
+    }
 
 
     if(!empty($_POST)){
@@ -21,10 +21,7 @@
 
               if($table = mysqli_fetch_assoc($record)){
                   $_SESSION['join']['id']=$table['id'];
-                  $_SESSION['join']['first_name']=$table['first_name'];
-                  $_SESSION['join']['last_name']=$table['last_name'];
-                  $_SESSION['join']['eg_first_name']=$table['eg_first_name'];
-                  $_SESSION['join']['eg_last_name']=$table['eg_last_name'];
+                  $_SESSION['join']['fullname']=$table['fullname'];
                   $_SESSION['join']['email']=$table['email'];
                   $_SESSION['join']['password']=$table['password'];
                   $_SESSION['join']['start_day']=$table['start_day'];
