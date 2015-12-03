@@ -30,7 +30,7 @@
         </div>
       </div>
       <div class="col-md-3">
-        <div class="log" style="background-color: white;">
+        <div class="log" style="overflow: auto; background-color: white;">
           <ul class="chat">
               <li class="right clearfix" style="margin-bottom: 0px;">
                   <div class="chat-body clearfix">

@@ -24,6 +24,10 @@ io.sockets.on('connection', function(socket) {
     }
   });
 
+  socket.on('send-log', function(text){
+      io.sockets.in(socket.name).emit('push-log', text);
+  });
+
   // 会議室名が指定されていたら、室内だけに通知
   function emitMessage(type, message) {
     var roomname;

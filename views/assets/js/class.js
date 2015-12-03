@@ -5,6 +5,9 @@
   var peerStarted = false;
   var mediaConstraints = {'mandatory': {'OfferToReceiveAudio':true, 'OfferToReceiveVideo':true }};
 
+  var $script = $('#script');
+  var user_name = JSON.parse($script.attr('data-name'));
+
 
   // ---- socket ------
   // create socket
@@ -15,13 +18,20 @@
   socket.on('connect', onOpened)
         .on('message', onMessage);
 
+// 入室処理
 function onOpened(evt) {
     console.log('socket opened.');
     socketReady = true;
-
     var roomname = getRoomName(); // 会議室名を取得する
     socket.emit('enter', roomname);
+    socket.emit('send-log',user_name + 'が入室しました');
 }
+
+socket.on('push-log', function(text){
+    var $log;
+    $log = time()+ escapeHTML2(text) +"<br>";
+    $('#log').append($log).fadeIn();
+});
 
 function getRoomName() { // たとえば、 URLに  ?roomname  とする
   var url = document.location.href;
@@ -249,6 +259,7 @@ function prepareNewConnection(id) {
   //if (!peerStarted && localStream) { // --
       sendOffer();
       peerStarted = true;
+      socket.emit('send-log','授業を開始しました');
     } else {
       alert("Local stream not running yet - try again.");
     }
@@ -267,10 +278,6 @@ function prepareNewConnection(id) {
   }
 
   // チャット欄
-
-  var $script = $('#script');
-  var user_name = JSON.parse($script.attr('data-name'));
-
   $('input[name="message"]').on('keydown', function(e){
     var ENTER_KEY = 13;
     if (ENTER_KEY == e.keyCode) {
