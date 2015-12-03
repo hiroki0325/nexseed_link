@@ -6,32 +6,26 @@
     }
 
 
+    $fullname = $_SESSION["join"]["first_name"]. ' ' .$_SESSION["join"]["last_name"];
+
     if(!empty($_POST)){
         if ($_SESSION["join"]["start_day"] && $_SESSION["join"]["end_day"]) {
-            $sql=sprintf('INSERT INTO users SET first_name="%s",last_name="%s",eg_first_name="%s",eg_last_name="%s",
-              email="%s",password="%s",start_day="%s",end_day="%s",status_id=%d,picture="%s",created=NOW()',
-              mysqli_real_escape_string($db,$_SESSION["join"]["first_name"]),
-              mysqli_real_escape_string($db,$_SESSION["join"]["last_name"]),
-              mysqli_real_escape_string($db,$_SESSION["join"]["eg_first_name"]),
-              mysqli_real_escape_string($db,$_SESSION["join"]["eg_last_name"]),
+            $sql=sprintf('INSERT INTO users SET fullname="%s",
+              email="%s",password="%s",start_day="%s",end_day="%s",status_id=%d,created=NOW()',
+              mysqli_real_escape_string($db,$fullname),
               mysqli_real_escape_string($db,$_SESSION["join"]["email"]),
               mysqli_real_escape_string($db,sha1($_SESSION["join"]["password"])),
               mysqli_real_escape_string($db,$_SESSION["join"]["start_day"]),
               mysqli_real_escape_string($db,$_SESSION["join"]["end_day"]),
-              mysqli_real_escape_string($db,$_SESSION["join"]["status_id"]),
-              mysqli_real_escape_string($db,$_SESSION["join"]["image"])
+              mysqli_real_escape_string($db,$_SESSION["join"]["status_id"])
             );
         } else {
-            $sql=sprintf('INSERT INTO users SET first_name="%s",last_name="%s",eg_first_name="%s",eg_last_name="%s",
-              email="%s",password="%s",status_id=%d,picture="%s",created=NOW()',
-              mysqli_real_escape_string($db,$_SESSION["join"]["first_name"]),
-              mysqli_real_escape_string($db,$_SESSION["join"]["last_name"]),
-              mysqli_real_escape_string($db,$_SESSION["join"]["eg_first_name"]),
-              mysqli_real_escape_string($db,$_SESSION["join"]["eg_last_name"]),
+            $sql=sprintf('INSERT INTO users SET fullname="%s",
+              email="%s",password="%s",status_id=%d,created=NOW()',
+              mysqli_real_escape_string($db,$fullname),
               mysqli_real_escape_string($db,$_SESSION["join"]["email"]),
               mysqli_real_escape_string($db,sha1($_SESSION["join"]["password"])),
-              mysqli_real_escape_string($db,$_SESSION["join"]["status_id"]),
-              mysqli_real_escape_string($db,$_SESSION["join"]["image"])
+              mysqli_real_escape_string($db,$_SESSION["join"]["status_id"])
             );
         }
 
@@ -55,25 +49,10 @@
 
 <form action="" method="post">
   <input type="hidden" name="hoge" value="huga">
-  
-  <div>
-    <p>姓</p>
-      <?php echo h($_SESSION["join"]["last_name"]); ?>
-  </div>
 
   <div>
-    <p>名</p>
-      <?php echo h($_SESSION["join"]["first_name"]); ?>
-  </div>
-
-  <div>
-    <p>First Name</p>
-      <?php echo h($_SESSION["join"]["eg_first_name"]); ?>
-  </div>
-
-  <div>
-    <p>Last Name</p>
-      <?php echo h($_SESSION["join"]["eg_last_name"]); ?>
+    <p>Name</p>
+      <?php echo h($fullname); ?>
   </div>
 
   <div>
@@ -110,16 +89,6 @@
         }else{
             echo '管理者';
         }
-      ?>
-  </div>
-
-
-  <div>
-    <p>プロフィール画像</p>
-      <?php
-          echo sprintf('<img src="../../views/member/user_picture/%s" width="100" height="100">',
-              $_SESSION["join"]["image"]
-          );
       ?>
   </div>
 
