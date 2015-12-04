@@ -27,6 +27,7 @@ function onOpened(evt) {
     socket.emit('send-log',user_name + 'が入室しました');
 }
 
+// ログの表示
 socket.on('push-log', function(text){
     var $log;
     $log = time()+ escapeHTML2(text) +"<br>";
@@ -268,6 +269,7 @@ function prepareNewConnection(id) {
   // stop the connection upon user request
   function hangUp() {
     console.log("Hang up.");
+    socket.emit('send-log','授業を終了しました');
     stop();
   }
 
