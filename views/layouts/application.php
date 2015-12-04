@@ -3,6 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <title>NexSeedLink</title>
+      <link rel="stylesheet" type="text/css" href="../views/assets/css/style.css">
+      <link rel="stylesheet" href="../../views/assets/css/bootstrap.css">
+      <link rel="stylesheet" href="../../views/assets/font-awesome/css/font-awesome.css">
+
 </head>
 <body>
   <h1>NexSeedLink</h1>

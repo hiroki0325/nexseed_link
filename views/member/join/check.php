@@ -6,18 +6,28 @@
     }
 
 
+    $fullname = $_SESSION["join"]["first_name"]. ' ' .$_SESSION["join"]["last_name"];
+
     if(!empty($_POST)){
-      $sql=sprintf('INSERT INTO users SET name="%s",eg_name="%s",
-        email="%s",password="%s",start_day="%s",end_day="%s",status="%s",picture="%s",created=NOW()',
-        mysqli_real_escape_string($db,$_SESSION["join"]["name"]),
-        mysqli_real_escape_string($db,$_SESSION["join"]["eg_name"]),
-        mysqli_real_escape_string($db,$_SESSION["join"]["email"]),
-        mysqli_real_escape_string($db,sha1($_SESSION["join"]["password"])),
-        mysqli_real_escape_string($db,$_SESSION["join"]["start_day"]),
-        mysqli_real_escape_string($db,$_SESSION["join"]["end_day"]),
-        mysqli_real_escape_string($db,$_SESSION["join"]["status"]),
-        mysqli_real_escape_string($db,$_SESSION["join"]["image"])
-      );
+        if ($_SESSION["join"]["start_day"] && $_SESSION["join"]["end_day"]) {
+            $sql=sprintf('INSERT INTO users SET fullname="%s",
+              email="%s",password="%s",start_day="%s",end_day="%s",status_id=%d,created=NOW()',
+              mysqli_real_escape_string($db,$fullname),
+              mysqli_real_escape_string($db,$_SESSION["join"]["email"]),
+              mysqli_real_escape_string($db,sha1($_SESSION["join"]["password"])),
+              mysqli_real_escape_string($db,$_SESSION["join"]["start_day"]),
+              mysqli_real_escape_string($db,$_SESSION["join"]["end_day"]),
+              mysqli_real_escape_string($db,$_SESSION["join"]["status_id"])
+            );
+        } else {
+            $sql=sprintf('INSERT INTO users SET fullname="%s",
+              email="%s",password="%s",status_id=%d,created=NOW()',
+              mysqli_real_escape_string($db,$fullname),
+              mysqli_real_escape_string($db,$_SESSION["join"]["email"]),
+              mysqli_real_escape_string($db,sha1($_SESSION["join"]["password"])),
+              mysqli_real_escape_string($db,$_SESSION["join"]["status_id"])
+            );
+        }
 
         mysqli_query($db,$sql)or die(mysqli_error($db));
         unset($_SESSION["join"]);
@@ -39,15 +49,10 @@
 
 <form action="" method="post">
   <input type="hidden" name="hoge" value="huga">
-  
-  <div>
-    <p>名前</p>
-      <?php echo h($_SESSION["join"]["name"]); ?>
-  </div>
 
   <div>
-    <p>English Name</p>
-      <?php echo h($_SESSION["join"]["eg_name"]); ?>
+    <p>Name</p>
+      <?php echo h($fullname); ?>
   </div>
 
   <div>
@@ -73,23 +78,17 @@
   <div>
     <p>ステータス</p>
       <?php
-        if($_SESSION["join"]["status"]=='future_student'){
+        if($_SESSION["join"]["status_id"]==2){
             echo '来学予定者';
-        }elseif($_SESSION["join"]["status"]=='stay_student'){
+        }elseif($_SESSION["join"]["status_id"]==3){
             echo '在学生';
-        }else{
+        }elseif($_SESSION["join"]["status_id"]==4){
             echo '卒業生';
+        }elseif($_SESSION["join"]["status_id"]==5){
+            echo 'teacher';
+        }else{
+            echo '管理者';
         }
-      ?>
-  </div>
-
-
-  <div>
-    <p>プロフィール画像</p>
-      <?php
-          echo sprintf('<img src="../../views/member/user_picture/%s" width="100" height="100">',
-              $_SESSION["join"]["image"]
-          );
       ?>
   </div>
 

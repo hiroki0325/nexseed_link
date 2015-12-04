@@ -56,56 +56,83 @@
 
     //htmlspecialchars
     function h($value){
-      return htmlspecialchars($value,ENT_QUOTES,'UTF-8');
+        return htmlspecialchars($value,ENT_QUOTES,'UTF-8');
     }
 
 
     //ログイン判定
     function isLoginSuccess(){
-      if(isset($_SESSION['id']) && $_SESSION['time']+3600 > time()){
-        //ログインしている
-          return true;
-      }else{
-        //ログインしていない
-        return false;
+        if(isset($_SESSION['join']['id']) && $_SESSION['time']+3600 > time()){
+          //ログインしている
+            return true;
+        }else{
+          //ログインしていない
+          return false;
       }
     }
 
 
     //ステータス判定
     function status(){
-      include('dbconnect.php');
-      $sql=sprintf('SELECT*FROM users WHERE id=%d',
-          mysqli_real_escape_string($db,$_SESSION['id'])
-      );
-      $record=mysqli_query($db,$sql)or die(mysqli_error($db));
-      $user=mysqli_fetch_assoc($record);
+        include('dbconnect.php');
+        $sql = sprintf('SELECT*FROM users WHERE id=%d',
+            mysqli_real_escape_string($db,$_SESSION['join']['id'])
+        );
+        $record = mysqli_query($db,$sql)or die(mysqli_error($db));
+        $user = mysqli_fetch_assoc($record);
 
-      //来学予定者
-      return $user['status']=='future_student';
-      //在学生
-      return $user['status']=='stay_student';
-      //卒業生
-      return $user['status']=='graduate_student';
+        return $user['status_id'];
     }
 
 
-    //ログアウト
+    //ログイしているユーザーの情報を取り出す関数
+    function current_user($column){
+        return $_SESSION['join'][$column];
+    }
+
+    // ログインユーザーの画像を表示する
+    // サイズ指定と、第三引数に 「square」もしくは「circle」といれることで
+    // 画像の形を指定できる。
+    function current_user_image($width,$height,$shape){
+        if ($shape == "circle"){
+            return sprintf('<img class="circle" src="%s/views/member/user_picture/%s" width=%d height=%d>',
+                root_path(),
+                current_user('image'),
+                $width,
+                $height
+            );
+        } elseif ($shape == "square") {
+            return sprintf('<img src="%s/views/member/user_picture/%s" width=%d height=%d>',
+                root_path(),
+                current_user('image'),
+                $width,
+                $height
+            );
+        }
+    }
+
+    // 画像やcssを指定する際のルートパスを返す
+    function root_path() {
+        return '../../nexseed_link';
+    }
+
+
+    //ログアウト処理
     function logout(){
-       $_SESSION= array();
-       if(ini_get("session.use_cokkie_params")){
-         $params=session_get_cookie_params();
-         setcookie(session_name(),'', time() - 42000,
-           $params["path"],$params["domain"],
-           $params["secure"],$params["httponly"]
-           );
-       }
-       session_destroy();
+        $_SESSION = array();
+        if(ini_get("session.use_cokkie_params")){
+            $params = session_get_cookie_params();
+            setcookie(session_name(),'', time() - 42000,
+              $params["path"],$params["domain"],
+              $params["secure"],$params["httponly"]
+            );
+        }
+        session_destroy();
 
-       setcookie('email','',time()-3600);
-       setcookie('password','',time()-3600);
+        setcookie('email','',time()-3600);
+        setcookie('password','',time()-3600);
 
-       header('Location: login/login');
-       exit();
+        header('Location: login/login');
+        exit();
     }
 ?>
