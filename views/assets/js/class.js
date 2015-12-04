@@ -323,10 +323,12 @@ function prepareNewConnection(id) {
       $('#log').append($log).fadeIn();
   });
 
-  window.onbeforeunload = function(){
-    socket.emit('send-log',user_name + 'が退室しました');
-  };
+  // 正常に退出した場合
+  // window.onbeforeunload = function(){
+  //   socket.emit('send-log',user_name + 'が退室しました');
+  // };
 
+  // 通信が突如きれた場合
   // socket.on('user disconnected', function(){
   //   $('#log').append('相手の接続が切れました<br>').fadeIn();
   // });
