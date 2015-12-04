@@ -27,13 +27,6 @@ function onOpened(evt) {
     socket.emit('send-log',user_name + 'が入室しました');
 }
 
-// ログの表示
-socket.on('push-log', function(text){
-    var $log;
-    $log = time()+ escapeHTML2(text) +"<br>";
-    $('#log').append($log).fadeIn();
-});
-
 function getRoomName() { // たとえば、 URLに  ?roomname  とする
   var url = document.location.href;
   var args = url.split('?');
@@ -321,3 +314,19 @@ function prepareNewConnection(id) {
     return (hour+":"+minute+":"+second+"　");
   }
 
+  // チャットログ出力用
+
+  //// ログの表示
+  socket.on('push-log', function(text){
+      var $log;
+      $log = time()+ escapeHTML2(text) +"<br>";
+      $('#log').append($log).fadeIn();
+  });
+
+  window.onbeforeunload = function(){
+    socket.emit('send-log',user_name + 'が退室しました');
+  };
+
+  // socket.on('user disconnected', function(){
+  //   $('#log').append('相手の接続が切れました<br>').fadeIn();
+  // });

@@ -14,7 +14,7 @@ io.sockets.on('connection', function(socket) {
   });
 
   socket.on('disconnect', function() {
-    emitMessage('user disconnected');
+    emitMessage('user disconnected', '相手の接続が切れました<br>');
   });
 
   socket.on('send-message', function(text){
