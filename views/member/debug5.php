@@ -5,11 +5,13 @@
         header('Location: auth/login');
         exit();
     }
-
+    echo "<br>";
+    echo last_login_time();
 ?>
 
 
-<h1>管理者</h1>
+<h1>先生ページ</h1>
+
 <?php
     if (status() == 1) {
         echo '管理者としてログイン中';

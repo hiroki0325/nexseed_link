@@ -30,15 +30,30 @@
                   $_SESSION['join']['image']=$table['picture'];
                   $_SESSION['join']['created']=$table['created'];
 
-
-                $_SESSION['time']=time();
+             
                 //ログイン情報を記録する
                   if($_POST['save']=='on'){
                     setcookie('email',$_POST['email'],time()+60*60*24*14);
                     setcookie('password',$_POST['password'],time()+60*60*24*14);
                   }
-                header('Location: ../index');
-                exit();
+                //ログインした時間を記録
+                  $_SESSION['time'] = time();
+                  // $_SESSION['login_time'] = date("Y/m/d H:i:s",$_SESSION['time']);
+                //ログイン回数のカウントとログインした時間の更新
+                  $sql=sprintf('UPDATE users SET login_count=%d WHERE id=%d ',
+                      $table['login_count']+1,
+                      mysqli_real_escape_string($db,$_SESSION['join']['id'])
+                  );
+                  mysqli_query($db, $sql) or die(mysqli_error());
+                //初回ログインのみユーザー編集画面に遷移
+                  if ($table['login_count'] == 0){
+                    header('Location: ../user_index');
+                    exit();
+                  } else {
+                    header('Location: ../index');
+                    exit();
+                  }
+
               }else{
                 $error['login']='failed';
               }
@@ -46,31 +61,13 @@
               $error['login']='blank';
             }
 
-
-
-            // $result = array();
-
-            // $name = $_SESSIN['join']['id'];
-            // if (!isset($result[$name])) {
-            //   $result[$name] = 1;
-            // } else {
-            //   $result[$name] += 1;
-            // }
-
-            // $sql=sprintf('UPDATE users SET login_count=%d WHERE id=%d',
-            //     mysqli_real_escape_string($db,$result),
-            //     mysqli_real_escape_string($db,$post_check['id'])
-            //     );
-            //     mysqli_query($db,$sql)or die(mysqli_error($db));
-            
-
         }
     }
 
 ?>
 
 
-<link rel="stylesheet" type="text/css" href="../../views/assets/css/login.css">
+<link rel="stylesheet" type="text/css" href="../../views/assets/css/user/login.css">
 <div class="container">
   <div class="row">
     <div class="col-xs-offset-4 col-xs-4">

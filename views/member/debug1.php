@@ -5,11 +5,13 @@
         header('Location: auth/login');
         exit();
     }
-
+    echo "<br>";
+    echo last_login_time();
 ?>
 
 
-<h1>管理者</h1>
+<h1>管理者ページ</h1>
+
 <?php
     if (status() == 1) {
         echo '管理者としてログイン中';
@@ -34,7 +36,7 @@
     echo "<br>";
     echo "留学期間 : " . current_user('start_day') . ' ~ ' . current_user('end_day');
     echo "<br>";
-    echo current_user_image(100,100,"square");
+    echo current_user_image(100,100,"circle");
 ?>
 
   <div>

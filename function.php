@@ -132,7 +132,20 @@
         setcookie('email','',time()-3600);
         setcookie('password','',time()-3600);
 
-        header('Location: login/login');
+        header('Location: auth/login');
         exit();
+    }
+
+    //最終ログイン時間
+    function last_login_time(){
+        include('dbconnect.php');
+        $sql = sprintf('SELECT*FROM users WHERE id=%d',
+            mysqli_real_escape_string($db,$_SESSION['join']['id'])
+        );
+        $record = mysqli_query($db,$sql)or die(mysqli_error($db));
+        $user = mysqli_fetch_assoc($record);
+        // return  $user['last_login_time'];
+        return date("Y-m-d H:i:s",$user['last_login_time']);
+
     }
 ?>
