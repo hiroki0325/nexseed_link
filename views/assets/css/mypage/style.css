@@ -743,7 +743,6 @@
 		padding-top: 40px;
 		padding-bottom: 40px;
 		color: rgba(255, 255, 255, 0.4);
-		opacity: 0.5;
 	}
 
 	#footer a{
@@ -754,7 +753,7 @@
 	}
 
 	.footer-social-icons{
-		text-align: center;
+		text-align: right;
 	}
 
 	.footer-social-icons a{
