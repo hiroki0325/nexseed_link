@@ -3,6 +3,7 @@
     $hash = array("tencho","hiro","natsu","hina","koich");
     $key = array_rand($hash);
     $name = $hash[$key];
+    echo "私は".$name."です";
 ?>
 
 <link rel="stylesheet" href="../../views/assets/css/bootstrap.css">
@@ -15,6 +16,7 @@
   <div class="container">
     <button type="button" onclick="connect();">授業開始</button>
     <button type="button" onclick="hangUp();">授業終了</button>
+    <button type="button" onclick="quit();">退室する</button>
     <br>
     <br>
   </div>

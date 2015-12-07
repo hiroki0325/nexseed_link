@@ -314,21 +314,26 @@ function prepareNewConnection(id) {
     return (hour+":"+minute+":"+second+"　");
   }
 
-  // チャットログ出力用
+  // チャットログ出力用 //
 
-  //// ログの表示
+  // ログの表示(全般)
   socket.on('push-log', function(text){
       var $log;
       $log = time()+ escapeHTML2(text) +"<br>";
       $('#log').append($log).fadeIn();
   });
 
-  // 正常に退出した場合
-  // window.onbeforeunload = function(){
-  //   socket.emit('send-log',user_name + 'が退室しました');
-  // };
+  // 退出した場合のログ
+  function quit(){
+    socket.emit('send-log',user_name + 'が退室しました');
+    // ToDo 予約ページのURLを設定
+    location.assign("hoge");
+  }
 
-  // 通信が突如きれた場合
-  // socket.on('user disconnected', function(){
-  //   $('#log').append('相手の接続が切れました<br>').fadeIn();
-  // });
+  // 通信が突如きれた場合のログ
+  socket.on('user disconnected', function(text){
+    var $log;
+    $log = time()+ escapeHTML2(text) +"<br>";
+    // 正常な退出でない場合のみ、出力
+    $('#log').append($log).fadeIn();
+  });

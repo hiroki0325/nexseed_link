@@ -14,14 +14,13 @@ io.sockets.on('connection', function(socket) {
   });
 
   socket.on('disconnect', function() {
-    var text = '相手の接続が切れました' + "<br>";
+    var text = '相手との接続が切れました' ;
     emitMessage('user disconnected', text);
   });
 
   socket.on('send-message', function(text){
     if (text.length) {
       io.sockets.in(socket.name).emit('push-message', text);
-      console.log('recieved text');
     }
   });
 
