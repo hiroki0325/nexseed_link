@@ -6,8 +6,9 @@
         exit();
     }
     echo "<br>";
-    echo last_login_time();
-?>
+    echo visit_log_time_show();
+ 
+ ?>
 
 
 <h1>在学生ページ</h1>

@@ -82,7 +82,7 @@
                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                 <?php if(isset($_POST['email'])): ?>
                   <input type="text" name="email" value="<?php echo h($_POST['email']); ?>"
-                   class="form-control" placeholder="" autofocus>
+                    class="form-control" placeholder="" autofocus>
                 <?php else: ?>
                   <input type="text" name="email" class="form-control" placeholder="" autofocus>
                 <?php endif; ?>

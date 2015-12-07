@@ -6,7 +6,8 @@
         exit();
     }
     echo "<br>";
-    echo last_login_time();
+    echo visit_log_time_show();
+    
 ?>
 
 

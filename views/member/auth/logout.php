@@ -1,11 +1,4 @@
 <?php 
-
-    //ログインした時間を記録する
-    $sql=sprintf('UPDATE users SET last_login_time=%d WHERE id=%d ',
-        $_SESSION['time'],
-        mysqli_real_escape_string($db,$_SESSION['join']['id'])
-        );
-        mysqli_query($db, $sql) or die(mysqli_error());
         
 
     //セッション情報を削除

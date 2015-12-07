@@ -16,6 +16,12 @@
       } else {
         include('./views/' . $function . '/' . $directry .  '/' . $page . '.php');
       }
+
+      //最終ログイン時間を記録する
+      visit_log_time();
+
    ?>
+
+
 </body>
 </html>
