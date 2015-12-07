@@ -66,7 +66,9 @@
   <!-- Main -->
   <div id="main">
 
+
     <?php
+    $favicon =1;
         if (!isset($page)) {
             include('./views/' . $function . '/' . $directry . '.php');
         } else {
@@ -104,7 +106,7 @@
     
     <!-- /SOCIAL ICONS -->
     <div class="copyright">
-      <p>&copy; 2015 <a href="">ShapedTheme</a>. All Rights Reserved.</p>
+      <p>&copy; 2016 <a href="">NexseedLink</a>. made by kade</p>
     </div>
   </footer>
   <!-- /FOOTER -->

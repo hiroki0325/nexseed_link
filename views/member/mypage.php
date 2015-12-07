@@ -3,24 +3,28 @@
 <section id="slider">
 	<div id="home-carousel" class="carousel slide" data-ride="carousel">			
 		<div class="carousel-inner">
-			<div class="item active" style="background-image: url(images/slider/01.jpg)">
+			<div class="item active" style="background-image: url(../views/assets/images/background.jpg)">
 				<div class="carousel-caption container">
 					<div class="row">
 						<div class="col-sm-7">
-							<h1>タイトル </h1>
-							<h2>見出し</h2>
-							<p>内容</p>
+							<h1>日本の物をセブ島へ</h1>
+							<h2></h2>
+							<p>セブの留学生と留学予定の方を「日本からの届け物」で繋ぎ、交流の輪を広げるプロジェクト。
+								あなたも一つセブ島へ「お届け物」はじめてみませんか。</p>
 						</div>
 					</div>
 				</div>					
 			</div>
-			<div class="item" style="background-image: url(images/slider/02.jpg)">
+
+			<div class="item" style="background-image: url(../views/assets/images/test.jpg)">
 				<div class="carousel-caption container">
 					<div class="row">
 						<div class="col-sm-7">
-							<h1>You are entire </h1>
-							<h2>creative world</h2>
-							<p>This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor. Aenean sollicitudin, lorem quis bibendum auctor.</p>
+							<h1>オンライン英会話 </h1>
+							<h2></h2>
+							<p>Nexseedの先生と日本にいても話したい！そんな声に答えました。
+								nexseedの先生たちと楽しい時間を過ごしてみませんか。
+								初心者の方でも大丈夫。まずは体験から</p>
 						</div>
 					</div>
 				</div>					
@@ -88,34 +92,35 @@
 					</div>
 				</div>
 			</div>
-		</div>
 
-		<div class="message-item" id="m6">
+		<div class="message-item" id="m7">
 			<div class="message-inner">
 				<div class="message-head clearfix">
-					<div class="avatar pull-left"><a href="./index.php?qa=user&qa_1=juggornot"><img class="timeline" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png"></a></div>
+					<div class="avatar pull-left"><a href="./index.php?qa=user&qa_1=russell"><img class="timeline" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png"></a></div>
 						<div class="user-detail">
-							<h5 class="handle">juggornot</h5>
+							<h5 class="handle">russell</h5>
 							<div class="post-meta">
 								<div class="asker-meta">
 									<span class="qa-message-what"></span>
 									<span class="qa-message-when">
-										<span class="qa-message-when-data">Oct 24, 2013</span>
+										<span class="qa-message-when-data">Oct 25, 2013</span>
 									</span>
 									<span class="qa-message-who">
 										<span class="qa-message-who-pad">by </span>
-										<span class="qa-message-who-data"><a href="./index.php?qa=user&qa_1=juggornot">juggornot</a></span>
+										<span class="qa-message-who-data"><a href="./index.php?qa=user&qa_1=russell">russell</a></span>
 									</span>
 								</div>
 							</div>
 						</div>
-					</div>
+		    	</div>
+	
 					<div class="qa-message-content">
-						Integer vitae arcu vitae ligula Cras vestibulum suscipit odio ac dapibus. In hac habitasse platea dictumst. Cras pulvinar erat et nunc fringilla, quis molestie
+						Nullam porta leo vitae ipsum feugiat viverra. In sed placerat mi. Nullam euismod, quam in euismod rhoncus, tellus velit posuere tortor, non cursus nunc velit et lacus.
 					</div>
-				</div>
-			</div>
-		</div>
+			 </div>
+		 </div>
+	
+	</div><!-- timeline  -->
 
 	</div><!-- wallmessages -->
 
