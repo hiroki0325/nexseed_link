@@ -49,6 +49,7 @@
       // $_POST['start_day']に入っているユーザーが入力した開始日と、
       // 現在の日付(date関数？)を取得して比べる
 
+<<<<<<< HEAD
           // もし$_POST['start_day']が後だったら入学前なので、
       if(date("Y-m-d") < $_POST['start_day']){
           $status = 'future_student';
@@ -59,6 +60,26 @@
       }else{
           $status = 'graduate_student';
       }
+=======
+      if (isset($_POST['teacher'])) {
+          $status = 5;
+      } elseif (isset($_POST['admin'])){
+          $status = 1;
+      } else {
+              // もし$_POST['start_day']が後だったら入学前なので、
+          if(date("Y-m-d") <= $_POST['start_day']){
+              $status = 2;
+              // もし$_POST['start_day']が前で、かつ$_POST['end_day']が後だったら在学生なので、
+          }elseif($_POST['start_day'] <= date("Y-m-d") && date("Y-m-d") <= $_POST['end_day']){
+              $status = 3;
+              // もし$_POST['start_day']が前で、かつ$_POST['end_day']が前だったら卒業生なので、
+          }else{
+              $status = 4;
+          }
+      }
+
+      
+>>>>>>> 2515986... ログイン画面の微調整
 
       if(empty($error)){
         $image=date('YmdHis').$_FILES["image"]["name"];
