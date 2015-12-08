@@ -1,7 +1,7 @@
 
 <?php
     
-    include('post_form.php');
+    include('request_form.php');
     //データの表示
     //全自分の投稿データ
     $sql=sprintf('SELECT * FROM logistic_posts WHERE client_id=%d ORDER BY created DESC',

@@ -1,7 +1,4 @@
 <?php
-    session_start();
-    require('dbconnect.php');
-    echo $_REQUEST['id'];
     if (isset($_REQUEST['id'])){
         $sql = sprintf('SELECT * FROM comments WHERE id = %d',
             $_REQUEST['id']
@@ -18,6 +15,6 @@
             echo 'ok';
         }
     }
-    header(sprintf('Location:show.php?id=%d',$table['post_id']));
+    header(sprintf('Location:show?id=%d',$table['post_id']));
     exit();
 ?>
