@@ -61,6 +61,11 @@
               $status = 2;
           // もし$_POST['start_day']が前で、かつ$_POST['end_day']が後だったら在学生なので、
           }elseif($_POST['start_day'] < date("Y-m-d") && date("Y-m-d") < $_POST['end_day']){
+              // もし$_POST['start_day']が後だったら入学前なので、
+          if(date("Y-m-d") <= $_POST['start_day']){
+              $status = 2;
+              // もし$_POST['start_day']が前で、かつ$_POST['end_day']が後だったら在学生なので、
+          }elseif($_POST['start_day'] <= date("Y-m-d") && date("Y-m-d") <= $_POST['end_day']){
               $status = 3;
           // もし$_POST['start_day']が前で、かつ$_POST['end_day']が前だったら卒業生なので、
           }else{
@@ -162,10 +167,10 @@
       ?>
       <?php if(isset($error["password"])): ?>
           <?php if ($error["password"]=='blank'): ?>
-              <p class="error">* パスワードを入力してください。</p>
+            <p class="error">* パスワードを入力してください。</p>
           <?php endif;?>
           <?php if ($error["password"]=='length'): ?>
-              <p class="error">* パスワードは４文字以上入力してください</p>
+            <p class="error">* パスワードは４文字以上入力してください</p>
           <?php endif;?>
       <?php endif;?>
   </div>
