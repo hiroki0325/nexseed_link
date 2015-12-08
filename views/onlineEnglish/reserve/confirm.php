@@ -4,17 +4,32 @@
     $_SESSION["join"]["picture"]["name"] = "default2.png";
     $_SESSION["join"]["eg_name"] = "koichi";
 
+    //ランダム英数字文字列の作成
+    function makeRandStr($length) {
+        $str = array_merge(range('a', 'z'), range('0', '9'), range('A', 'Z'));
+        $r_str = null;
+        for ($i = 0; $i < $length; $i++) {
+            $r_str .= $str[rand(0, count($str))];
+        }
+        return $r_str;
+    }
+
     date_default_timezone_set('Asia/Tokyo');
 
     if (isset($_POST["confirm"])) {
         if ($_POST["confirm"] == "on") {
-            $sql = sprintf('UPDATE lessons SET student_id=%d, reserve_status_id=2, modified=NOW() WHERE id=%d',
-                          $_SESSION["join"]["id"],
-                          $_POST["lesson"]
-            );
-            mysqli_query($db, $sql)or die(mysqli_error($db));
-            header('Location: thanks');
-            exit();
+              //乱数生成関数の呼び出し
+              $radomStr = makeRandStr(8);
+
+              //レッスンテーブルのアップデート
+              $sql = sprintf('UPDATE lessons SET student_id=%d, reserve_status_id=2, rand_str = "%s", modified=NOW() WHERE id=%d',
+                            $_SESSION["join"]["id"],
+                            $radomStr,
+                            $_POST["lesson"]
+              );
+              mysqli_query($db, $sql)or die(mysqli_error($db));
+              header('Location: thanks');
+              exit();
         }
     }
 ?>

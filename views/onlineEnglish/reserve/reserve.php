@@ -33,15 +33,13 @@
 
     //パラメータで指定された日の講師及び予約情報
     $sql_all_lessons = sprintf('SELECT users.id, users.eg_name, users.picture, lessons.id AS "lesson_id", lessons.date 
-                                FROM users INNER JOIN lessons ON users.id=lessons.teacher_id WHERE lessons.date>%d AND lessons.date<%d',
+                                FROM users INNER JOIN lessons ON users.id=lessons.teacher_id WHERE lessons.reserve_status_id=1 AND lessons.date>%d AND lessons.date<%d',
                                 $date,
                                 $date_next
                                 //20151126200000
                               );
 
     $all_lessons = mysqli_query($db, $sql_all_lessons)or die(mysqli_error($db));
-    $all_lesson = mysqli_fetch_assoc($all_lessons);
-    echo "all_lesson；";
 
     //お気に入り講師の追加
     if (isset($_POST["like"])) {
