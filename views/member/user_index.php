@@ -25,7 +25,6 @@
         mysqli_real_escape_string($db,$_SESSION['join']['image']),
         mysqli_real_escape_string($db,$_SESSION['join']['id'])
         );
-        var_dump($sql);
         mysqli_query($db,$sql)or die(mysqli_error($db));
         header('Location: index');
         exit();
@@ -74,7 +73,5 @@
 
 </form>
 
-  <div>
-    <a href="auth/logout">ログアウト</a>
-  </div>
+
 
