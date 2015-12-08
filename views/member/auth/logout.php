@@ -1,4 +1,6 @@
 <?php 
+        
+
     //セッション情報を削除
     $_SESSION = array();
     if(ini_get("session.use_cokkie_params")){
@@ -14,7 +16,7 @@
     setcookie('email','',time()-3600);
     setcookie('password','',time()-3600);
 
-    header('Location: ../login/login');
+    header('Location: login');
     exit();
 
  ?>

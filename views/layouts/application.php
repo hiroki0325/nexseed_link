@@ -3,13 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <title>NexSeedLink</title>
-  <link rel="stylesheet" type="text/css" href="../views/assets/css/style.css">
+  <link rel="stylesheet" type="text/css" href="../views/assets/css/user/style.css">
   <link rel="stylesheet" href="../../views/assets/css/bootstrap.css">
-  <link rel="stylesheet" href="../../views/assets/font-awesome/css/font-awesome.css">
+  <link rel="stylesheet" href="../../views/assets/font-awesome/css/font-awesome.css"> 
   <?php if ($function == 'logistic') :?>
     <link rel="stylesheet" href="../../views/assets/css/logistic/logistic.css">
-    <link rel='stylesheet' href='../../views/assets/css/logistic/popbox.css' type='text/css' media='screen'>
-    <link rel='stylesheet' href='../../views/assets/css/logistic/comment_timeline.css'>
     <script type='text/javascript' src='../../views/assets/js/logistic/jquery-min.js'></script>
     <script type='text/javascript' src='../../views/assets/js/logistic/popbox.js'></script>
     <script type='text/javascript'>
@@ -35,6 +33,12 @@
       } else {
         include('./views/' . $function . '/' . $directry .  '/' . $page . '.php');
       }
+
+      //最終ログイン時間を記録する
+      visit_log_time();
+
    ?>
+
+
 </body>
 </html>

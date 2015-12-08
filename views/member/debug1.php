@@ -2,20 +2,17 @@
     if (isLoginSuccess()) {
         echo "ログインしていた場合の処理";
     } else {
-        echo "ログインしていなかった場合の処理";
+        header('Location: auth/login');
+        exit();
     }
-
+    echo "<br>";
+    echo visit_log_time_show();
 ?>
 
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <title>hoge</title>
-</head>
-<body>
-  <h1>管理者</h1>
-  <?php
+
+<h1>管理者ページ</h1>
+
+<?php
     if (status() == 1) {
         echo '管理者としてログイン中';
     } elseif (status() == 2) {
@@ -33,17 +30,15 @@
     echo "<br>";
     echo "status()の中身 = " . status();
     echo "<br>";
-    echo "ユーザー名 : " . current_user('first_name') . ' ' . current_user('last_name');
+    echo "ユーザー名 : " . current_user('fullname');
     echo "<br>";
     echo "メールアドレス : " . current_user('email');
     echo "<br>";
     echo "留学期間 : " . current_user('start_day') . ' ~ ' . current_user('end_day');
     echo "<br>";
-    echo current_user_image(100,100,"square");
+    echo current_user_image(100,100,"circle");
+?>
 
-    ?>
   <div>
-    <a href="logout/logout">ログアウト</a>
+    <a href="auth/logout">ログアウト</a>
   </div>
-</body>
-</html>

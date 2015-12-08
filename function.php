@@ -132,7 +132,28 @@
         setcookie('email','',time()-3600);
         setcookie('password','',time()-3600);
 
-        header('Location: login/login');
+        header('Location: auth/login');
         exit();
+    }
+
+
+    //最終閲覧時間を記録する（ページを開いたら時間が更新される）
+    function visit_log_time(){
+        include('dbconnect.php');
+        $sql=sprintf('UPDATE users SET visit_log_time=NOW() WHERE id=%d ',
+            mysqli_real_escape_string($db,$_SESSION['join']['id'])
+            );
+            mysqli_query($db, $sql) or die(mysqli_error());
+    }
+
+    //最終閲覧時間を確認できる
+    function visit_log_time_show(){
+        include('dbconnect.php');
+        $sql = sprintf('SELECT*FROM users WHERE id=%d',
+            mysqli_real_escape_string($db,$_SESSION['join']['id'])
+        );
+        $record = mysqli_query($db,$sql)or die(mysqli_error($db));
+        $user = mysqli_fetch_assoc($record);
+        return $user['visit_log_time'];
     }
 ?>
