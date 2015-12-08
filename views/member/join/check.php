@@ -11,7 +11,7 @@
     if(!empty($_POST)){
         if ($_SESSION["join"]["start_day"] && $_SESSION["join"]["end_day"]) {
             $sql=sprintf('INSERT INTO users SET fullname="%s",
-              email="%s",password="%s",start_day="%s",end_day="%s",status_id=%d,created=NOW()',
+              email="%s",password="%s",start_day="%s",login_count=0,end_day="%s",status_id=%d,created=NOW()',
               mysqli_real_escape_string($db,$fullname),
               mysqli_real_escape_string($db,$_SESSION["join"]["email"]),
               mysqli_real_escape_string($db,sha1($_SESSION["join"]["password"])),
@@ -21,7 +21,7 @@
             );
         } else {
             $sql=sprintf('INSERT INTO users SET fullname="%s",
-              email="%s",password="%s",status_id=%d,created=NOW()',
+              email="%s",password="%s",loing_count=0,status_id=%d,created=NOW()',
               mysqli_real_escape_string($db,$fullname),
               mysqli_real_escape_string($db,$_SESSION["join"]["email"]),
               mysqli_real_escape_string($db,sha1($_SESSION["join"]["password"])),

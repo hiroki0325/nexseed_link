@@ -1,4 +1,6 @@
 <?php 
+        
+
     //セッション情報を削除
     $_SESSION = array();
     if(ini_get("session.use_cokkie_params")){

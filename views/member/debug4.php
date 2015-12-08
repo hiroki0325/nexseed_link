@@ -5,11 +5,14 @@
         header('Location: auth/login');
         exit();
     }
+    echo "<br>";
+    echo visit_log_time_show();
 
 ?>
 
 
-<h1>管理者</h1>
+<h1>卒業生ページ</h1>
+
 <?php
     if (status() == 1) {
         echo '管理者としてログイン中';
