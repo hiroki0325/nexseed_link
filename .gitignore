@@ -1,4 +1,5 @@
-### https://raw.github.com/github/gitignore/32da2f83412ad9aeaaf5316338c50521a6bfd5df/Global/OSX.gitignore
+
+### https://raw.github.com/github/gitignore/5c11cc04f05ab9a1d124525faa8648a9b6c8dc64/Global/OSX.gitignore
 
 .DS_Store
 .AppleDouble
@@ -27,7 +28,7 @@ Temporary Items
 .apdisk
 
 
-### https://raw.github.com/github/gitignore/32da2f83412ad9aeaaf5316338c50521a6bfd5df/Global/Vim.gitignore
+### https://raw.github.com/github/gitignore/5c11cc04f05ab9a1d124525faa8648a9b6c8dc64/Global/Vim.gitignore
 
 [._]*.s[a-w][a-z]
 [._]s[a-w][a-z]
