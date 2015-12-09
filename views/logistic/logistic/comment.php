@@ -10,7 +10,7 @@
          
         //画像ファイルの拡張子に対してのエラー判定
         if (isset($_FILES)) { 
-            $filename = $_FILES['comment_image']['name'];
+            $filename = $_FILES['image_comment']['name'];
             $ext = substr($filename, -3);
             if ($ext != 'jpg' && $ext != 'gif'&& $ext != 'png') {
                 $error_image = 'type';
@@ -19,8 +19,8 @@
         //画像をファイルにアップロード
         if (empty($error)) {
             if($filename != "" ) {
-                $comment_image = $filename;  
-                move_uploaded_file($_FILES['comment_image']['tmp_name'],'/var/www/html/nexseed_link/views/logistic/logistic/comment_image/'.$comment_image);  
+                $image_comment = $filename;  
+                move_uploaded_file($_FILES['image_comment']['tmp_name'],'/var/www/html/nexseed_link/views/logistic/logistic/image_comment/'.$image_comment);  
             }
         }
         //エラーがない場合logistic_postsにinsert
@@ -30,7 +30,7 @@
                 mysqli_real_escape_string($db, $post_id),
                 mysqli_real_escape_string($db, $user_id),
                 mysqli_real_escape_string($db, $_POST['comment']),
-                mysqli_real_escape_string($db, $_FILES['comment_image']['name'])
+                mysqli_real_escape_string($db, $_FILES['image_comment']['name'])
             );
             mysqli_query($db, $sql) or die (mysqli_error($db));
         } 
@@ -53,7 +53,7 @@
             <?php else:?>
               <textarea ype="text" name="comment" placeholder="コメントを投稿します。" ></textarea>
             <?php endif; ?>
-            <input type="file" name="comment_image">
+            <input type="file" name="image_comment">
             <button type="submit" class="btn btn-success green"><i class="fa fa-share"></i>コメントする</button>
           </form>
         </div>
@@ -71,7 +71,7 @@
             <blockquote>
               <p><?php echo $comment['user_id'].' '.$comment['comment'];?></p>
               <?php if(!empty($comment['comment_image'])):?>
-                <img src="../../views/logistic/logistic/comment_image/<?php echo $comment['comment_image']?>">
+                <img src="../../views/logistic/logistic/image_comment/<?php echo $comment['comment_image']?>">
               <?php endif; ?>
               <p>[<a href="comment_delete?id=<?php echo $comment['id']?>" onClick="disp()">削除</a>]</p>
             </blockquote>         

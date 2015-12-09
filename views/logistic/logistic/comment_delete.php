@@ -12,7 +12,6 @@
                 $table['id']
             );
             mysqli_query($db, $sql) or die (mysqli_error($db));
-            echo 'ok';
         }
     }
     header(sprintf('Location:show?id=%d',$table['post_id']));
