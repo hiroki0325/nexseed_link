@@ -128,7 +128,7 @@
             <div class="row">
               <div class="col-xs-6 col-md-6">
                 <div class="left-section">
-                  <a href="admin_login">管理者はこちら</a>
+                  <a href="../admin/admin_login">管理者はこちら</a>
                 </div>
               </div>
               <div class="col-xs-6 col-md-6 pull-right"></div>
