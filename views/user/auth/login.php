@@ -50,7 +50,7 @@
                     header('Location: ../user_index');
                     exit();
                   } elseif ($_SESSION['join']['status_id']==1) {
-                    header('Location: ../admin/index');
+                    header('Location: ../../admin/index');
                   } else {
                     header('Location: ../index');
                     exit();

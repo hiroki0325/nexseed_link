@@ -14,7 +14,7 @@
 
       if (empty($error)) {
         $image = date('YmdHis') . $_FILES["image"]["name"];
-        move_uploaded_file($_FILES["image"]["tmp_name"], './views/member/user_picture/' . $image);
+        move_uploaded_file($_FILES["image"]["tmp_name"], './views/user/user_picture/' . $image);
         $_SESSION["join"]["image"] = $image;
       }
     }
