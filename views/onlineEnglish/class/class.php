@@ -4,8 +4,6 @@
 
 <link rel="stylesheet" href="../../views/assets/css/bootstrap.css">
 <link rel="stylesheet" type="text/css" href="../../views/assets/css/class.css">
-<script type="text/javascript" src="../../views/assets/js/jquery.min.js"></script>
-<script type="text/javascript" src="../../views/assets/js/bootstrap.js"></script>
 
 <section id="onlineclass">
   <!-- 授業の開始と終了は先生のみ可能 -->
