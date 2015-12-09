@@ -1,37 +1,36 @@
 <?php
     //入力しなかった場合入力を促す
     if (!empty($_POST)) {
-      if ($_POST["nickname"]=='') {
-         $error["nickname"]='blank';
+      if ($_POST["nickname"] == '') {
+         $error["nickname"] = 'blank';
       }
       $fileName=$_FILES["image"]["name"];
       if (!empty($fileName)) {
         $ext=substr($fileName, -3);
-        if ($ext !='jpg'&& $ext !='gif') {
-          $error["image"]="type";
+        if ($ext != 'jpg' && $ext != 'gif') {
+          $error["image"] = "type";
         } 
       }
 
       if (empty($error)) {
-        $image=date('YmdHis').$_FILES["image"]["name"];
-        move_uploaded_file($_FILES["image"]["tmp_name"], './views/member/user_picture/'.$image);
-        $_SESSION["join"]=$_POST;
-        $_SESSION["join"]["image"]=$image;
-        header('Location: index');
-        exit();
+        $image = date('YmdHis') . $_FILES["image"]["name"];
+        move_uploaded_file($_FILES["image"]["tmp_name"], './views/member/user_picture/' . $image);
+        $_SESSION["join"]["image"] = $image;
       }
     }
 
-       var_dump($_POST);
-       var_dump($_SESSION);
-
-      $sql=sprintf('UPDATE users SET nickname="%s" picture="%s" WHERE id=%d',
+    var_dump($_POST);
+    if (!empty($_POST)) {
+      $sql=sprintf('UPDATE users SET nickname="%s", picture="%s" WHERE id=%d',
         mysqli_real_escape_string($db,$_POST['nickname']),
-        mysqli_real_escape_string($db,$_POST['image']),
+        mysqli_real_escape_string($db,$_SESSION['join']['image']),
         mysqli_real_escape_string($db,$_SESSION['join']['id'])
         );
+        var_dump($sql);
         mysqli_query($db,$sql)or die(mysqli_error($db));
-       
+        header('Location: index');
+        exit();
+    }
 
 ?>
 

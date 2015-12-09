@@ -59,6 +59,10 @@
         } else {
             include('./views/' . $function . '/' . $directry .  '/' . $page . '.php');
         }
+
+        //最終ログイン時間を記録する
+        visit_log_time();
+
      ?>
   </div><!-- /main -->
 
@@ -67,7 +71,7 @@
     <!-- SOCIAL ICONS -->
     <div class="footer-social-icons">
     </div>
-    
+
     <!-- /SOCIAL ICONS -->
     <div class="copyright">
       <p>&copy; 2016 <a href="">NexseedLink</a>. made by kade</p>
@@ -76,12 +80,12 @@
   <!-- /FOOTER -->
 
   <!-- Scripts -->
+  <script src="../views/assets/js/bootstrap.js"></script>
   <script src="../views/assets/js/jquery.min.js"></script>
   <script src="../views/assets/js/mypage/jquery.scrolly.min.js"></script>
   <script src="../views/assets/js/mypage/jquery.scrollzer.min.js"></script>
   <script src="../views/assets/js/mypage/skel.min.js"></script>
   <script src="../views/assets/js/mypage/util.js"></script>
-  <script src="../views/assets/js/bootstrap.js"></script>
   <script src="../views/assets/js/mypage/jquery.parallax.js"></script>
   <script src="../views/assets/js/mypage/smoothscroll.js"></script>
   <script src="../views/assets/js/mypage/masonry.pkgd.min.js"></script>

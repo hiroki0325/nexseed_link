@@ -7,7 +7,7 @@
 
     }else{
       //ログインしていない
-      header('Location: login/login');
+      header('Location: auth/login');
       exit();
     }
 
