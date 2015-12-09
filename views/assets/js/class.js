@@ -334,6 +334,12 @@ function prepareNewConnection(id) {
   socket.on('user disconnected', function(text){
     var $log;
     $log = time()+ escapeHTML2(text) +"<br>";
-    // 正常な退出でない場合のみ、出力
-    $('#log').append($log).fadeIn();
+    // 正常な退出でない場合のみ、出力する処理
+    var logComment = document.getElementById("log").innerText;
+    var lastLog = logComment.substr(-7);
+
+    if (lastLog !== '退室しました') {
+      $('#log').append($log).fadeIn();
+    }
+
   });

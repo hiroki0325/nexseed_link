@@ -1,9 +1,5 @@
 <?php
-    // ToDo ユーザー名を動的に代入するように書き換える
-    $hash = array("tencho","hiro","natsu","hina","koich");
-    $key = array_rand($hash);
-    $name = $hash[$key];
-    echo "私は".$name."です";
+    $name = current_user('nickname')
 ?>
 
 <link rel="stylesheet" href="../../views/assets/css/bootstrap.css">
