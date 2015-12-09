@@ -49,6 +49,8 @@
                   if ($table['login_count'] == 0){
                     header('Location: ../user_index');
                     exit();
+                  } elseif ($_SESSION['join']['status_id']==1) {
+                    header('Location: ../../admin/index');
                   } else {
                     header('Location: ../index');
                     exit();
@@ -126,7 +128,7 @@
             <div class="row">
               <div class="col-xs-6 col-md-6">
                 <div class="left-section">
-                  <a href="admin_login">管理者はこちら</a>
+                  <a href="../admin/admin_login">管理者はこちら</a>
                 </div>
               </div>
               <div class="col-xs-6 col-md-6 pull-right"></div>

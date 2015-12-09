@@ -14,19 +14,17 @@
 
       if (empty($error)) {
         $image = date('YmdHis') . $_FILES["image"]["name"];
-        move_uploaded_file($_FILES["image"]["tmp_name"], './views/member/user_picture/' . $image);
+        move_uploaded_file($_FILES["image"]["tmp_name"], './views/user/user_picture/' . $image);
         $_SESSION["join"]["image"] = $image;
       }
     }
 
-    var_dump($_POST);
     if (!empty($_POST)) {
       $sql=sprintf('UPDATE users SET nickname="%s", picture="%s" WHERE id=%d',
         mysqli_real_escape_string($db,$_POST['nickname']),
         mysqli_real_escape_string($db,$_SESSION['join']['image']),
         mysqli_real_escape_string($db,$_SESSION['join']['id'])
         );
-        var_dump($sql);
         mysqli_query($db,$sql)or die(mysqli_error($db));
         header('Location: index');
         exit();
@@ -75,6 +73,11 @@
 
 </form>
 
-</body>
-</html>
+<<<<<<< HEAD
+
+=======
+  <div>
+    <a href="auth/logout">ログアウト</a>
+  </div>
+>>>>>>> 2515986... ログイン画面の微調整
 

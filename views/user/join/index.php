@@ -36,24 +36,42 @@
       // $_POST['start_day']に入っているユーザーが入力した開始日と、
       // 現在の日付(date関数？)を取得して比べる
 
+          // もし$_POST['start_day']が後だったら入学前なので、
+      if(date("Y-m-d") < $_POST['start_day']){
+          $status = 'future_student';
+          // もし$_POST['start_day']が前で、かつ$_POST['end_day']が後だったら在学生なので、
+      }elseif($_POST['start_day'] < date("Y-m-d") && date("Y-m-d")<$_POST['end_day']){
+          $status = 'stay_student';
+          // もし$_POST['start_day']が前で、かつ$_POST['end_day']が前だったら卒業生なので、
+      }else{
+          $status = 'graduate_student';
+      }
+
       if (isset($_POST['teacher'])) {
           $status = 5;
       } elseif (isset($_POST['admin'])){
           $status = 1;
       } else {
-              // もし$_POST['start_day']が後だったら入学前なので、
+          // もし$_POST['start_day']が後だったら入学前なので、
+          if(date("Y-m-d") <= $_POST['start_day']){
+              $status = 2;
+          // もし$_POST['start_day']が前で、かつ$_POST['end_day']が後だったら在学生なので、
+          }elseif($_POST['start_day'] <= date("Y-m-d") && date("Y-m-d") <= $_POST['end_day']){
           if(date("Y-m-d") < $_POST['start_day']){
               $status = 2;
-              // もし$_POST['start_day']が前で、かつ$_POST['end_day']が後だったら在学生なので、
+          // もし$_POST['start_day']が前で、かつ$_POST['end_day']が後だったら在学生なので、
           }elseif($_POST['start_day'] < date("Y-m-d") && date("Y-m-d") < $_POST['end_day']){
+              // もし$_POST['start_day']が後だったら入学前なので、
+          if(date("Y-m-d") <= $_POST['start_day']){
+              $status = 2;
+              // もし$_POST['start_day']が前で、かつ$_POST['end_day']が後だったら在学生なので、
+          }elseif($_POST['start_day'] <= date("Y-m-d") && date("Y-m-d") <= $_POST['end_day']){
               $status = 3;
-              // もし$_POST['start_day']が前で、かつ$_POST['end_day']が前だったら卒業生なので、
+          // もし$_POST['start_day']が前で、かつ$_POST['end_day']が前だったら卒業生なので、
           }else{
               $status = 4;
           }
       }
-
-      
 
       if(empty($error)){
         $_SESSION["join"]=$_POST;
@@ -62,7 +80,6 @@
         header('Location: check');
         exit();
       }
-
     }
 
     //書き直し処理
@@ -110,7 +127,7 @@
       }
     ?>
     <?php if(isset($error["last_name"])): ?>
-    <?php if ($error["last_name"]=='blank'): ?>
+      <?php if ($error["last_name"]=='blank'): ?>
         <p class="error">* 名前を入力してください</p>
       <?php endif; ?>
     <?php endif; ?>
@@ -150,10 +167,10 @@
       ?>
       <?php if(isset($error["password"])): ?>
           <?php if ($error["password"]=='blank'): ?>
-              <p class="error">* パスワードを入力してください。</p>
+            <p class="error">* パスワードを入力してください。</p>
           <?php endif;?>
           <?php if ($error["password"]=='length'): ?>
-              <p class="error">* パスワードは４文字以上入力してください</p>
+            <p class="error">* パスワードは４文字以上入力してください</p>
           <?php endif;?>
       <?php endif;?>
   </div>
@@ -189,12 +206,10 @@
       }else{
           echo '<input type="date" name="end_day">';
       }
-    ?>
+     ?>
   </div>
 
-
-    <button type="submit">入力内容の確認</button>
-
+  <button type="submit">入力内容の確認</button>
 
 </form>
 
