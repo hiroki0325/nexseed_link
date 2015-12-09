@@ -34,3 +34,6 @@
 		</div><!-- /carousel-inner -->
 	</div> <!--/#home-carousel--> 
 </section><!-- /slider -->
+
+
+<!-- time line -->
