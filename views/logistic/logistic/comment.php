@@ -73,7 +73,7 @@
               <?php if(!empty($comment['comment_image'])):?>
                 <img src="../../views/logistic/logistic/image_comment/<?php echo $comment['comment_image']?>">
               <?php endif; ?>
-              <p>[<a href="comment_delete?id=<?php echo $comment['id']?>" onClick="disp()">削除</a>]</p>
+              <p>[<a href="comment_delete?id=<?php echo $comment['id']?>">削除</a>]</p>
             </blockquote>         
           </div>
         </div>
