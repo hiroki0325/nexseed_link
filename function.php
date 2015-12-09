@@ -147,7 +147,7 @@
         $sql=sprintf('UPDATE users SET visit_log_time=NOW() WHERE id=%d ',
             mysqli_real_escape_string($db,$_SESSION['join']['id'])
             );
-            mysqli_query($db, $sql) or die(mysqli_error());
+            mysqli_query($db, $sql) or die(mysqli_error($db));
     }
 
     //最終閲覧時間を確認できる
