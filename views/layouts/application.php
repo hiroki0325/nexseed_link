@@ -3,10 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <title>NexSeedLink</title>
-      <link rel="stylesheet" type="text/css" href="../views/assets/css/user/style.css">
-      <link rel="stylesheet" href="../../views/assets/css/bootstrap.css">
-      <link rel="stylesheet" href="../../views/assets/font-awesome/css/font-awesome.css">
-
+  <link rel="stylesheet" type="text/css" href="../views/assets/css/user/style.css">
+  <link rel="stylesheet" href="../../views/assets/css/bootstrap.css">
+  <link rel="stylesheet" href="../../views/assets/css/<?php echo $function.'/'.$directry.'.css';?>">
+  <link rel="stylesheet" href="../../views/assets/font-awesome/css/font-awesome.css"> 
+  <script type='text/javascript' src="../../views/assets/js/jquery.js"></script>
+  <script type='text/javascript' src="../../views/assets/js/<?php echo $function.'/'.$directry.'.js';?>"></script>
 </head>
 <body>
   <h1>NexSeedLink</h1>
@@ -16,7 +18,6 @@
       } else {
         include('./views/' . $function . '/' . $directry .  '/' . $page . '.php');
       }
-
       //最終ログイン時間を記録する
       visit_log_time();
 
