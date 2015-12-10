@@ -13,8 +13,10 @@
     $params = explode('/', $_GET['url']);
 
     $function = $params[0];
-    $directry = $params[1];
 
+    if (isset($params[1])) {
+        $directry = $params[1];
+    }
 
     if (count($params) > 2) {
         $page = $params[2];
