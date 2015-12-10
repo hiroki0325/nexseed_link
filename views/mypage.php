@@ -74,3 +74,5 @@
     </ul>
 </div>
 <!-- /time line -->
+<img src="../views/assets/images/teacher.jpg" alt="">
+
