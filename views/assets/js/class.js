@@ -338,7 +338,8 @@ function prepareNewConnection(id) {
     var logComment = document.getElementById("log").innerText;
     var lastLog = logComment.substr(-7);
 
-    if (lastLog !== '退室しました') {
+    if (lastLog != '退室しました' ) {
+      window.alert(lastLog);
       $('#log').append($log).fadeIn();
     }
 

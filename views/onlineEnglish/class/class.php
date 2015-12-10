@@ -69,11 +69,3 @@
       </div>
   </div>
 </section>
-
-<!-- socket -->
-<script src="../../views/assets/js/socket.io.js"></script>
-
-<!-- online英会話メインjs -->
-<script id="script" type="text/javascript" src="../../views/assets/js/class.js"
-  data-name = '<?php echo json_safe_encode($name); ?>'
-></script>
