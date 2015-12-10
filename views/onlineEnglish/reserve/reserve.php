@@ -2,12 +2,12 @@
     //仮のアカウント情報設定
     $_SESSION["join"]["id"] = 38;
     $_SESSION["join"]["picture"]["name"] = "default2.png";
-    $_SESSION["join"]["eg_name"] = "koichi";
+    $_SESSION["join"]["nickname"] = "koichi";
 
 
     $db = mysqli_connect("localhost", "root", "mysql","nexseed_link");
     // ログイン中ユーザーのお気に入り講師情報を呼び出す
-    $sql_like_teachers = sprintf('SELECT u.id, u.eg_name, u.picture, l.id AS "lesson_id", l.date FROM users u, teacher_likes t, lessons l 
+    $sql_like_teachers = sprintf('SELECT u.id, u.nickname, u.picture, l.id AS "lesson_id", l.date FROM users u, teacher_likes t, lessons l 
                                   WHERE t.student_id=%d AND t.teacher_id=u.id AND t.teacher_id=l.teacher_id AND l.reserve_status_id=1 AND l.date>NOW()+1',
                                 $_SESSION["join"]["id"]
                              );
@@ -32,7 +32,7 @@
     var_dump($date_next);
 
     //パラメータで指定された日の講師及び予約情報
-    $sql_all_lessons = sprintf('SELECT users.id, users.eg_name, users.picture, lessons.id AS "lesson_id", lessons.date 
+    $sql_all_lessons = sprintf('SELECT users.id, users.nickname, users.picture, lessons.id AS "lesson_id", lessons.date 
                                 FROM users INNER JOIN lessons ON users.id=lessons.teacher_id WHERE lessons.reserve_status_id=1 AND lessons.date>%d AND lessons.date<%d',
                                 $date,
                                 $date_next
@@ -67,7 +67,7 @@
     //予約情報の送信
     // if (isset($_POST["date"])) {
     //     $_SESSION["reserve"] = $_POST;
-    //     $_SESSION["reserve"]["eg_name"] = $like_teacher["eg_name"];
+    //     $_SESSION["reserve"]["nickname"] = $like_teacher["nickname"];
     //     $_SESSION["reserve"]["picture"] = $like_teacher["picture"];
     //     header("Location: confirm.php");
     //     exit();
@@ -117,7 +117,7 @@
                             // echo "===== like_teacher =====";
                             // var_dump($like_teacher);
 
-                            // $lessons_ary = array_merge($lessons_ary,array($like_teacher["eg_name"] => array_merge($lessons_ary1,array($i => $like_teacher["date"]))));
+                            // $lessons_ary = array_merge($lessons_ary,array($like_teacher["nickname"] => array_merge($lessons_ary1,array($i => $like_teacher["date"]))));
                             // $i++;
                             // //$lessoms_ary2 = $lessons_ary + array( "key" => $);
                             // // $lessons_ary1 = array_merge($lessons_ary1, array("$i" => $like_teacher["date"]));
@@ -130,7 +130,7 @@
                         <?php 
                           // echo sprintf('<img src="../../views/member/user_picture/%s" alt="画像" width="80" height="80"><p>%s先生</p>',
                           //                  $like_teacher["picture"],
-                          //                  $like_teacher["eg_name"]
+                          //                  $like_teacher["nickname"]
                           //                );
                         ?>
                         <!-- <form action="" method="post">
@@ -142,7 +142,7 @@
                             <form action="confirm" method="post">
                               <input type="hidden" name="lesson_id" value="<?php echo $like_teacher["lesson_id"]; ?>" >
                               <input type="hidden" name="id" value="<?php echo $like_teacher["id"]; ?>" >
-                              <input type="hidden" name="eg_name" value="<?php echo $like_teacher["eg_name"]; ?>" >
+                              <input type="hidden" name="nickname" value="<?php echo $like_teacher["nickname"]; ?>" >
                               <input type="hidden" name="picture" value="<?php echo $like_teacher["picture"]; ?>" >
                               <button type="submit" name="date" value="<?php echo $like_teacher["date"];?>"><?php echo date("n月j日H時i分",strtotime($like_teacher["date"])) ;?></button>
                             </form>
@@ -175,7 +175,7 @@
             <?php
                 for ($i=0; $i <=10 ; $i++) { 
                   echo sprintf("<li style=".'display:inline;'.">"."<a href='reserve?date=%s'>"."%s"."</a>"."</li>",
-                  date("Ymd", strtotime("+$i day")),
+                  date("Y-m-d", strtotime("+$i day")),
                   date("n/j(D)", strtotime("+$i day"))
                   );
                 }
@@ -198,7 +198,7 @@
                         echo sprintf('<img src="../../views/member/user_picture/%s" alt="画像" width="80" height="80"><p>%s先生</p>',
                                       $all_lesson["picture"],
                                       // "default.png",
-                                      $all_lesson["eg_name"]
+                                      $all_lesson["nickname"]
                                       // "Daisy"
                                     );
                       }
@@ -224,7 +224,7 @@
                   <?php if (isset($all_lesson["lesson_id"])) :?>
                     <form action="confirm" method="post">
                       <input type="hidden" name="lesson_id" value="<?php echo $all_lesson["lesson_id"]; ?>" >
-                      <input type="hidden" name="eg_name" value="<?php echo $all_lesson["eg_name"]; ?>" >
+                      <input type="hidden" name="nickname" value="<?php echo $all_lesson["nickname"]; ?>" >
                       <input type="hidden" name="picture" value="<?php echo $all_lesson["picture"]; ?>" >
                       <button type="submit" name="date" value="<?php echo $all_lesson["date"];?>"><?php echo date("H時i分",strtotime($all_lesson["date"])) ;?></button>
                     </form>

@@ -2,7 +2,7 @@
     //仮のアカウント情報設定
     $_SESSION["join"]["id"] = 38;
     $_SESSION["join"]["picture"]["name"] = "default2.png";
-    $_SESSION["join"]["eg_name"] = "koichi";
+    $_SESSION["join"]["nickname"] = "koichi";
 
     //ランダム英数字文字列の作成
     function makeRandStr($length) {
@@ -54,7 +54,7 @@
         <img src="" alt="">
         <?php
             if (isset($_POST)) {
-                echo $_POST["eg_name"];
+                echo $_POST["nickname"];
                 echo "<br>";
                 echo date("n月j日", strtotime($_POST["date"]));
                 echo "<br>";
@@ -68,7 +68,7 @@
         <input type="button" value="選択画面に戻る" onClick="document.location='reserve';">
         <form action="" method="post">       
           <input type="hidden" name="lesson" value="<?php echo $_POST["lesson_id"]; ?>" >
-          <input type="hidden" name="eg_name" value="<?php echo $_POST["eg_name"]; ?>" >
+          <input type="hidden" name="nickname" value="<?php echo $_POST["nickname"]; ?>" >
           <input type="hidden" name="picture" value="<?php echo $_POST["picture"]; ?>" >
           <input type="hidden" name="confirm" value="on">
           <input type="submit" value="予約する">
