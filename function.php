@@ -59,7 +59,6 @@
         return htmlspecialchars($value,ENT_QUOTES,'UTF-8');
     }
 
-
     //ログイン判定
     function isLoginSuccess(){
         if(isset($_SESSION['join']['id']) && $_SESSION['time']+3600 > time()){
@@ -70,7 +69,6 @@
           return false;
       }
     }
-
 
     //ステータス判定
     function status(){
@@ -84,7 +82,6 @@
         return $user['status_id'];
     }
 
-
     //ログイしているユーザーの情報を取り出す関数
     function current_user($column){
         return $_SESSION['join'][$column];
@@ -95,14 +92,14 @@
     // 画像の形を指定できる。
     function current_user_image($width,$height,$shape){
         if ($shape == "circle"){
-            return sprintf('<img class="circle" src="%s/views/member/user_picture/%s" width=%d height=%d>',
+            return sprintf('<img class="circle" src="%s/views/user/user_picture/%s" width=%d height=%d>',
                 root_path(),
                 current_user('image'),
                 $width,
                 $height
             );
         } elseif ($shape == "square") {
-            return sprintf('<img src="%s/views/member/user_picture/%s" width=%d height=%d>',
+            return sprintf('<img src="%s/views/user/user_picture/%s" width=%d height=%d>',
                 root_path(),
                 current_user('image'),
                 $width,
@@ -115,7 +112,6 @@
     function root_path() {
         return '../../nexseed_link';
     }
-
 
     //ログアウト処理
     function logout(){
@@ -136,22 +132,21 @@
         exit();
     }
 
-
     //最終閲覧時間を記録する（ページを開いたら時間が更新される）
     function visit_log_time(){
         include('dbconnect.php');
         $sql=sprintf('UPDATE users SET visit_log_time=NOW() WHERE id=%d ',
-            mysqli_real_escape_string($db,$_SESSION['join']['id'])
+            mysqli_real_escape_string($db,current_user('id'))
             );
-            mysqli_query($db, $sql) or die(mysqli_error());
+            mysqli_query($db, $sql) or die(mysqli_error($db));
     }
 
     //最終閲覧時間を確認できる
     function visit_log_time_show(){
         include('dbconnect.php');
         $sql = sprintf('SELECT*FROM users WHERE id=%d',
-            mysqli_real_escape_string($db,$_SESSION['join']['id'])
-        );
+            mysqli_real_escape_string($db,current_user('id'))
+            );
         $record = mysqli_query($db,$sql)or die(mysqli_error($db));
         $user = mysqli_fetch_assoc($record);
         return $user['visit_log_time'];
