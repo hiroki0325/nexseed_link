@@ -1,3 +1,7 @@
+
+
+
+
 <?php 
     if (isLoginSuccess()) {
         echo "ログインしていた場合の処理";
