@@ -1,23 +1,22 @@
 <?php
 
     //仮のアカウント情報設定
-    $_SESSION["join"]["id"] = 38;
+    $_SESSION["join"]["id"] = 40;
     $_SESSION["join"]["picture"]["name"] = "default2.png";
-    $_SESSION["join"]["nickname"] = "koichi";
+    $_SESSION["join"]["nickname"] = "Daisy";
 
     $sql = 'SELECT * from lesson_times';
     $available_times = mysqli_query($db, $sql);
 
     if (isset($_POST["lesson_time"])) {
         $date = $_REQUEST['date'] .' '. $_POST["lesson_time"];
-        echo $date;
-        $sql = sprintf('INSERT INTO lessons SET date="%s", teacher_id=%s, reserve_status_id=%s, created=NOW()',
+        $sql = sprintf('INSERT INTO lessons SET date="%s", time_id=%d, teacher_id=%s, reserve_status_id=%s, created=NOW()',
                   $date,
+                  $_POST["lesson_time"],
                   $_POST["teacher_id"],
                   1
                   );
         mysqli_query($db,$sql) or die(mysqli_error($db));
-        echo $_POST["teacher_id"];
     }
     
 
@@ -49,16 +48,19 @@
         <select name="lesson_time">
         <?php
             while ($available_time = mysqli_fetch_assoc($available_times)) {
-                echo sprintf('<option value="%s">%s</option>',$available_time["time"], $available_time["time"]);
+                echo sprintf('<option value="%s">%s</option>',$available_time["id"], $available_time["time"]);
                 
             }
             echo sprintf('<input type="hidden" name="teacher_id" value="%s">', $_SESSION['join']['id']);
         ?>
         </select>
         <input type="submit" value="register">
-
       </form>
     </div>
+  </div>
+
+  <div class="row">
+    <a href="../../reserve/index/">To Adomin Top</a>
   </div>
 </div>
 

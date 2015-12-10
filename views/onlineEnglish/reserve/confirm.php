@@ -53,12 +53,12 @@
       <div class="row">
         <img src="" alt="">
         <?php
-            if (isset($_POST)) {
+            if (isset($_POST["nickname"])) {
                 echo $_POST["nickname"];
                 echo "<br>";
                 echo date("n月j日", strtotime($_POST["date"]));
                 echo "<br>";
-                echo date("H時i分", strtotime($_POST["date"]));
+                echo date("H時i分", strtotime($_POST["time"]));
             }
         ?>
       </div>
@@ -66,13 +66,15 @@
       <div class="row">
         <p>※必ず内容をご確認の上で、「予約する」ボタンを押してください。</p>
         <input type="button" value="選択画面に戻る" onClick="document.location='reserve';">
-        <form action="" method="post">       
-          <input type="hidden" name="lesson" value="<?php echo $_POST["lesson_id"]; ?>" >
-          <input type="hidden" name="nickname" value="<?php echo $_POST["nickname"]; ?>" >
-          <input type="hidden" name="picture" value="<?php echo $_POST["picture"]; ?>" >
-          <input type="hidden" name="confirm" value="on">
-          <input type="submit" value="予約する">
-        </form>
+        <?php if(isset($_POST["lesson_id"])) : ?>
+            <form action="" method="post">       
+              <input type="hidden" name="lesson" value="<?php echo $_POST["lesson_id"]; ?>" >
+              <input type="hidden" name="nickname" value="<?php echo $_POST["nickname"]; ?>" >
+              <input type="hidden" name="picture" value="<?php echo $_POST["picture"]; ?>" >
+              <input type="hidden" name="confirm" value="on">
+              <input type="submit" value="予約する">
+            </form>
+        <?php endif ;?>
       </div>
     </div>
 

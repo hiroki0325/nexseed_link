@@ -18,28 +18,26 @@
     date_default_timezone_set('Asia/Tokyo');
     if (isset($_REQUEST["date"])) {
         $date = (string)$_REQUEST["date"];
-        $date_next = (string)$date+1;
+        // $date_next = (string)$date +1 day;
         //date($date, strtotime("+1 day"));
     }else{
         $date = (string)date("Ymd", strtotime("+1 day"));
-        $date_next = (string)date("Ymd", strtotime("+2 day"));
+        // $date_next = (string)date("Ymd", strtotime("+2 day"));
     }
 
     echo "選択したレッスン日：". $date;
     var_dump($date);
     echo "<br>";
-    echo "選択したレッスン日の次の日：". $date_next;
-    var_dump($date_next);
+    // echo "選択したレッスン日の次の日：". $date_next;
+    // var_dump($date_next);
 
     //パラメータで指定された日の講師及び予約情報
-    $sql_all_lessons = sprintf('SELECT users.id, users.nickname, users.picture, lessons.id AS "lesson_id", lessons.date 
-                                FROM users INNER JOIN lessons ON users.id=lessons.teacher_id WHERE lessons.reserve_status_id=1 AND lessons.date>%d AND lessons.date<%d',
-                                $date,
-                                $date_next
-                                //20151126200000
+    $sql_all_lessons = sprintf('SELECT users.id, users.nickname, users.picture, lessons.id AS "lesson_id", lessons.date ,lesson_times.time                                 
+                                FROM users INNER JOIN lessons ON users.id=lessons.teacher_id INNER JOIN lesson_times ON lessons.time_id=lesson_times.id WHERE lessons.reserve_status_id=1 AND lessons.date="%s"',
+                                $date
                               );
 
-    $all_lessons = mysqli_query($db, $sql_all_lessons)or die(mysqli_error($db));
+    $all_lessons = mysqli_query($db, $sql_all_lessons) or die(mysqli_error($db));
 
     //お気に入り講師の追加
     if (isset($_POST["like"])) {
@@ -194,7 +192,7 @@
                 <div class="col-md-6">
                   <!-- 講師の写真表示 -->
                   <?php 
-                      if (isset($all_lesson["picture"])) {
+                      if (isset($all_lesson["nickname"])) {
                         echo sprintf('<img src="../../views/member/user_picture/%s" alt="画像" width="80" height="80"><p>%s先生</p>',
                                       $all_lesson["picture"],
                                       // "default.png",
@@ -222,11 +220,12 @@
 
                   <!-- 予約可能時間帯の表示 -->
                   <?php if (isset($all_lesson["lesson_id"])) :?>
-                    <form action="confirm" method="post">
+                    <form action="../confirm" method="post">
                       <input type="hidden" name="lesson_id" value="<?php echo $all_lesson["lesson_id"]; ?>" >
                       <input type="hidden" name="nickname" value="<?php echo $all_lesson["nickname"]; ?>" >
                       <input type="hidden" name="picture" value="<?php echo $all_lesson["picture"]; ?>" >
-                      <button type="submit" name="date" value="<?php echo $all_lesson["date"];?>"><?php echo date("H時i分",strtotime($all_lesson["date"])) ;?></button>
+                      <input type="hidden" name="time" value="<?php echo $all_lesson["time"]; ?>" >
+                      <button type="submit" name="date" value="<?php echo $all_lesson["date"];?>"><?php echo date("H時i分",strtotime($all_lesson["time"])) ;?></button>
                     </form>
                     <?php if (empty($error["duplicate"])) :?>
                         <!-- <form action="" method="post">
