@@ -16,14 +16,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <link rel="stylesheet" href="../views/assets/css/style.css">
-  <link rel="stylesheet" href="../views/assets/css/mypage/main.css" />
-  <link rel="stylesheet" href="../views/assets/css/bootstrap.css">
-  <link rel="stylesheet" href="../views/assets/css/mypage/owl.carousel.css" />
-  <link rel="stylesheet" href="../views/assets/css/mypage/magnific-popup.css" />
-  <link rel="stylesheet" href="../views/assets/css/mypage/body.css" />
-  <link rel="stylesheet" href="../views/assets/css/mypage/responsive.css" />
-  <link rel="stylesheet" href="../views/assets/font-awesome/css/font-awesome.css">
+  <link rel="stylesheet" href="views/assets/css/mypage/style.css">
+  <link rel="stylesheet" href="views/assets/css/mypage/main.css" />
+  <link rel="stylesheet" href="views/assets/css/bootstrap.css">
+  <link rel="stylesheet" href="views/assets/css/mypage/owl.carousel.css" />
+  <link rel="stylesheet" href="views/assets/css/mypage/magnific-popup.css" />
+  <link rel="stylesheet" href="views/assets/css/mypage/body.css" />
+  <link rel="stylesheet" href="views/assets/css/mypage/responsive.css" />
+  <link rel="stylesheet" href="views/assets/font-awesome/css/font-awesome.css">
 
 
 </head>
@@ -95,22 +95,22 @@
   <!-- /FOOTER -->
 
   <!-- Scripts -->
-  <script src="../views/assets/js/jquery.min.js"></script>
-  <script src="../views/assets/js/mypage/jquery.scrolly.min.js"></script>
-  <script src="../views/assets/js/mypage/jquery.scrollzer.min.js"></script>
-  <script src="../views/assets/js/mypage/skel.min.js"></script>
-  <script src="../views/assets/js/mypage/util.js"></script>
-  <script src="../views/assets/js/bootstrap.js"></script>
-  <script src="../views/assets/js/mypage/jquery.parallax.js"></script>
-  <script src="../views/assets/js/mypage/smoothscroll.js"></script>
-  <script src="../views/assets/js/mypage/masonry.pkgd.min.js"></script>
-  <script src="../views/assets/js/mypage/jquery.fitvids.js"></script>
-  <script src="../views/assets/js/mypage/owl.carousel.min.js"></script>
-  <script src="../views/assets/js/mypage/jquery.counterup.min.js"></script>
-  <script src="../views/assets/js/mypage/jquery.isotope.min.js"></script>
-  <script src="../views/assets/js/mypage/jquery.magnific-popup.min.js"></script>
-  <script src="../views/assets/js/mypage/scripts.js"></script>
-  <script src="../views/assets/js/mypage/main.js"></script>
+  <script src="views/assets/js/jquery.min.js"></script>
+  <script src="views/assets/js/mypage/jquery.scrolly.min.js"></script>
+  <script src="views/assets/js/mypage/jquery.scrollzer.min.js"></script>
+  <script src="views/assets/js/mypage/skel.min.js"></script>
+  <script src="views/assets/js/mypage/util.js"></script>
+  <script src="views/assets/js/bootstrap.js"></script>
+  <script src="views/assets/js/mypage/jquery.parallax.js"></script>
+  <script src="views/assets/js/mypage/smoothscroll.js"></script>
+  <script src="views/assets/js/mypage/masonry.pkgd.min.js"></script>
+  <script src="views/assets/js/mypage/jquery.fitvids.js"></script>
+  <script src="views/assets/js/mypage/owl.carousel.min.js"></script>
+  <script src="views/assets/js/mypage/jquery.counterup.min.js"></script>
+  <script src="views/assets/js/mypage/jquery.isotope.min.js"></script>
+  <script src="views/assets/js/mypage/jquery.magnific-popup.min.js"></script>
+  <script src="views/assets/js/mypage/scripts.js"></script>
+  <script src="views/assets/js/mypage/main.js"></script>
 
 </body>
 </html>
