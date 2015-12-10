@@ -43,7 +43,7 @@
       <nav id="nav">
         <ul>
           <li><a href="http://192.168.33.10/nexseed_link/mypage" id="top-link" class="skel-layers-ignoreHref"><span class="icon fa-home">ホーム</span></a></li>
-          <li><a href="#portfolio" id="portfolio-link" class="skel-layers-ignoreHref"><span class="icon fa-th">英会話</span></a></li>
+          <li><a href="http://192.168.33.10/nexseed_link/views/onlineEnglish/class/" id="portfolio-link" class="skel-layers-ignoreHref"><span class="icon fa-th">英会話</span></a></li>
           <li><a href="#about" id="about-link" class="skel-layers-ignoreHref"><span class="icon fa-user">物流</span></a></li>
           <li><a href="#contact" id="contact-link" class="skel-layers-ignoreHref"><span class="icon fa fa-cog">詳細ページ</span></a></li>
         </ul>
