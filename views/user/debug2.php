@@ -1,17 +1,4 @@
-<?php 
-    if (isLoginSuccess()) {
-        echo "ログインしていた場合の処理";
-    } else {
-        header('Location: auth/login');
-        exit();
-    }
-    echo "<br>";
-    echo visit_log_time_show();
- 
- ?>
-
-
-<h1>在学生ページ</h1>
+<h1>来学予定者ページ</h1>
 
 <?php
     if (status() == 1) {
@@ -37,7 +24,7 @@
     echo "<br>";
     echo "留学期間 : " . current_user('start_day') . ' ~ ' . current_user('end_day');
     echo "<br>";
-    echo current_user_image(100,100,"circle");
+    echo current_user_image(100,100,"square");
 ?>
 
   <div>

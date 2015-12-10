@@ -1,3 +1,13 @@
+<?php
+    // ログイン判定
+    if (!isLoginSuccess()) {
+        header('Location: user/auth/login');
+        exit();
+    }
+
+    // 最終訪問日更新
+     visit_log_time_show();
+?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -54,11 +64,16 @@
   <div id="main">
     <?php
 
-        if (!isset($page)) {
-            include('./views/' . $function . '/' . $directry . '.php');
+        if ($function == 'mypage') {
+            include('./views/' . $function . '.php');
         } else {
-            include('./views/' . $function . '/' . $directry .  '/' . $page . '.php');
+            if (!isset($page)) {
+                include('./views/' . $function . '/' . $directry . '.php');
+            } else {
+                include('./views/' . $function . '/' . $directry .  '/' . $page . '.php');
+            }
         }
+
 
         //最終ログイン時間を記録する
         visit_log_time();
