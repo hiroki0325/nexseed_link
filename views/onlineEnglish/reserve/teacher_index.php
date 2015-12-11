@@ -1,9 +1,4 @@
 <?php
-    //仮のアカウント情報設定
-    $_SESSION["join"]["id"] = 40;
-    $_SESSION["join"]["picture"]["name"] = "default2.png";
-    $_SESSION["join"]["nickname"] = "Daisy";
-
     //マッチング完了レッスンの取得
     $sql = sprintf('SELECT lessons.*, users.picture, users.nickname,lesson_times.time FROM lessons INNER JOIN lesson_times ON lessons.time_id=lesson_times.id INNER JOIN users ON lessons.student_id=users.id WHERE lessons.teacher_id=%d AND reserve_status_id=2',
                   $_SESSION["join"]["id"]

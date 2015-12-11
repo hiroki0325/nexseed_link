@@ -1,9 +1,4 @@
 <?php
-    //仮のアカウント情報設定
-    $_SESSION["join"]["id"] = 38;
-    $_SESSION["join"]["picture"]["name"] = "default2.png";
-    $_SESSION["join"]["nickname"] = "koichi";
-
     //ランダム英数字文字列の作成
     function makeRandStr($length) {
         $str = array_merge(range('a', 'z'), range('0', '9'), range('A', 'Z'));

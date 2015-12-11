@@ -1,10 +1,4 @@
 <?php
-
-    //仮のアカウント情報設定
-    $_SESSION["join"]["id"] = 40;
-    $_SESSION["join"]["picture"]["name"] = "default2.png";
-    $_SESSION["join"]["nickname"] = "Daisy";
-
     $sql = 'SELECT * from lesson_times';
     $available_times = mysqli_query($db, $sql);
 

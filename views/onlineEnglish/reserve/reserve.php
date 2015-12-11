@@ -1,10 +1,4 @@
 <?php
-    //仮のアカウント情報設定
-    $_SESSION["join"]["id"] = 38;
-    $_SESSION["join"]["picture"]["name"] = "default2.png";
-    $_SESSION["join"]["nickname"] = "koichi";
-
-
     $db = mysqli_connect("localhost", "root", "mysql","nexseed_link");
     // ログイン中ユーザーのお気に入り講師情報を呼び出す
     $sql_like_teachers = sprintf('SELECT u.id, u.nickname, u.picture, l.id AS "lesson_id", l.date FROM users u, teacher_likes t, lessons l 
