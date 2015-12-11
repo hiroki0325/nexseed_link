@@ -1,7 +1,7 @@
 <?php
     // ログイン判定
     if (!isLoginSuccess()) {
-        header('Location: user/auth/login');
+        header('Location: /nexseed_link/user/auth/login');
         exit();
     }
 
