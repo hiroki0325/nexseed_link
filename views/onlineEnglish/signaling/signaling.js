@@ -14,14 +14,18 @@ io.sockets.on('connection', function(socket) {
   });
 
   socket.on('disconnect', function() {
-    emitMessage('user disconnected');
+    var text = '相手との接続が切れました' ;
+    emitMessage('user disconnected', text);
   });
 
   socket.on('send-message', function(text){
     if (text.length) {
       io.sockets.in(socket.name).emit('push-message', text);
-      console.log('recieved text');
     }
+  });
+
+  socket.on('send-log', function(text){
+      io.sockets.in(socket.name).emit('push-log', text);
   });
 
   // 会議室名が指定されていたら、室内だけに通知

@@ -136,6 +136,10 @@
         exit();
     }
 
+    // テキストチャットを安全にする関数
+    function json_safe_encode($data){
+        return json_encode($data, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT);
+    }
 
     //最終閲覧時間を記録する（ページを開いたら時間が更新される）
     function visit_log_time(){

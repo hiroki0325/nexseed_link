@@ -1,0 +1,134 @@
+#parent_box {
+  position:relative;
+  background-color: black;
+  }
+
+#child_box {
+  position:absolute;
+  left:560px;
+  top:310px;
+  width:300px;
+  }
+
+#remote-video{
+  width: 880px;
+  height: 450px;
+  border: 1px solid white;
+  background-color: black;
+}
+
+#local-video{
+  width: 160px;
+  height: 120px;
+}
+
+#onlineclass{
+  background-color: black;
+}
+
+.log{
+  height: 450px;
+  border: 1px solid black;
+}
+
+.input{
+  width:1100px;
+}
+
+.chat
+{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.chat li
+{
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px dotted #B3A9A9;
+}
+
+.chat li:last-child
+{
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: none;
+}
+
+.chat li.left .chat-body
+{
+    margin-left: 60px;
+}
+
+.chat li.right .chat-body
+{
+    margin-right: 5px;
+}
+
+
+.chat li .chat-body p
+{
+    margin: 0;
+    color: #777777;
+}
+
+.panel .slidedown .glyphicon, .chat .glyphicon
+{
+    margin-right: 5px;
+}
+
+.panel-body
+{
+    height: 125px;
+}
+
+.panel-body2
+{
+    height: 185px;
+    margin: 15px;
+}
+
+.panel-body3
+{
+    margin: 15px;
+}
+
+.panel-body4
+{
+    margin: 15px;
+}
+
+::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar
+{
+    width: 12px;
+    background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #555;
+}
+
+p a {
+    text-decoration: underline;
+}
+
+.twitter-typeahead {
+    display: block !important;
+}
+
+.tt-dataset-topics {
+    margin-left: 15px;
+}
+
+.help-buttons {
+    margin-top: 15px;
+}
