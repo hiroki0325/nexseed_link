@@ -1,9 +1,7 @@
 <?php 
-    $sql = 'SELECT a.id, a.date, b.time, c.nickname, c.nickname
-            FROM lessons a, lesson_times b, users c
-            WHERE a.time_id = b.id
-            AND a.teacher_id = c.id
-            AND a.student_id = c.id';
+    $sql = 'SELECT a.id, a.date, b.time, c.nickname AS teacher, d.nickname AS student 
+            FROM lessons a, lesson_times b, users c, users d WHERE a.time_id = b.id 
+            AND a.teacher_id = c.id  AND a.student_id = d.id';
     $tables = mysqli_query($db,$sql)or die(mysqli_error($db));
 
  ?>
@@ -117,7 +115,7 @@
                     </li>
                     <li class="divider"></li>
                     <li>
-                        <a href="#"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                        <a href="../user/auth/logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
                     </li>
                 </ul>
             </li>
@@ -144,7 +142,7 @@
                     <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> ユーザー管理 <i class="fa fa-fw fa-caret-down"></i></a>
                     <ul id="demo" class="collapse">
                         <li>
-                            <a href="../../index.php">新規ユーザー登録</a>
+                            <a href="../user/join/index">新規ユーザー登録</a>
                         </li>
                         <li>
                             <a href="#">ユーザー管理</a>
@@ -339,16 +337,16 @@
                                             <th>Student name</th>
                                         </tr>
                                     </thead>
-                                    <!-- // <?php while ($table=mysqli_fetch_assoc($tables)): ?> -->
+                                    <?php while ($table = mysqli_fetch_assoc($tables)): ?> 
                                       <tbody>
                                           <tr>
-                                              <td>32</td>
-                                              <td><?php echo $tables['nickname']; ?></td>
-                                              <td></td>
-                                              <td></td>
+                                              <td><?php echo $table['id']; ?></td>
+                                              <td><?php echo $table['date']; ?></td>
+                                              <td><?php echo $table['teacher']; ?></td>
+                                              <td><?php echo $table['student']; ?></td>
                                           </tr>
                                       </tbody>
-                                    <!-- <?php endwhile; ?> -->
+                                    <?php endwhile; ?>
                                 </table>
                             </div>
                             <div class="text-right">

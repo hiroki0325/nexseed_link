@@ -13,7 +13,7 @@
 
     //ユーザーステータスによる分岐
     if($user_status == 1){
-      header('Location: debug1');
+      header('Location: ../admin/index');
     }elseif($user_status == 2){
       header('Location: debug2');
     }elseif($user_status == 3){
