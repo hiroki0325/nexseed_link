@@ -13,8 +13,10 @@
     $params = explode('/', $_GET['url']);
 
     $function = $params[0];
-    $directry = $params[1];
 
+    if (isset($params[1])) {
+        $directry = $params[1];
+    }
 
     if (count($params) > 2) {
         $page = $params[2];
@@ -31,7 +33,15 @@
     //viewの形成を楽にするヘルパーを読み込み
     include('./views/helpers/application_helper.php');
 
-    // レイアウトファイルを読み込み
-    include('./views/layouts/application.php');
+    if ($params[0]=='admin') { //管理者ファイルを読み込み
+        include('./views/layouts/admin.php');
+        
+    } elseif ($params[0]=='user') { //ログインファイルを読み込み
+        include('./views/layouts/login.php');
+
+    } else { // レイアウトファイルを読み込み
+        include('./views/layouts/application.php');
+        
+    }
 
 ?>

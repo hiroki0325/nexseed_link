@@ -1,3 +1,8 @@
+<<<<<<< HEAD:views/member/debug2.php
+
+
+
+
 <?php 
     if (isLoginSuccess()) {
         echo "ログインしていた場合の処理";
@@ -7,11 +12,13 @@
     }
     echo "<br>";
     echo visit_log_time_show();
- 
- ?>
+    
+?>
 
 
-<h1>在学生ページ</h1>
+=======
+>>>>>>> a0a3cd2f27652dd8b0f087e37307fba341e43e76:views/user/debug2.php
+<h1>来学予定者ページ</h1>
 
 <?php
     if (status() == 1) {
@@ -37,7 +44,7 @@
     echo "<br>";
     echo "留学期間 : " . current_user('start_day') . ' ~ ' . current_user('end_day');
     echo "<br>";
-    echo current_user_image(100,100,"circle");
+    echo current_user_image(100,100,"square");
 ?>
 
   <div>

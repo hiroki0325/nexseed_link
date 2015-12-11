@@ -1,21 +1,4 @@
-
-
-
-
-<?php 
-    if (isLoginSuccess()) {
-        echo "ログインしていた場合の処理";
-    } else {
-        header('Location: auth/login');
-        exit();
-    }
-    echo "<br>";
-    echo visit_log_time_show();
-    
-?>
-
-
-<h1>来学予定者ページ</h1>
+<h1>先生ページ</h1>
 
 <?php
     if (status() == 1) {
