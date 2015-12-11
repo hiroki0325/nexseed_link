@@ -1,7 +1,7 @@
 <?php
     // ログイン判定
     if (!isLoginSuccess()) {
-        header('Location: user/auth/login');
+        header('Location: http://geechscamp.lovepop.jp/7th_batch_camp/nexseed_link/user/auth/login');
         exit();
     }
 
