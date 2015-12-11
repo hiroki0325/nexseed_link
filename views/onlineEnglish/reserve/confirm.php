@@ -29,50 +29,38 @@
     }
 ?>
 
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <title>Document</title>
-</head>
-  <body>
-    <div class="container">
-    <?php 
-        var_dump($_POST);
+<div class="container">
+
+  <div class="row">
+    <h1>予約情報の確認</h1>
+  </div>
+  
+
+  <div class="row">
+    <img src="" alt="">
+    <?php
+        if (isset($_POST["nickname"])) {
+            echo $_POST["nickname"];
+            echo "<br>";
+            echo date("n月j日", strtotime($_POST["date"]));
+            echo "<br>";
+            echo date("H時i分", strtotime($_POST["time"]));
+        }
     ?>
-      <div class="row">
-        <h1>予約情報の確認</h1>
-      </div>
-      
-    
-      <div class="row">
-        <img src="" alt="">
-        <?php
-            if (isset($_POST["nickname"])) {
-                echo $_POST["nickname"];
-                echo "<br>";
-                echo date("n月j日", strtotime($_POST["date"]));
-                echo "<br>";
-                echo date("H時i分", strtotime($_POST["time"]));
-            }
-        ?>
-      </div>
+  </div>
 
-      <div class="row">
-        <p>※必ず内容をご確認の上で、「予約する」ボタンを押してください。</p>
-        <input type="button" value="選択画面に戻る" onClick="document.location='reserve';">
-        <?php if(isset($_POST["lesson_id"])) : ?>
-            <form action="" method="post">       
-              <input type="hidden" name="lesson" value="<?php echo $_POST["lesson_id"]; ?>" >
-              <input type="hidden" name="nickname" value="<?php echo $_POST["nickname"]; ?>" >
-              <input type="hidden" name="picture" value="<?php echo $_POST["picture"]; ?>" >
-              <input type="hidden" name="confirm" value="on">
-              <input type="submit" value="予約する">
-            </form>
-        <?php endif ;?>
-      </div>
-    </div>
+  <div class="row">
+    <p>※必ず内容をご確認の上で、「予約する」ボタンを押してください。</p>
+    <input type="button" value="選択画面に戻る" onClick="document.location='reserve';">
+    <?php if(isset($_POST["lesson_id"])) : ?>
+        <form action="" method="post">       
+          <input type="hidden" name="lesson" value="<?php echo $_POST["lesson_id"]; ?>" >
+          <input type="hidden" name="nickname" value="<?php echo $_POST["nickname"]; ?>" >
+          <input type="hidden" name="picture" value="<?php echo $_POST["picture"]; ?>" >
+          <input type="hidden" name="confirm" value="on">
+          <input type="submit" value="予約する">
+        </form>
+    <?php endif ;?>
+  </div>
+</div>
 
-    
-  </body>
-</html>
