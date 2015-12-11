@@ -37,16 +37,16 @@
     <link rel="stylesheet" href="../../views/assets/css/<?php echo $function.'/'.$directry.'.css';?>">
   <?php endif; ?>
 
-      <!-- FullCalemdarの呼び出し -->
-      <!-- CSS -->
-      <link href="../../views/assets/css/reserve/fullcalendar.min.css" rel="stylesheet" type="text/css">
-      <!-- Java Script -->
-      <script type="text/javascript" src="../../views/assets/js/reserve/moment.min.js"></script>
-      <!-- 一時的にリンクを外す -->
-      <!--<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>-->
-      <script type="text/javascript" src="../../views/assets/js/reserve/jquery-ui.custom.min.js"></script>
-      <script type="text/javascript" src="../../views/assets/js/reserve/fullcalendar.min.js"></script>
-      <script type="text/javascript" src="../../views/assets/js/reserve/ja.js"></script>
+  <!-- FullCalemdarの呼び出し -->
+  <!-- CSS -->
+  <link href="../../views/assets/css/reserve/fullcalendar.min.css" rel="stylesheet" type="text/css">
+  <!-- Java Script -->
+  <script type="text/javascript" src="../../views/assets/js/reserve/moment.min.js"></script>
+  <!-- 一時的にリンクを外す -->
+  <!--<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>-->
+  <script type="text/javascript" src="../../views/assets/js/reserve/jquery-ui.custom.min.js"></script>
+  <script type="text/javascript" src="../../views/assets/js/reserve/fullcalendar.min.js"></script>
+  <script type="text/javascript" src="../../views/assets/js/reserve/ja.js"></script>
 
 </head>
 <body>
