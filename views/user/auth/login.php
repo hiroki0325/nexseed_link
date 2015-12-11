@@ -22,6 +22,7 @@
               if($table = mysqli_fetch_assoc($record)){
                   $_SESSION['join']['id']=$table['id'];
                   $_SESSION['join']['fullname']=$table['fullname'];
+                  $_SESSION['join']['nickname']=$table['nickname'];
                   $_SESSION['join']['email']=$table['email'];
                   $_SESSION['join']['password']=$table['password'];
                   $_SESSION['join']['start_day']=$table['start_day'];
