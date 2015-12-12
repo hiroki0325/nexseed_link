@@ -5,7 +5,7 @@
     $tables = mysqli_query($db,$sql)or die(mysqli_error($db));
     $table=mysqli_fetch_assoc($tables);
     echo $table['date'];
-var_dump($table);
+    var_dump($table);
 
  ?>
 

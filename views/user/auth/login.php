@@ -43,12 +43,12 @@
                 //ログイン回数のカウントとログインした時間の更新
                   $sql=sprintf('UPDATE users SET login_count=%d WHERE id=%d ',
                       $table['login_count']+1,
-                      mysqli_real_escape_string($db,$_SESSION['join']['id'])
+                      mysqli_real_escape_string($db,current_user('id'))
                   );
                   mysqli_query($db, $sql) or die(mysqli_error());
                 //初回ログインのみユーザー編集画面に遷移
                   if ($table['login_count'] == 0){
-                    header('Location: ../user_index');
+                    header('Location: ../user_edit');
                     exit();
                   } else {
                     header('Location: ../index');

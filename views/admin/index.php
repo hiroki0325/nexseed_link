@@ -4,6 +4,7 @@
             AND a.teacher_id = c.id  AND a.student_id = d.id';
     $tables = mysqli_query($db,$sql)or die(mysqli_error($db));
 
+
  ?>
 <div id="wrapper">
 
@@ -17,7 +18,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.html">SB Admin</a>
+            <a class="navbar-brand" href="index.php">SB Admin</a>
         </div>
         <!-- Top Menu Items -->
         <ul class="nav navbar-right top-nav">
@@ -124,19 +125,19 @@
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav side-nav">
                 <li class="active">
-                    <a href="index.html"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
+                    <a href="index.php"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                 </li>
                 <li>
-                    <a href="charts.html"><i class="fa fa-fw fa-bar-chart-o"></i> Charts</a>
+                    <a href="charts.php"><i class="fa fa-fw fa-bar-chart-o"></i> Charts</a>
                 </li>
                 <li>
-                    <a href="forms.html"><i class="fa fa-fw fa-edit"></i> Forms</a>
+                    <a href="forms.php"><i class="fa fa-fw fa-edit"></i> Forms</a>
                 </li>
                 <li>
-                    <a href="bootstrap-elements.html"><i class="fa fa-fw fa-desktop"></i> Bootstrap Elements</a>
+                    <a href="bootstrap-elements.php"><i class="fa fa-fw fa-desktop"></i> Bootstrap Elements</a>
                 </li>
                 <li>
-                    <a href="bootstrap-grid.html"><i class="fa fa-fw fa-wrench"></i> Bootstrap Grid</a>
+                    <a href="bootstrap-grid.php"><i class="fa fa-fw fa-wrench"></i> Bootstrap Grid</a>
                 </li>
                 <li>
                     <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> ユーザー管理 <i class="fa fa-fw fa-caret-down"></i></a>
@@ -214,7 +215,14 @@
                                     <i class="fa fa-comments fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">26</div>
+                                    <div class="huge">
+                                      <?php 
+                                          $sql = 'SELECT COUNT(*) AS count FROM lessons';
+                                          $lesson_counts = mysqli_query($db,$sql)or die(mysqli_error($db));
+                                          $lesson_count = mysqli_fetch_assoc($lesson_counts);
+                                          echo $lesson_count['count'];
+                                       ?>
+                                    </div>
                                     <div>オンライン英会話</div>
                                 </div>
                             </div>
@@ -236,7 +244,14 @@
                                     <i class="fa fa-tasks fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">12</div>
+                                    <div class="huge">
+                                      <?php 
+                                          $sql = 'SELECT COUNT(*) AS count FROM users';
+                                          $user_counts = mysqli_query($db,$sql)or die(mysqli_error($db));
+                                          $user_count = mysqli_fetch_assoc($user_counts);
+                                          echo $user_count['count'];
+                                       ?>
+                                    </div>
                                     <div>ユーザー管理</div>
                                 </div>
                             </div>
