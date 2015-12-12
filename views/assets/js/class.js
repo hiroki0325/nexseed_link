@@ -149,7 +149,7 @@ function getRoomName() {
           localVideo.volume = 0;
         },
         function (error) { // error
-          console.error('An error occurred: [CODE ' + error.code + ']');
+          console.error('An error occurred to user video');
           return;
         }
       );
