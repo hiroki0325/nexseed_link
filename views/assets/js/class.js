@@ -12,7 +12,9 @@
   // ---- socket ------
   // create socket
   var socketReady = false;
-  var socket = io.connect("https://nexseedlink-test.herokuapp.com/");
+  var socketReady = false;
+  var port = 80;
+  var socket = io.connect('http://27.120.111.43:' + port + '/');
 
   // socket: channel connected
   socket.on('connect', onOpened)
@@ -157,15 +159,18 @@ function getRoomName() { // たとえば、 URLに  ?roomname  とする
     });
 
   // ---------------------- connection handling -----------------------
-function prepareNewConnection(id) {
-  var pc_config = {"iceServers":[ {"url":"stun:stun.l.google.com:19302"} ]};
-  var peer = null;
-  try {
-    peer = new webkitRTCPeerConnection(pc_config);
-  } catch (e) {
-    console.log("Failed to create PeerConnection, exception: " + e.message);
-  }
-
+  function prepareNewConnection(id) {
+    var pc_config = {"iceServers":[
+     {"url":"stun:27.120.111.43:80"},
+     {"url":"turn:27.120.111.43:80?transport=udp", "username":"hiroki", "credential":"0xbc807ee29df3c9ffa736523fb2c4e8ee"},
+     {"url":"turn:27.120.111.43:80?transport=tcp", "username":"hiroki", "credential":"0xbc807ee29df3c9ffa736523fb2c4e8ee"}
+    ]};
+    var peer = null;
+    try {
+      peer = new webkitRTCPeerConnection(pc_config);
+    } catch (e) {
+      console.log("Failed to create PeerConnection, exception: " + e.message);
+    }
     // send any ice candidates to the other peer
     peer.onicecandidate = function (evt) {
       if (evt.candidate) {
@@ -339,7 +344,6 @@ function prepareNewConnection(id) {
     var lastLog = logComment.substr(-7);
 
     if (lastLog != '退室しました' ) {
-      window.alert(lastLog);
       $('#log').append($log).fadeIn();
     }
 
