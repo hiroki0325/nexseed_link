@@ -149,7 +149,7 @@ function getRoomName() {
           localVideo.volume = 0;
         },
         function (error) { // error
-          console.error('An error occurred: [CODE ' + error.code + ']');
+          console.error('An error occurred to user video');
           return;
         }
       );
@@ -342,10 +342,8 @@ function getRoomName() {
     $log = time()+ escapeHTML2(text) +"<br>";
     // 正常な退出でない場合のみ、出力する処理
     var logComment = document.getElementById("log").innerText;
-    var lastLog = logComment.substr(-7);
-    console.log(lastLog);
 
-    if (lastLog != '退室しました' ) {
+    if (!logComment.match(/退室しました/) ) {
       $('#log').append($log).fadeIn();
     }
 

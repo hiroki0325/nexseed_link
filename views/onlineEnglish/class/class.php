@@ -72,7 +72,7 @@
 </section>
 
 <!-- socket -->
-<script src="http://27.120.111.43:80/socket.io/socket.io.js"></script>
+<script src="../../views/assets/js/socket.io.js"></script>
 
 <!-- online英会話メインjs -->
 <script id="script" type="text/javascript" src="../../views/assets/js/class.js"
