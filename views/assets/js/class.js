@@ -29,12 +29,13 @@ function onOpened(evt) {
     socket.emit('send-log',user_name + 'が入室しました');
 }
 
-function getRoomName() { // たとえば、 URLに  ?roomname  とする
+function getRoomName() {
+  // URLに  ?roomname  とする
   var url = document.location.href;
   var args = url.split('?');
   if (args.length > 1) {
     var room = args[1];
-    if (room != "") {
+    if (room) {
       return room;
     }
   }
@@ -342,6 +343,7 @@ function getRoomName() { // たとえば、 URLに  ?roomname  とする
     // 正常な退出でない場合のみ、出力する処理
     var logComment = document.getElementById("log").innerText;
     var lastLog = logComment.substr(-7);
+    console.log(lastLog);
 
     if (lastLog != '退室しました' ) {
       $('#log').append($log).fadeIn();
