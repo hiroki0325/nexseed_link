@@ -1,9 +1,10 @@
 <?php
-    $name = current_user('nickname')
+    $name = current_user('fullname')
 ?>
 
-<link rel="stylesheet" href="../../views/assets/css/bootstrap.css">
 <link rel="stylesheet" type="text/css" href="../../views/assets/css/class.css">
+<script type="text/javascript" src="../../views/assets/js/jquery.min.js"></script>
+<script type="text/javascript" src="../../views/assets/js/bootstrap.js"></script>
 
 <section id="onlineclass">
   <!-- 授業の開始と終了は先生のみ可能 -->
@@ -69,3 +70,11 @@
       </div>
   </div>
 </section>
+
+<!-- socket -->
+<script src="http://27.120.111.43:80/socket.io/socket.io.js"></script>
+
+<!-- online英会話メインjs -->
+<script id="script" type="text/javascript" src="../../views/assets/js/class.js"
+  data-name = '<?php echo json_safe_encode($name); ?>'
+></script>
