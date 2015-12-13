@@ -1,5 +1,6 @@
-var io = require('socket.io').listen(process.env.PORT, process.env.IP);
-console.log((new Date()) + " Server is listening");
+var port = 80;
+var io = require('socket.io').listen(port);
+console.log((new Date()) + " Server is listening on port " + port);
 
 io.sockets.on('connection', function(socket) {
   // 入室
