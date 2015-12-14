@@ -30,9 +30,11 @@
         </form>
         <a href="http://geechscamp.lovepop.jp/7th_batch_camp/nexseed_link/onlineEnglish/<?php $lesson['rand_str'] ;?>">入室する</a>
         <p>※開始5分前までは入室しないでください。</p>
+        <input type="button" value="レッスン予約画面へ" onClick="document.location='reserve'">
         <hr>
     <?php endwhile ;?>
 <?php else :?>
     <p>現在予約済みのレッスンはありません</p>
+    <input type="button" value="レッスン予約画面へ" onClick="document.location='reserve'">
 <?php endif ;?>
 

@@ -1,10 +1,15 @@
 <?php
     $db = mysqli_connect("localhost", "root", "mysql","nexseed_link");
     // ログイン中ユーザーのお気に入り講師情報を呼び出す
-    $sql_like_teachers = sprintf('SELECT u.id, u.nickname, u.picture, l.id AS "lesson_id", l.date FROM users u, teacher_likes t, lessons l 
-                                  WHERE t.student_id=%d AND t.teacher_id=u.id AND t.teacher_id=l.teacher_id AND l.reserve_status_id=1 AND l.date>NOW()+1',
-                                $_SESSION["join"]["id"]
-                             );
+    
+    $sql_like_teachers = sprintf('SELECT users.id, users.nickname, users.picture, teacher_likes.student_id, lessons.date, lessons.teacher_id 
+                                  AS "lessons_teacher_id", lessons.student_id AS "lessons_student_id", lessons.reserve_status_id, lesson_times.time 
+                                  FROM users INNER JOIN teacher_likes ON users.id=teacher_likes.teacher_id AND teacher_likes.student_id=38 
+                                  INNER JOIN lessons ON lessons.teacher_id=teacher_likes.teacher_id AND lessons.reserve_status_id=1 
+                                  INNER JOIN lesson_times ON lessons.time_id=lesson_times.id ORDER BY users.id, lessons.date, lesson_times.time',
+                                  $_SESSION["join"]["id"]
+                                );
+
     $like_teachers = mysqli_query($db, $sql_like_teachers)or die(mysqli_error($db));
 
 
@@ -45,10 +50,10 @@
     }
     
     //配列作成
-    // $lessons_ary = array();
-    // $lessons_ary1 = array();
-    // $lessons_ary2 = array();
-    // $i = 1;
+    $lessons_ary = array();
+    $lessons_ary1 = array();
+    $lessons_ary2 = array();
+    $i = 1;
 
     //予約情報の送信
     // if (isset($_POST["date"])) {
@@ -87,18 +92,18 @@
 
                   <?php while ($like_teacher = mysqli_fetch_assoc($like_teachers)) :?>
                       <?php
-                          // echo "===== like_teacher =====";
-                          // var_dump($like_teacher);
+                          echo "===== like_teacher =====";
+                          var_dump($like_teacher);
 
                           // $lessons_ary = array_merge($lessons_ary,array($like_teacher["nickname"] => array_merge($lessons_ary1,array($i => $like_teacher["date"]))));
                           // $i++;
-                          // //$lessoms_ary2 = $lessons_ary + array( "key" => $);
-                          // // $lessons_ary1 = array_merge($lessons_ary1, array("$i" => $like_teacher["date"]));
-                          // // $i++;
-                          // //$lessons_ary2 = 
-                          // var_dump($lessons_ary);
-                          // // var_dump($lessons_ary1);
-                          // // var_dump($lessons_ary2);
+                          $lessons_ary = array_merge($lessons_ary,array($like_teacher["nickname"] => $like_teacher["date"]." ".$like_teacher["time"]));
+                          var_dump($lessons_ary);
+                          //$lessoms_ary2 = $lessons_ary + array( "key" => $);
+                          // $lessons_ary1 = array_merge($lessons_ary1, array("$i" => $like_teacher["date"]));
+                          // $i++;
+                          //$lessons_ary2 = 
+                         
                       ?>
                       <?php 
                         // echo sprintf('<img src="../../views/member/user_picture/%s" alt="画像" width="80" height="80"><p>%s先生</p>',
