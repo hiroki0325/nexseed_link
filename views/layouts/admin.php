@@ -12,6 +12,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="">
   <meta name="author" content="">
+  <!-- table_sort -->
+  <link rel="stylesheet" href="../views/assets/css/admin/style.css" type="text/css" media="print, projection, screen" />
+  
 
   <title>NexSeedLink -Admin page-</title>
   <link rel="stylesheet" href="../views/assets/css/bootstrap.css">
@@ -35,7 +38,7 @@
                    <span class="icon-bar"></span>
                    <span class="icon-bar"></span>
                </button>
-               <a class="navbar-brand" href="index">SB Admin</a>
+               <a class="navbar-brand" href="index">NexSeedLink -Admin page-</a>
            </div>
            <!-- Top Menu Items -->
            <ul class="nav navbar-right top-nav">
@@ -193,6 +196,10 @@
            </div>
            <!-- /.navbar-collapse -->
        </nav>
+       <!-- jQuery -->
+       <script src="../views/assets/js/admin/jquery.js"></script>
+       <!-- table_sort -->
+       <script src="../views/assets/js/admin/jquery.tablesorter.min.js"></script> 
        <?php
            if (!isset($page)) {
              include('./views/' . $function . '/' . $directry . '.php');
@@ -206,8 +213,7 @@
 
    
 
-   <!-- jQuery -->
-   <script src="../views/assets/js/admin/jquery.js"></script>
+  
 
    <!-- Bootstrap Core JavaScript -->
    <script src="../views/assets/js/admin/bootstrap.min.js"></script>
@@ -218,12 +224,14 @@
    <script src="../views/assets/js/admin/plugins/morris/morris-data.js"></script>
 
    <!-- Flot Charts JavaScript -->
-   <!--[if lte IE 8]><script src="js/excanvas.min.js"></script><![endif]-->
    <script src="../views/assets/js/admin/plugins/flot/jquery.flot.js"></script>
    <script src="../views/assets/js/admin/plugins/flot/jquery.flot.tooltip.min.js"></script>
    <script src="../views/assets/js/admin/plugins/flot/jquery.flot.resize.js"></script>
    <script src="../views/assets/js/admin/plugins/flot/jquery.flot.pie.js"></script>
    <script src="../views/assets/js/admin/plugins/flot/flot-data.js"></script>
+
+ 
+
 
 </body>
 </html>

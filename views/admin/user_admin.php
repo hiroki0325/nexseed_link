@@ -15,7 +15,9 @@
             </div>
             <div class="panel-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered table-hover table-striped">
+                    <table  id="sampleTable" class="tablesorter">
+                    <!-- <table  id="myTable" class="tablesorter"> -->
+
                         <thead>
                             <tr>
                                 <th>id</th>
@@ -31,8 +33,8 @@
 
                             </tr>
                         </thead>
+                        <tbody>
                         <?php while ($table = mysqli_fetch_assoc($tables)): ?> 
-                          <tbody>
                               <tr>
                                   <td><?php echo $table['id']; ?></td>
                                   <td><?php echo $table['fullname']; ?></td>
@@ -59,9 +61,16 @@
                                   <td><?php echo $table['visit_log_time']; ?></td>
                                   <td><?php echo $table['created']; ?></td>
                               </tr>
-                          </tbody>
                         <?php endwhile; ?>
+                        </tbody>
                     </table>
+                    <script type="text/javascript">
+                       $(document).ready(function() 
+                           { 
+                               $("#sampleTable").tablesorter();
+                           } 
+                       ); 
+                    </script>
                 </div>
             </div>
         </div>
@@ -69,3 +78,7 @@
 
   </div>
 </div>
+
+
+
+

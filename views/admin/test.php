@@ -1,11 +1,59 @@
 <?php 
-    $sql = 'SELECT a.id, a.date, b.time, c.nickname AS teacher, d.nickname AS student 
-            FROM lessons a, lesson_times b, users c, users d WHERE a.time_id = b.id 
-            AND a.teacher_id = c.id  AND a.student_id = d.id';
-    $tables = mysqli_query($db,$sql)or die(mysqli_error($db));
-    $table=mysqli_fetch_assoc($tables);
-    echo $table['date'];
-    var_dump($table);
 
  ?>
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+   <!-- JS -->
+   <script src="jquery-1.2.6.min.js" type="text/javascript" charset="utf-8"></script>
+   <script src="jquery.tablesorter.min.js" type="text/javascript" charset="utf-8"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){ 
+       $("#myTable").tablesorter();
+     }); 
+   </script>
+
+ </head>
+ <body>
+   
+ </body>
+ </html>
+ <table id="myTable" class="tablesorter">
+
+
+    <!-- ▼必ずthead要素が必要です。 -->
+    <thead>
+       <tr>
+          <th>都道府県名</th>
+          <th>総人口(万人)</th>
+          <th>面積(km²)</th>
+          <th>人口密度(人/km²)</th>
+       </tr>
+    </thead>
+
+    <!-- ▼表の中身はtbody要素に。 -->
+    <tbody>
+       <tr>
+          <td>東京都</td>
+          <td>1327</td>
+          <td>2189</td>
+          <td>6000</td>
+       </tr>
+       <tr>
+          <td>大阪府</td>
+          <td>886</td>
+          <td>1899</td>
+          <td>4700</td>
+       </tr>
+
+       ：　：　：
+
+       <tr>
+          <td>兵庫県</td>
+          <td>556</td>
+          <td>8396</td>
+          <td>662</td>
+       </tr>
+    </tbody>
+ </table>
 
