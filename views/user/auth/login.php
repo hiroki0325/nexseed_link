@@ -1,10 +1,10 @@
 <?php
 
     if(isset($_COOKIE['email'])){
-        if($_COOKIE['email']!=''){
-          $_POST['email']=$_COOKIE['email'];
-          $_POST['password']=$_COOKIE['password'];
-          $_POST['save']='on';
+        if($_COOKIE['email'] != ''){
+          $_POST['email'] = $_COOKIE['email'];
+          $_POST['password'] = $_COOKIE['password'];
+          $_POST['save'] = 'on';
         }
     }
 
@@ -12,28 +12,28 @@
     if(!empty($_POST)){
       //ログインの処理1
         if(isset($_POST['password'])){
-            if($_POST['email']!='' && $_POST['password'] !=''){
-              $sql=sprintf('SELECT*FROM users WHERE email="%s" AND password="%s"',
+            if($_POST['email'] != '' && $_POST['password'] != ''){
+              $sql = sprintf('SELECT*FROM users WHERE email = "%s" AND password = "%s"',
                 mysqli_real_escape_string($db,$_POST['email']),
                 mysqli_real_escape_string($db,sha1($_POST['password']))
               );
-              $record=mysqli_query($db,$sql)or die(mysqli_error($db));
+              $record = mysqli_query($db,$sql)or die(mysqli_error($db));
 
               if($table = mysqli_fetch_assoc($record)){
-                  $_SESSION['join']['id']=$table['id'];
-                  $_SESSION['join']['fullname']=$table['fullname'];
-                  $_SESSION['join']['nickname']=$table['nickname'];
-                  $_SESSION['join']['email']=$table['email'];
-                  $_SESSION['join']['password']=$table['password'];
-                  $_SESSION['join']['start_day']=$table['start_day'];
-                  $_SESSION['join']['end_day']=$table['end_day'];
-                  $_SESSION['join']['status_id']=$table['status_id'];
-                  $_SESSION['join']['image']=$table['picture'];
-                  $_SESSION['join']['created']=$table['created'];
+                  $_SESSION['join']['id'] = $table['id'];
+                  $_SESSION['join']['fullname'] = $table['fullname'];
+                  $_SESSION['join']['nickname'] = $table['nickname'];
+                  $_SESSION['join']['email'] = $table['email'];
+                  $_SESSION['join']['password'] = $table['password'];
+                  $_SESSION['join']['start_day'] = $table['start_day'];
+                  $_SESSION['join']['end_day'] = $table['end_day'];
+                  $_SESSION['join']['status_id'] = $table['status_id'];
+                  $_SESSION['join']['image'] = $table['picture'];
+                  $_SESSION['join']['created'] = $table['created'];
 
              
                 //ログイン情報を記録する
-                  if($_POST['save']=='on'){
+                  if($_POST['save'] == 'on'){
                     setcookie('email',$_POST['email'],time()+60*60*24*14);
                     setcookie('password',$_POST['password'],time()+60*60*24*14);
                   }
@@ -41,7 +41,7 @@
                   $_SESSION['time'] = time();
                   // $_SESSION['login_time'] = date("Y/m/d H:i:s",$_SESSION['time']);
                 //ログイン回数のカウントとログインした時間の更新
-                  $sql=sprintf('UPDATE users SET login_count=%d WHERE id=%d ',
+                  $sql=sprintf('UPDATE users SET login_count = %d WHERE id = %d ',
                       $table['login_count']+1,
                       mysqli_real_escape_string($db,current_user('id'))
                   );
@@ -56,10 +56,10 @@
                   }
 
               }else{
-                $error['login']='failed';
+                $error['login'] = 'failed';
               }
             }else{
-              $error['login']='blank';
+              $error['login'] = 'blank';
             }
 
         }
@@ -90,10 +90,10 @@
               </div>
 
               <?php if(isset($error)): ?>
-                  <?php if($error['login']=='blank'): ?>
+                  <?php if($error['login'] == 'blank'): ?>
                     <p class="error"> *メールアドレスとパスワードをご記入ください</p>
                   <?php endif; ?>
-                  <?php if($error['login']=='failed'): ?>
+                  <?php if($error['login'] == 'failed'): ?>
                     <p class="error"> *ログインに失敗しました。正しく情報をご記入ください</p>
                   <?php endif; ?>
               <?php endif; ?>
