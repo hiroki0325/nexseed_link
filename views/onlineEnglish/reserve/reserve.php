@@ -4,7 +4,7 @@
     
     $sql_like_teachers = sprintf('SELECT users.id, users.nickname, users.picture, teacher_likes.student_id, lessons.date, lessons.teacher_id 
                                   AS "lessons_teacher_id", lessons.student_id AS "lessons_student_id", lessons.reserve_status_id, lesson_times.time 
-                                  FROM users INNER JOIN teacher_likes ON users.id=teacher_likes.teacher_id AND teacher_likes.student_id=38 
+                                  FROM users INNER JOIN teacher_likes ON users.id=teacher_likes.teacher_id AND teacher_likes.student_id=%d 
                                   INNER JOIN lessons ON lessons.teacher_id=teacher_likes.teacher_id AND lessons.reserve_status_id=1 
                                   INNER JOIN lesson_times ON lessons.time_id=lesson_times.id ORDER BY users.id, lessons.date, lesson_times.time',
                                   $_SESSION["join"]["id"]
