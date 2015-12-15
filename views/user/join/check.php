@@ -20,17 +20,28 @@
               mysqli_real_escape_string($db,$_SESSION["join"]["status_id"])
             );
         } else {
-            $sql=sprintf('INSERT INTO users SET fullname="%s",
-              email="%s",password="%s",loing_count=0,status_id=%d,created=NOW()',
+            $sql = sprintf('INSERT INTO users SET fullname = "%s",
+              email = "%s",password = "%s",loing_count = 0,status_id = %d,created = NOW()',
               mysqli_real_escape_string($db,$fullname),
               mysqli_real_escape_string($db,$_SESSION["join"]["email"]),
               mysqli_real_escape_string($db,sha1($_SESSION["join"]["password"])),
               mysqli_real_escape_string($db,$_SESSION["join"]["status_id"])
             );
         }
-
         mysqli_query($db,$sql)or die(mysqli_error($db));
         unset($_SESSION["join"]);
+
+
+        $sql = 'SELECT * FROM users ORDER BY created DESC';
+        $users = mysqli_query($db,$sql)or die(mysqli_error($db));
+        $user = mysqli_fetch_assoc($users);
+        //新しくユーザーが登録されたことを通知する
+        $sql = sprintf('INSERT INTO notifications SET user_id = %d,
+                         notificaton_message_id = 1, created = NOW()',
+                    mysqli_real_escape_string($db,$user['id'])
+        );
+        $user_notification = mysqli_query($db,$sql)or die(mysqli_error($db));
+
 
         header('Location: thanks');
         exit();
