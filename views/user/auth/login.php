@@ -50,7 +50,7 @@
                     header('Location: ../user_index');
                     exit();
                   } else {
-                    header('Location: ../../index');
+                    header('Location: ../../member');
                     exit();
                   }
 
