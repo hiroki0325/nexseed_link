@@ -13,8 +13,8 @@
   // create socket
   var socketReady = false;
   var socketReady = false;
-  var port = 80;
-  var socket = io.connect('http://27.120.111.43:' + port + '/');
+  var port = 443;
+  var socket = io.connect('https://27.120.111.43:' + port + '/', {secure: true});
 
   // socket: channel connected
   socket.on('connect', onOpened)
