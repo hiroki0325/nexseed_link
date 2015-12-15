@@ -1,5 +1,4 @@
 <?php
-
     if(isset($_COOKIE['email'])){
         if($_COOKIE['email']!=''){
           $_POST['email']=$_COOKIE['email'];
@@ -64,6 +63,13 @@
 
         }
     }
+
+    if (isLoginSuccess()) {
+        header('Location: ../index');
+        exit();
+    }
+
+
 
 ?>
 

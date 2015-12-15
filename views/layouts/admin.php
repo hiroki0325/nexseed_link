@@ -1,5 +1,6 @@
 <?php 
-    if (!isLoginSuccess()) {
+    $status = status();
+    if (!isLoginSuccess() || $status != 1) {
         header('Location: ../user/auth/login');
         exit();
     }

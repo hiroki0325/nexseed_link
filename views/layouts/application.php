@@ -7,6 +7,7 @@
 
     // 最終訪問日更新
      visit_log_time_show();
+
 ?>
 <!DOCTYPE html>
 <html lang="ja">
