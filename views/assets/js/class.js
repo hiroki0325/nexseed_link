@@ -12,7 +12,9 @@
   // ---- socket ------
   // create socket
   var socketReady = false;
-  var socket = io.connect("https://nexseedlink-test.herokuapp.com/");
+  var socketReady = false;
+  var port = 80;
+  var socket = io.connect('http://27.120.111.43:' + port + '/');
 
   // socket: channel connected
   socket.on('connect', onOpened)
@@ -27,12 +29,13 @@ function onOpened(evt) {
     socket.emit('send-log',user_name + 'が入室しました');
 }
 
-function getRoomName() { // たとえば、 URLに  ?roomname  とする
+function getRoomName() {
+  // URLに  ?roomname  とする
   var url = document.location.href;
   var args = url.split('?');
   if (args.length > 1) {
     var room = args[1];
-    if (room != "") {
+    if (room) {
       return room;
     }
   }
@@ -146,7 +149,7 @@ function getRoomName() { // たとえば、 URLに  ?roomname  とする
           localVideo.volume = 0;
         },
         function (error) { // error
-          console.error('An error occurred: [CODE ' + error.code + ']');
+          console.error('An error occurred to user video');
           return;
         }
       );
@@ -157,15 +160,18 @@ function getRoomName() { // たとえば、 URLに  ?roomname  とする
     });
 
   // ---------------------- connection handling -----------------------
-function prepareNewConnection(id) {
-  var pc_config = {"iceServers":[ {"url":"stun:stun.l.google.com:19302"} ]};
-  var peer = null;
-  try {
-    peer = new webkitRTCPeerConnection(pc_config);
-  } catch (e) {
-    console.log("Failed to create PeerConnection, exception: " + e.message);
-  }
-
+  function prepareNewConnection(id) {
+    var pc_config = {"iceServers":[
+     {"url":"stun:27.120.111.43:80"},
+     {"url":"turn:27.120.111.43:80?transport=udp", "username":"hiroki", "credential":"0xbc807ee29df3c9ffa736523fb2c4e8ee"},
+     {"url":"turn:27.120.111.43:80?transport=tcp", "username":"hiroki", "credential":"0xbc807ee29df3c9ffa736523fb2c4e8ee"}
+    ]};
+    var peer = null;
+    try {
+      peer = new webkitRTCPeerConnection(pc_config);
+    } catch (e) {
+      console.log("Failed to create PeerConnection, exception: " + e.message);
+    }
     // send any ice candidates to the other peer
     peer.onicecandidate = function (evt) {
       if (evt.candidate) {
@@ -336,10 +342,8 @@ function prepareNewConnection(id) {
     $log = time()+ escapeHTML2(text) +"<br>";
     // 正常な退出でない場合のみ、出力する処理
     var logComment = document.getElementById("log").innerText;
-    var lastLog = logComment.substr(-7);
 
-    if (lastLog != '退室しました' ) {
-      window.alert(lastLog);
+    if (!logComment.match(/退室しました/) ) {
       $('#log').append($log).fadeIn();
     }
 
