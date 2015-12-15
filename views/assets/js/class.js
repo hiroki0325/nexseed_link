@@ -1,32 +1,3 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-  <title>オンライン英会話</title>
-</head>
-<body>
-  <div>
-   <video id="local-video" autoplay style="width: 240px; height: 180px; border: 1px solid black;"></video>
-   <video id="remote-video" autoplay style="width: 240px; height: 180px; border: 1px solid black;"></video>
-  </div>
-  <br>
-  <button type="button" onclick="connect();">授業開始</button>
-  <button type="button" onclick="hangUp();">授業終了</button>
-
-  <div id="layer2">
-    <input type="text" name="message" placeholder="発言を入力">
-  </div>
-
-  <div id="tmpl" style="display:none;">
-  </div>
-
-  <!-- socket -->
-  <script src="https://cdn.socket.io/socket.io-1.3.7.js"></script>
-
-  <script>
   var localVideo = document.getElementById('local-video');
   var remoteVideo = document.getElementById('remote-video');
   var localStream = null;
@@ -34,30 +5,37 @@
   var peerStarted = false;
   var mediaConstraints = {'mandatory': {'OfferToReceiveAudio':true, 'OfferToReceiveVideo':true }};
 
+  var $script = $('#script');
+  var user_name = JSON.parse($script.attr('data-name'));
+
 
   // ---- socket ------
   // create socket
   var socketReady = false;
-  var socket = io.connect("https://nexseedlink-test.herokuapp.com/");
+  var socketReady = false;
+  var port = 443;
+  var socket = io.connect('https://27.120.111.43:' + port + '/', {secure: true});
 
   // socket: channel connected
   socket.on('connect', onOpened)
         .on('message', onMessage);
 
+// 入室処理
 function onOpened(evt) {
     console.log('socket opened.');
     socketReady = true;
-
     var roomname = getRoomName(); // 会議室名を取得する
     socket.emit('enter', roomname);
+    socket.emit('send-log',user_name + 'が入室しました');
 }
 
-function getRoomName() { // たとえば、 URLに  ?roomname  とする
+function getRoomName() {
+  // URLに  ?roomname  とする
   var url = document.location.href;
   var args = url.split('?');
   if (args.length > 1) {
     var room = args[1];
-    if (room != "") {
+    if (room) {
       return room;
     }
   }
@@ -67,7 +45,7 @@ function getRoomName() { // たとえば、 URLに  ?roomname  とする
   // socket: accept connection request
   function onMessage(evt) {
     if (evt.type === 'offer') {
-      console.log("Received offer, set offer, sending answer....")
+      console.log("Received offer, set offer, sending answer....");
       onOffer(evt);
     } else if (evt.type === 'answer' && peerStarted) {
       console.log('Received answer, settinng answer SDP');
@@ -118,7 +96,7 @@ function getRoomName() { // たとえば、 URLに  ?roomname  とする
 
 
   function onOffer(evt) {
-    console.log("Received offer...")
+    console.log("Received offer...");
   console.log(evt);
     setOffer(evt);
   sendAnswer(evt);
@@ -126,14 +104,14 @@ function getRoomName() { // たとえば、 URLに  ?roomname  とする
   }
 
   function onAnswer(evt) {
-    console.log("Received Answer...")
+    console.log("Received Answer...");
   console.log(evt);
   setAnswer(evt);
   }
 
   function onCandidate(evt) {
     var candidate = new RTCIceCandidate({sdpMLineIndex:evt.sdpMLineIndex, sdpMid:evt.sdpMid, candidate:evt.candidate});
-    console.log("Received Candidate...")
+    console.log("Received Candidate...");
   console.log(candidate);
     peerConnection.addIceCandidate(candidate);
   }
@@ -171,7 +149,7 @@ function getRoomName() { // たとえば、 URLに  ?roomname  とする
           localVideo.volume = 0;
         },
         function (error) { // error
-          console.error('An error occurred: [CODE ' + error.code + ']');
+          console.error('An error occurred to user video');
           return;
         }
       );
@@ -182,15 +160,18 @@ function getRoomName() { // たとえば、 URLに  ?roomname  とする
     });
 
   // ---------------------- connection handling -----------------------
-function prepareNewConnection(id) {
-  var pc_config = {"iceServers":[ {"url":"stun:stun.l.google.com:19302"} ]};
-  var peer = null;
-  try {
-    peer = new webkitRTCPeerConnection(pc_config);
-  } catch (e) {
-    console.log("Failed to create PeerConnection, exception: " + e.message);
-  }
-
+  function prepareNewConnection(id) {
+    var pc_config = {"iceServers":[
+     {"url":"stun:27.120.111.43:80"},
+     {"url":"turn:27.120.111.43:80?transport=udp", "username":"hiroki", "credential":"0xbc807ee29df3c9ffa736523fb2c4e8ee"},
+     {"url":"turn:27.120.111.43:80?transport=tcp", "username":"hiroki", "credential":"0xbc807ee29df3c9ffa736523fb2c4e8ee"}
+    ]};
+    var peer = null;
+    try {
+      peer = new webkitRTCPeerConnection(pc_config);
+    } catch (e) {
+      console.log("Failed to create PeerConnection, exception: " + e.message);
+    }
     // send any ice candidates to the other peer
     peer.onicecandidate = function (evt) {
       if (evt.candidate) {
@@ -209,7 +190,7 @@ function prepareNewConnection(id) {
     peer.addStream(localStream);
 
     peer.addEventListener("addstream", onRemoteStreamAdded, false);
-    peer.addEventListener("removestream", onRemoteStreamRemoved, false)
+    peer.addEventListener("removestream", onRemoteStreamRemoved, false);
 
     // when remote adds a stream, hand it on to the local video element
     function onRemoteStreamAdded(event) {
@@ -278,6 +259,7 @@ function prepareNewConnection(id) {
   //if (!peerStarted && localStream) { // --
       sendOffer();
       peerStarted = true;
+      socket.emit('send-log','授業を開始しました');
     } else {
       alert("Local stream not running yet - try again.");
     }
@@ -286,6 +268,7 @@ function prepareNewConnection(id) {
   // stop the connection upon user request
   function hangUp() {
     console.log("Hang up.");
+    socket.emit('send-log','授業を終了しました');
     stop();
   }
 
@@ -295,19 +278,21 @@ function prepareNewConnection(id) {
     peerStarted = false;
   }
 
+  // チャット欄
   $('input[name="message"]').on('keydown', function(e){
     var ENTER_KEY = 13;
     if (ENTER_KEY == e.keyCode) {
-      socket.emit('send-message',$(this).val() );
+      var message = $(this).val() + "　(" + user_name + ")" ;
+      socket.emit('send-message',message );
       $(this).val('');
     }
   });
 
   socket.on('push-message', function(text){
       var $message;
-      $message = time()+ escapeHTML2(text) + "<br>";
-      // $($message).html('<br>');
-      $('#tmpl').prepend($message).fadeIn();
+      $message = time()+ escapeHTML2(text) +"<br>";
+      $('#tmpl').append($message).fadeIn();
+      $(".panel-body").scrollTop( $("#tmpl")[0].scrollHeight );
   });
 
   function escapeHTML2(html) {
@@ -335,6 +320,31 @@ function prepareNewConnection(id) {
     return (hour+":"+minute+":"+second+"　");
   }
 
-  </script>
-</body>
-</html>
+  // チャットログ出力用 //
+
+  // ログの表示(全般)
+  socket.on('push-log', function(text){
+      var $log;
+      $log = time()+ escapeHTML2(text) +"<br>";
+      $('#log').append($log).fadeIn();
+  });
+
+  // 退出した場合のログ
+  function quit(){
+    socket.emit('send-log',user_name + 'が退室しました');
+    // ToDo 予約ページのURLを設定
+    location.assign("hoge");
+  }
+
+  // 通信が突如きれた場合のログ
+  socket.on('user disconnected', function(text){
+    var $log;
+    $log = time()+ escapeHTML2(text) +"<br>";
+    // 正常な退出でない場合のみ、出力する処理
+    var logComment = document.getElementById("log").innerText;
+
+    if (!logComment.match(/退室しました/) ) {
+      $('#log').append($log).fadeIn();
+    }
+
+  });

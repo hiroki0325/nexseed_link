@@ -1,3 +1,23 @@
+<<<<<<< HEAD:views/member/debug2.php
+
+
+
+
+<?php 
+    if (isLoginSuccess()) {
+        echo "ログインしていた場合の処理";
+    } else {
+        header('Location: auth/login');
+        exit();
+    }
+    echo "<br>";
+    echo visit_log_time_show();
+    
+?>
+
+
+=======
+>>>>>>> a0a3cd2f27652dd8b0f087e37307fba341e43e76:views/user/debug2.php
 <h1>来学予定者ページ</h1>
 
 <?php

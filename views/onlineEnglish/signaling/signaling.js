@@ -1,5 +1,25 @@
-var io = require('socket.io').listen(process.env.PORT, process.env.IP);
-console.log((new Date()) + " Server is listening");
+var port = 443;
+var SSL_KEY = '/etc/letsencrypt/live/nexseed.tk/privkey.pem';
+var SSL_CERT= '/etc/letsencrypt/live/nexseed.tk/cert.pem';
+
+var https = require('https');
+var fs = require('fs');
+var express = require('express');
+var app = express();
+
+var options = {
+  key: fs.readFileSync(SSL_KEY),
+  cert: fs.readFileSync(SSL_CERT)
+};
+
+var server = https.createServer(options, app);
+var io = require('socket.io')(server);
+
+https.createServer().listen(app.get('port'), function(){
+  console.log(new Date() + 'Express server listening on port ' + port);
+});
+
+// console.log((new Date()) + " Server is listening on port " + port);
 
 io.sockets.on('connection', function(socket) {
   // 入室
@@ -14,14 +34,18 @@ io.sockets.on('connection', function(socket) {
   });
 
   socket.on('disconnect', function() {
-    emitMessage('user disconnected');
+    var text = '相手との接続が切れました' ;
+    emitMessage('user disconnected', text);
   });
 
   socket.on('send-message', function(text){
     if (text.length) {
       io.sockets.in(socket.name).emit('push-message', text);
-      console.log('recieved text');
     }
+  });
+
+  socket.on('send-log', function(text){
+      io.sockets.in(socket.name).emit('push-log', text);
   });
 
   // 会議室名が指定されていたら、室内だけに通知

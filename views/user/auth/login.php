@@ -30,7 +30,7 @@
                   $_SESSION['join']['image']=$table['picture'];
                   $_SESSION['join']['created']=$table['created'];
 
-             
+
                 //ログイン情報を記録する
                   if($_POST['save']=='on'){
                     setcookie('email',$_POST['email'],time()+60*60*24*14);
@@ -50,7 +50,7 @@
                     header('Location: ../user_edit');
                     exit();
                   } else {
-                    header('Location: ../index');
+                    header('Location: ../../mypage');
                     exit();
                   }
 
@@ -128,7 +128,7 @@
 
         </div>
 
-          <span class="clearfix"></span>  
+          <span class="clearfix"></span>
           <div class="login-footer">
             <div class="row">
               <div class="col-xs-6 col-md-6">
