@@ -4,22 +4,18 @@ var SSL_CERT= '/etc/letsencrypt/live/nexseed.tk/cert.pem';
 
 var https = require('https');
 var fs = require('fs');
-var express = require('express');
-var app = express();
 
 var options = {
   key: fs.readFileSync(SSL_KEY),
   cert: fs.readFileSync(SSL_CERT)
 };
 
-var server = https.createServer(options, app);
+var server = https.createServer(options);
 var io = require('socket.io')(server);
 
-https.createServer().listen(app.get('port'), function(){
-  console.log(new Date() + 'Express server listening on port ' + port);
+server.listen(port, function() {
+  console.log((new Date()) + " Server is listening on port " + port);
 });
-
-// console.log((new Date()) + " Server is listening on port " + port);
 
 io.sockets.on('connection', function(socket) {
   // 入室

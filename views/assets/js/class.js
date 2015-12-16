@@ -14,7 +14,7 @@
   var socketReady = false;
   var socketReady = false;
   var port = 443;
-  var socket = io.connect('https://27.120.111.43:' + port + '/', {secure: true});
+  var socket = io.connect('https://nexseed.tk:' + port + '/', {secure: true});
 
   // socket: channel connected
   socket.on('connect', onOpened)
