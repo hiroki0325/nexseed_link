@@ -1,13 +1,15 @@
 var port = 443;
-var SSL_KEY = '/etc/letsencrypt/live/nexseed.tk/privkey.pem';
-var SSL_CERT= '/etc/letsencrypt/live/nexseed.tk/cert.pem';
+var sslKey = '/etc/letsencrypt/live/nexseed.tk/privkey.pem';
+var sslCert = '/etc/letsencrypt/live/nexseed.tk/cert.pem';
+var sslChain = '/etc/letsencrypt/live/nexseed.tk/chain.pem';
 
 var https = require('https');
 var fs = require('fs');
 
 var options = {
-  key: fs.readFileSync(SSL_KEY),
-  cert: fs.readFileSync(SSL_CERT)
+  key: fs.readFileSync(sslKey),
+  cert: fs.readFileSync(sslCert),
+  ca: fs.readFileSync(sslChain)
 };
 
 var server = https.createServer(options);
