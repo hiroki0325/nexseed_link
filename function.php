@@ -76,7 +76,7 @@
     function status(){
         include('dbconnect.php');
         $sql = sprintf('SELECT*FROM users WHERE id=%d',
-            mysqli_real_escape_string($db,current_user('id')
+            mysqli_real_escape_string($db,current_user('id'))
         );
         $record = mysqli_query($db,$sql)or die(mysqli_error($db));
         $user = mysqli_fetch_assoc($record);

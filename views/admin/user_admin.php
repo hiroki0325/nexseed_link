@@ -13,10 +13,12 @@
             <div class="panel-heading">
                 <h3 class="panel-title"><i class="fa fa-money fa-fw"></i>ユーザー管理表</h3>
             </div>
+            <br>
+            <p>　　*ソートはカラム名をクリック</p>
             <div class="panel-body">
                 <div class="table-responsive">
-                    <table  id="sampleTable" class="tablesorter">
-                    <!-- <table  id="myTable" class="tablesorter"> -->
+                    <!-- <table  id="sampleTable" class="tablesorter"> -->
+                    <table  id="sampleTable" class="table table-bordered table-hover table-striped">
 
                         <thead>
                             <tr>

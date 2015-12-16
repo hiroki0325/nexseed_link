@@ -172,8 +172,8 @@
                        </ul>
                    </li>
                    <li>
-                       <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> オンライン英会話 <i class="fa fa-fw fa-caret-down"></i></a>
-                       <ul id="demo" class="collapse">
+                       <a href="javascript:;" data-toggle="collapse" data-target="#hoge"><i class="fa fa-fw fa-arrows-v"></i> オンライン英会話 <i class="fa fa-fw fa-caret-down"></i></a>
+                       <ul id="hoge" class="collapse">
                            <li>
                                <a href="#">授業スケジュール</a>
                            </li>
@@ -183,8 +183,8 @@
                        </ul>
                    </li>
                    <li>
-                       <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> 物流システム <i class="fa fa-fw fa-caret-down"></i></a>
-                       <ul id="demo" class="collapse">
+                       <a href="javascript:;" data-toggle="collapse" data-target="#fuga"><i class="fa fa-fw fa-arrows-v"></i> 物流システム <i class="fa fa-fw fa-caret-down"></i></a>
+                       <ul id="fuga" class="collapse">
                            <li>
                                <a href="#">物流スケジュール</a>
                            </li>
