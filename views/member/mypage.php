@@ -3,7 +3,7 @@
 <section id="slider">
 	<div id="home-carousel" class="carousel slide" data-ride="carousel">			
 		<div class="carousel-inner">
-			<div class="item active" style="background-image: url(../views/assets/images/background.jpg)">
+			<div class="item active" style="background-image: url(views/assets/images/background.jpg)">
 				<div class="carousel-caption container">
 					<div class="row">
 						<div class="col-sm-7">
