@@ -333,7 +333,7 @@ function getRoomName() {
   function quit(){
     socket.emit('send-log',user_name + 'が退室しました');
     // ToDo 予約ページのURLを設定
-    location.assign("hoge");
+    location.assign("../reserve/index");
   }
 
   // 通信が突如きれた場合のログ
