@@ -342,8 +342,9 @@ function getRoomName() {
     $log = time()+ escapeHTML2(text) +"<br>";
     // 正常な退出でない場合のみ、出力する処理
     var logComment = document.getElementById("log").innerText;
+    var lastLog = logComment.substr(-10);
 
-    if (!logComment.match(/退室しました/) ) {
+    if (!lastLog.match(/退室しました/) ) {
       $('#log').append($log).fadeIn();
     }
 
