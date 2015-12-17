@@ -1,6 +1,23 @@
-var port = 80;
-var io = require('socket.io').listen(port);
-console.log((new Date()) + " Server is listening on port " + port);
+var port = 443;
+var sslKey = '/etc/letsencrypt/live/nexseed.tk/privkey.pem';
+var sslCert = '/etc/letsencrypt/live/nexseed.tk/cert.pem';
+var sslChain = '/etc/letsencrypt/live/nexseed.tk/chain.pem';
+
+var https = require('https');
+var fs = require('fs');
+
+var options = {
+  key: fs.readFileSync(sslKey),
+  cert: fs.readFileSync(sslCert),
+  ca: fs.readFileSync(sslChain)
+};
+
+var server = https.createServer(options);
+var io = require('socket.io')(server);
+
+server.listen(port, function() {
+  console.log((new Date()) + " Server is listening on port " + port);
+});
 
 io.sockets.on('connection', function(socket) {
   // 入室
