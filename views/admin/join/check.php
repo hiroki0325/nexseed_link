@@ -43,19 +43,12 @@
         $user_notification = mysqli_query($db,$sql)or die(mysqli_error($db));
 
 
-        header('Location: thanks');
+        header('Location: ../../user/login');
         exit();
     }
 ?>
 
 
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <title>Nexseed Link-登録確認</title>
-</head>
-<body>
   <h1>入力内容の確認</h1>
 
 <form action="" method="post">
@@ -111,5 +104,3 @@
 
 </form>
 
-</body>
-</html>
