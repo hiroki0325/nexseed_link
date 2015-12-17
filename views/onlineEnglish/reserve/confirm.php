@@ -27,6 +27,7 @@
               exit();
         }
     }
+    var_dump($_POST);
 ?>
 
 <div class="container">

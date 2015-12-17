@@ -49,20 +49,10 @@
         }
     }
     
-    //配列作成
-    $lessons_ary = array();
-    $lessons_ary1 = array();
-    $lessons_ary2 = array();
-    $i = 1;
+    //配列の用意
+    $lessons_ary = "";
+ 
 
-    //予約情報の送信
-    // if (isset($_POST["date"])) {
-    //     $_SESSION["reserve"] = $_POST;
-    //     $_SESSION["reserve"]["nickname"] = $like_teacher["nickname"];
-    //     $_SESSION["reserve"]["picture"] = $like_teacher["picture"];
-    //     header("Location: confirm.php");
-    //     exit();
-    //}
 ?>
 
 <div class="container">
@@ -72,67 +62,103 @@
       <!-- お気に入り講師一覧のrow -->
       <div class="row">
           <!-- <p>お気に入り講師から予約</p> -->
-          <div class="col-md-4">
-            <div class="col-md-6">
-              <!-- お気に入り講師の写真表示 -->
-
-
-                  <!-- 修正中 -->
-                  <!-- 講師とレッスン時間が紐付いた配列を作成する -->
+          <div class="col-md-4"> 
+            <div class="col-md-6"> 
                   <?php 
-                      // while ( $like_teacher = mysqli_fetch_assoc($like_teachers) && $like_teacher["id"]) {
-                      //     var_dump($like_teacher);
-                      //     $array = array("like_teacher_name" => "",
-                      //                    "")
-                      // }
-                  ?>
+                      // 講師とレッスン時間が紐付いた配列を作成する
+                      $like_teachers_lessons = array(); // すべてのお気に入りの先生のレッスン可能時間をいれる
+                      $count = 0;
 
-
+                      $data = array(); // 最終的に必要なデータ (お気に入り先生ごとのレッスン可能時間すべて)
+                   ?>
 
 
                   <?php while ($like_teacher = mysqli_fetch_assoc($like_teachers)) :?>
                       <?php
-                          echo "===== like_teacher =====";
-                          var_dump($like_teacher);
-
-                          // $lessons_ary = array_merge($lessons_ary,array($like_teacher["nickname"] => array_merge($lessons_ary1,array($i => $like_teacher["date"]))));
-                          // $i++;
-                          $lessons_ary = array_merge($lessons_ary,array($like_teacher["nickname"] => $like_teacher["date"]." ".$like_teacher["time"]));
-                          var_dump($lessons_ary);
-                          //$lessoms_ary2 = $lessons_ary + array( "key" => $);
-                          // $lessons_ary1 = array_merge($lessons_ary1, array("$i" => $like_teacher["date"]));
-                          // $i++;
-                          //$lessons_ary2 = 
                          
-                      ?>
-                      <?php 
-                        // echo sprintf('<img src="../../views/member/user_picture/%s" alt="画像" width="80" height="80"><p>%s先生</p>',
-                        //                  $like_teacher["picture"],
-                        //                  $like_teacher["nickname"]
-                        //                );
-                      ?>
-                      <!-- <form action="" method="post">
-                        <input type="hidden" name="id" value="<?php echo $like_teacher["id"]; ?>" >
-                        <input type="submit" name="like" value="お気に入り解除">
-                      </form>
-                       <div class="col-md-6">
-          
-                          <form action="confirm" method="post">
-                            <input type="hidden" name="lesson_id" value="<?php echo $like_teacher["lesson_id"]; ?>" >
-                            <input type="hidden" name="id" value="<?php echo $like_teacher["id"]; ?>" >
-                            <input type="hidden" name="nickname" value="<?php echo $like_teacher["nickname"]; ?>" >
-                            <input type="hidden" name="picture" value="<?php echo $like_teacher["picture"]; ?>" >
-                            <button type="submit" name="date" value="<?php echo $like_teacher["date"];?>"><?php echo date("n月j日H時i分",strtotime($like_teacher["date"])) ;?></button>
-                          </form>
-                      </div>
+                          $count++;
 
-                      <hr> -->
+                          $tmp_ary = array(
+                                $count => array(
+                                      $like_teacher['nickname'] => $like_teacher['date']." ".$like_teacher["time"]  // 日時を連結させていれる
+                                  )
+                            );
+                         
+                          $like_teachers_lessons = array_merge($like_teachers_lessons,$tmp_ary);
 
+                          $data = array_merge($data,array($like_teacher['nickname'] => array()));
+                      ?>
+                      
                   <?php endwhile ;?>
+                 <?php 
+                    for ($i = 0; $i < count($like_teachers_lessons); $i++) {
+                        $key = key($like_teachers_lessons[$i]);
+                        $tmp_ary = array(
+                            $i => $like_teachers_lessons[$i][$key]
+                          );
 
+                        for ($j = 0; $j < count($data); $j++) {  // お気に入り先生の数分繰り返す
+                            $teacher_name = array_keys($data)[$j];
 
-                  <!-- 修正中ここまで -->
-                </div>
+                            if ($teacher_name == $key) {//別々の箱から取ってきた名前が一致した時にそこへデータを追加している
+                                $data[$key] = array_merge($data[$key], $tmp_ary);
+                            }
+                        }
+                    }
+                  ?>
+
+                    <!-- お気に入り講師の写真表示 -->
+                    <?php 
+                      // echo sprintf('<img src="../../views/member/user_picture/%s" alt="画像" width="80" height="80"><p>%s先生</p>',
+                      //                  $like_teacher["picture"],
+                      //                  $like_teacher["nickname"]
+                      //                );
+                    ?>
+
+                    <!-- お気に入り解除ボタンの表示 -->
+                    <!-- <form action="" method="post">
+                      <input type="hidden" name="id" value="<?php echo $like_teacher["id"]; ?>" >
+                      <input type="submit" name="like" value="お気に入り解除">
+                    </form> -->
+            </div><!-- <div class="col-md-6"> -->
+
+           
+            <div class="col-md-6">
+
+                <!-- お気に入り講師からの予約フォーム -->
+                
+            
+                <form action="confirm" method="post">
+                  <?php 
+                      foreach ($data as $key1 => $value1) {
+                          echo $key1;
+                          echo "<br>";
+                          // var_dump($value1);
+                          // foreach ($value1 as $key2 => $value2) {
+                          //     // var_dump($value1);
+                          //     // echo "<br>";
+                          //     echo $key2;
+                          //     echo $value2;
+                          //     echo "<br>";
+                          // }
+                          for ($i = 0; $i < count($value1); $i++) { 
+                              // echo $value1[$i];
+                              // echo "<br>";
+                              // echo $value1["$i"]."<br>";
+                              echo sprintf('<button type="submit" name="date" value="%s">%s</button>',
+                                          $value1[$i], // データをスペース区切りで分解する
+                                          date("n月j日H時i分",strtotime($value1[$i]))
+                                          );
+                              echo "<br>";
+                          }
+                      }
+                  ?>
+                  <input type="hidden" name="lesson_id" value="">
+                  <input type="hidden" name="student_id" value="">
+                </form> 
+            </div>
+
+            <hr>
             
           </div><!-- <div class="col-md-4"> -->
           <div class="col-md-4">
