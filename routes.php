@@ -33,17 +33,23 @@
     //viewの形成を楽にするヘルパーを読み込み
     include('./views/helpers/application_helper.php');
 
-    if ($params[0]=='admin') { //管理者ファイルを読み込み
-        include('./views/layouts/admin.php');
+    if (isset($params[1])) {
+        if ($params[0]=='admin') { //管理者ファイルを読み込み
+            include('./views/layouts/admin.php');
 
-    } elseif ($params[0]=='user') { //ログインファイルを読み込み
-        include('./views/layouts/login.php');
+        } elseif ($params[0]=='user') { //ログインファイルを読み込み
+            include('./views/layouts/login.php');
 
-    } elseif ($params[1]=='class') { //英会話ファイルを読み込み
-        include('./views/layouts/onlineEnglish.php');
+        } elseif ($params[1]=='class') { //英会話ファイルを読み込み
+            include('./views/layouts/onlineEnglish.php');
 
-    }else { // レイアウトファイルを読み込み
+        }else { // レイアウトファイルを読み込み
+            include('./views/layouts/application.php');
+        }
+    } else { // mypage用
         include('./views/layouts/application.php');
     }
+
+
 
 ?>
