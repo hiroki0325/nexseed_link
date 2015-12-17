@@ -1,35 +1,35 @@
 <?php
   //情報が入っていなかった場合、index.phpにもどる
-    if(!isset($_SESSION["join"])){
+    if(!isset($_SESSION["user"])){
       header("Location: index");
       exit();
     }
 
 
-    $fullname = $_SESSION["join"]["first_name"]. ' ' .$_SESSION["join"]["last_name"];
+    $fullname = $_SESSION["user"]["first_name"]. ' ' .$_SESSION["user"]["last_name"];
 
     if(!empty($_POST)){
-        if ($_SESSION["join"]["start_day"] && $_SESSION["join"]["end_day"]) {
+        if ($_SESSION["user"]["start_day"] && $_SESSION["user"]["end_day"]) {
             $sql=sprintf('INSERT INTO users SET fullname="%s",
               email="%s",password="%s",start_day="%s",login_count=0,end_day="%s",status_id=%d,created=NOW()',
               mysqli_real_escape_string($db,$fullname),
-              mysqli_real_escape_string($db,$_SESSION["join"]["email"]),
-              mysqli_real_escape_string($db,sha1($_SESSION["join"]["password"])),
-              mysqli_real_escape_string($db,$_SESSION["join"]["start_day"]),
-              mysqli_real_escape_string($db,$_SESSION["join"]["end_day"]),
-              mysqli_real_escape_string($db,$_SESSION["join"]["status_id"])
+              mysqli_real_escape_string($db,$_SESSION["user"]["email"]),
+              mysqli_real_escape_string($db,sha1($_SESSION["user"]["password"])),
+              mysqli_real_escape_string($db,$_SESSION["user"]["start_day"]),
+              mysqli_real_escape_string($db,$_SESSION["user"]["end_day"]),
+              mysqli_real_escape_string($db,$_SESSION["user"]["status_id"])
             );
         } else {
             $sql = sprintf('INSERT INTO users SET fullname = "%s",
               email = "%s",password = "%s",loing_count = 0,status_id = %d,created = NOW()',
               mysqli_real_escape_string($db,$fullname),
-              mysqli_real_escape_string($db,$_SESSION["join"]["email"]),
-              mysqli_real_escape_string($db,sha1($_SESSION["join"]["password"])),
-              mysqli_real_escape_string($db,$_SESSION["join"]["status_id"])
+              mysqli_real_escape_string($db,$_SESSION["user"]["email"]),
+              mysqli_real_escape_string($db,sha1($_SESSION["user"]["password"])),
+              mysqli_real_escape_string($db,$_SESSION["user"]["status_id"])
             );
         }
         mysqli_query($db,$sql)or die(mysqli_error($db));
-        unset($_SESSION["join"]);
+        unset($_SESSION["user"]);
 
 
         $sql = 'SELECT * FROM users ORDER BY created DESC';
@@ -61,7 +61,7 @@
 
   <div>
     <p>メールアドレス</p>
-      <?php echo h($_SESSION["join"]["email"]); ?>
+      <?php echo h($_SESSION["user"]["email"]); ?>
   </div>
 
   <div>
@@ -71,24 +71,24 @@
 
   <div>
     <p>留学開始日</p>
-      <?php echo h($_SESSION["join"]["start_day"]); ?>
+      <?php echo h($_SESSION["user"]["start_day"]); ?>
   </div>
 
   <div>
     <p>留学終了日</p>
-      <?php echo h($_SESSION["join"]["end_day"]); ?>
+      <?php echo h($_SESSION["user"]["end_day"]); ?>
   </div>
 
   <div>
     <p>ステータス</p>
       <?php
-        if($_SESSION["join"]["status_id"]==2){
+        if($_SESSION["user"]["status_id"]==2){
             echo '来学予定者';
-        }elseif($_SESSION["join"]["status_id"]==3){
+        }elseif($_SESSION["user"]["status_id"]==3){
             echo '在学生';
-        }elseif($_SESSION["join"]["status_id"]==4){
+        }elseif($_SESSION["user"]["status_id"]==4){
             echo '卒業生';
-        }elseif($_SESSION["join"]["status_id"]==5){
+        }elseif($_SESSION["user"]["status_id"]==5){
             echo 'teacher';
         }else{
             echo '管理者';

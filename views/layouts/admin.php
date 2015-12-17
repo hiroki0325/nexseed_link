@@ -13,22 +13,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="">
   <meta name="author" content="">
-    <?php if($directry =='join'): ?> 
+
         <!-- joinディレクトリ -->
         <title>NexSeedLink -Admin page-</title>
         <link rel="stylesheet" href="../../views/assets/css/bootstrap.css">
         <link rel="stylesheet" href="../../views/assets/font-awesome/css/font-awesome.css">
         <link rel="stylesheet" href="../../views/assets/css/admin/sb-admin.css">
         <link rel="stylesheet" href="../../views/assets/css/admin/plugins/morris.css">
-    <?php else: ?>
-        <!-- table_sort -->
-        <link rel="stylesheet" href="../views/assets/css/admin/style.css" type="text/css" media="print, projection, screen" />
-        <title>NexSeedLink -Admin page-</title>
-        <link rel="stylesheet" href="../views/assets/css/bootstrap.css">
-        <link rel="stylesheet" href="../views/assets/font-awesome/css/font-awesome.css">
-        <link rel="stylesheet" href="../views/assets/css/admin/sb-admin.css">
-        <link rel="stylesheet" href="../views/assets/css/admin/plugins/morris.css">
-    <?php endif; ?>
+
 
     
 
@@ -171,10 +163,10 @@
                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> ユーザー管理 <i class="fa fa-fw fa-caret-down"></i></a>
                        <ul id="demo" class="collapse">
                            <li>
-                               <a href="join/index">新規ユーザー登録</a>
+                               <a href="../join/index">新規ユーザー登録</a>
                            </li>
                            <li>
-                               <a href="user_admin">ユーザー管理</a>
+                               <a href="../admin/user_admin">ユーザー管理</a>
                            </li>
                        </ul>
                    </li>
@@ -205,18 +197,11 @@
            <!-- /.navbar-collapse -->
        </nav>
 
-      <?php if($directry == 'join'): ?>     
          <!-- jQuery -->
          <script src="../../views/assets/js/admin/jquery.js"></script>
          <!-- table_sort -->
          <script src="../../views/assets/js/admin/jquery.tablesorter.min.js"></script> 
-      <?php else: ?>
-          <!-- jQuery -->
-          <script src="../views/assets/js/admin/jquery.js"></script>
-          <!-- table_sort -->
-          <script src="../views/assets/js/admin/jquery.tablesorter.min.js"></script> 
-      <?php endif; ?>
-
+      
        <?php
            if (!isset($page)) {
              include('./views/' . $function . '/' . $directry . '.php');
@@ -228,9 +213,6 @@
     </div>
     <!-- /#wrapper -->
 
-   
-
-    <?php if($directry == 'join'): ?>     
         <!-- Bootstrap Core JavaScript -->
         <script src="../../views/assets/js/admin/bootstrap.min.js"></script>
 
@@ -245,22 +227,7 @@
         <script src="../../views/assets/js/admin/plugins/flot/jquery.flot.resize.js"></script>
         <script src="../../views/assets/js/admin/plugins/flot/jquery.flot.pie.js"></script>
         <script src="../../views/assets/js/admin/plugins/flot/flot-data.js"></script>
-    <?php else: ?>
-        <!-- Bootstrap Core JavaScript -->
-        <script src="../views/assets/js/admin/bootstrap.min.js"></script>
 
-        <!-- Morris Charts JavaScript -->
-        <script src="../views/assets/js/admin/plugins/morris/raphael.min.js"></script>
-        <script src="../views/assets/js/admin/plugins/morris/morris.min.js"></script>
-        <script src="../views/assets/js/admin/plugins/morris/morris-data.js"></script>
-
-        <!-- Flot Charts JavaScript -->
-        <script src="../views/assets/js/admin/plugins/flot/jquery.flot.js"></script>
-        <script src="../views/assets/js/admin/plugins/flot/jquery.flot.tooltip.min.js"></script>
-        <script src="../views/assets/js/admin/plugins/flot/jquery.flot.resize.js"></script>
-        <script src="../views/assets/js/admin/plugins/flot/jquery.flot.pie.js"></script>
-        <script src="../views/assets/js/admin/plugins/flot/flot-data.js"></script>
-    <?php endif; ?>
 
 </body>
 </html>

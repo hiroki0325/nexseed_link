@@ -36,27 +36,27 @@
       // 現在の日付(date関数？)を取得して比べる
 
       if (isset($_POST['teacher'])) {
-          $status = 5;
+          $addUserStatus = 5;
       } elseif (isset($_POST['admin'])){
-          $status = 1;
+          $addUserStatus = 1;
       } else {
               // もし$_POST['start_day']が後だったら入学前なので、
           if(date("Y-m-d") < $_POST['start_day']){
-              $status = 2;
+              $addUserStatus = 2;
               // もし$_POST['start_day']が前で、かつ$_POST['end_day']が後だったら在学生なので、
           }elseif($_POST['start_day'] < date("Y-m-d") && date("Y-m-d") < $_POST['end_day']){
-              $status = 3;
+              $addUserStatus = 3;
               // もし$_POST['start_day']が前で、かつ$_POST['end_day']が前だったら卒業生なので、
           }else{
-              $status = 4;
+              $addUserStatus = 4;
           }
       }
 
       
 
       if(empty($error)){
-        $_SESSION["join"] = $_POST;
-        $_SESSION["join"]["status_id"] = $status;
+        $_SESSION["user"] = $_POST;
+        $_SESSION["user"]["status_id"] = $addUserStatus;
         header('Location: check');
         exit();
       }
@@ -66,7 +66,7 @@
     //書き直し処理
     if(isset($_REQUEST['action'])){
       if($_REQUEST['action'] == 'rewrite'){
-          $_POST = $_SESSION['join'];
+          $_POST = $_SESSION['user'];
           $error['rewrite'] = true;
       }
     }
