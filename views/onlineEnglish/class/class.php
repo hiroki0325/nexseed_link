@@ -1,5 +1,6 @@
 <?php
-    $name = current_user('fullname')
+    $name = current_user('nickname');
+    $status = current_user('status_id');
 ?>
 
 <link rel="stylesheet" type="text/css" href="../../views/assets/css/class.css">
@@ -9,8 +10,10 @@
 <section id="onlineclass">
   <!-- 授業の開始と終了は先生のみ可能 -->
   <div class="container">
+    <?php if ($status == 5): ?>
     <button type="button" onclick="connect();">授業開始</button>
     <button type="button" onclick="hangUp();">授業終了</button>
+    <?php endif ?>
     <button type="button" onclick="quit();">退室する</button>
     <br>
     <br>
