@@ -204,10 +204,19 @@
            </div>
            <!-- /.navbar-collapse -->
        </nav>
-       <!-- jQuery -->
-       <script src="../views/assets/js/admin/jquery.js"></script>
-       <!-- table_sort -->
-       <script src="../views/assets/js/admin/jquery.tablesorter.min.js"></script> 
+
+      <?php if($directry == 'join'): ?>     
+         <!-- jQuery -->
+         <script src="../../views/assets/js/admin/jquery.js"></script>
+         <!-- table_sort -->
+         <script src="../../views/assets/js/admin/jquery.tablesorter.min.js"></script> 
+      <?php else: ?>
+          <!-- jQuery -->
+          <script src="../views/assets/js/admin/jquery.js"></script>
+          <!-- table_sort -->
+          <script src="../views/assets/js/admin/jquery.tablesorter.min.js"></script> 
+      <?php endif; ?>
+
        <?php
            if (!isset($page)) {
              include('./views/' . $function . '/' . $directry . '.php');
@@ -221,7 +230,7 @@
 
    
 
-    <?php if($directry =='join'): ?>     
+    <?php if($directry == 'join'): ?>     
         <!-- Bootstrap Core JavaScript -->
         <script src="../../views/assets/js/admin/bootstrap.min.js"></script>
 

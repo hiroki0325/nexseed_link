@@ -46,11 +46,11 @@
                 <h1 class="page-header">
                     管理者画面 <small>test</small>
                 </h1>
-                <ol class="breadcrumb">
+                <!-- <ol class="breadcrumb">
                     <li class="active">
                         <i class="fa fa-dashboard"></i> Dashboard
                     </li>
-                </ol>
+                </ol> -->
             </div>
         </div>
         <!-- /.row -->

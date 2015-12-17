@@ -1,6 +1,5 @@
 <?php
     // date_default_timezone_set('Asia/Tokyo');
-
     //入力しなかった場合入力を促す
     if(!empty($_POST)){
       if($_POST["first_name"]==''){
@@ -78,11 +77,11 @@
   <div class="container-fluid">
 
     <h1 class="page-header">ユーザー新規登録 </h1>
-    <ol class="breadcrumb">
+    <!-- <ol class="breadcrumb">
         <li class="active">
             <i class="fa fa-dashboard"></i> Dashboard
         </li>
-    </ol>
+    </ol> -->
 
     <div class="row">
       <div class="col-lg-12">
