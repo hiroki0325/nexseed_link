@@ -37,7 +37,7 @@
                     setcookie('email',$_POST['email'],time()+60*60*24*14);
                     setcookie('password',$_POST['password'],time()+60*60*24*14);
                   }
-                header('Location: ../index');
+                header('Location: ../../admin/admin/index');
                 exit();
               }else{
                 $error['login']='failed';

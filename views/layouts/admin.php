@@ -1,7 +1,7 @@
 <?php 
     $status = status();
     if (!isLoginSuccess() || $status != 1) {
-        header('Location: ../user/auth/login');
+        header('Location: ../../user/auth/login');
         exit();
     }
  ?>
@@ -136,7 +136,7 @@
                        </li>
                        <li class="divider"></li>
                        <li>
-                           <a href="../user/auth/logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                           <a href="../../user/auth/logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
                        </li>
                    </ul>
                </li>

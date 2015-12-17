@@ -52,11 +52,9 @@
           }
       }
 
-      
-
       if(empty($error)){
-        $_SESSION["user"] = $_POST;
-        $_SESSION["user"]["status_id"] = $addUserStatus;
+        // $_SESSION["user"] = $_POST;
+        // $_SESSION["user"]["status_id"] = $addUserStatus;
         header('Location: check');
         exit();
       }
