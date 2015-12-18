@@ -1,7 +1,5 @@
 <?php
-    $db = mysqli_connect("localhost", "root", "mysql","nexseed_link");
     // ログイン中ユーザーのお気に入り講師情報を呼び出す
-    
     $sql_like_teachers = sprintf('SELECT users.id, users.nickname, users.picture, teacher_likes.student_id,lessons.id AS "lessons_id", lessons.date, lessons.teacher_id 
                                   AS "lessons_teacher_id", lessons.student_id AS "lessons_student_id", lessons.reserve_status_id,lesson_times.id AS "time_id", lesson_times.time 
                                   FROM users INNER JOIN teacher_likes ON users.id=teacher_likes.teacher_id AND teacher_likes.student_id=%s 
