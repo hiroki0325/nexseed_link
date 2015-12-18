@@ -2,9 +2,9 @@
     $db = mysqli_connect("localhost", "root", "mysql","nexseed_link");
     // ログイン中ユーザーのお気に入り講師情報を呼び出す
     
-    $sql_like_teachers = sprintf('SELECT users.id, users.nickname, users.picture, teacher_likes.student_id, lessons.date, lessons.teacher_id 
-                                  AS "lessons_teacher_id", lessons.student_id AS "lessons_student_id", lessons.reserve_status_id, lesson_times.time 
-                                  FROM users INNER JOIN teacher_likes ON users.id=teacher_likes.teacher_id AND teacher_likes.student_id=%d 
+    $sql_like_teachers = sprintf('SELECT users.id, users.nickname, users.picture, teacher_likes.student_id,lessons.id AS "lessons_id", lessons.date, lessons.teacher_id 
+                                  AS "lessons_teacher_id", lessons.student_id AS "lessons_student_id", lessons.reserve_status_id,lesson_times.id AS "time_id", lesson_times.time 
+                                  FROM users INNER JOIN teacher_likes ON users.id=teacher_likes.teacher_id AND teacher_likes.student_id=%s 
                                   INNER JOIN lessons ON lessons.teacher_id=teacher_likes.teacher_id AND lessons.reserve_status_id=1 
                                   INNER JOIN lesson_times ON lessons.time_id=lesson_times.id ORDER BY users.id, lessons.date, lesson_times.time',
                                   $_SESSION["join"]["id"]
@@ -62,8 +62,8 @@
       <!-- お気に入り講師一覧のrow -->
       <div class="row">
           <!-- <p>お気に入り講師から予約</p> -->
-          <div class="col-md-4"> 
-            <div class="col-md-6"> 
+          <div > <!-- class="col-md-4"を削除 -->
+            <div > 
                   <?php 
                       // 講師とレッスン時間が紐付いた配列を作成する
                       $like_teachers_lessons = array(); // すべてのお気に入りの先生のレッスン可能時間をいれる
@@ -80,13 +80,14 @@
 
                           $tmp_ary = array(
                                 $count => array(
-                                      $like_teacher['nickname'] => $like_teacher['date']." ".$like_teacher["time"]  // 日時を連結させていれる
+                                      $like_teacher['nickname'] => $like_teacher['date']." ".$like_teacher["time"]." ".$like_teacher["lessons_id"]." ".$like_teacher["time_id"] // 日時と必要IDを連結させていれる
                                   )
                             );
-                         
+                          
                           $like_teachers_lessons = array_merge($like_teachers_lessons,$tmp_ary);
 
                           $data = array_merge($data,array($like_teacher['nickname'] => array()));
+                          
                       ?>
                       
                   <?php endwhile ;?>
@@ -119,42 +120,44 @@
                     <!-- <form action="" method="post">
                       <input type="hidden" name="id" value="<?php echo $like_teacher["id"]; ?>" >
                       <input type="submit" name="like" value="お気に入り解除">
-                    </form> -->
+                    </form>  -->
             </div><!-- <div class="col-md-6"> -->
 
            
-            <div class="col-md-6">
+            <div >
 
                 <!-- お気に入り講師からの予約フォーム -->
                 
             
-                <form action="confirm" method="post">
+                  <form action="confirm" method="post">
                   <?php 
                       foreach ($data as $key1 => $value1) {
                           echo $key1;
                           echo "<br>";
-                          // var_dump($value1);
-                          // foreach ($value1 as $key2 => $value2) {
-                          //     // var_dump($value1);
-                          //     // echo "<br>";
-                          //     echo $key2;
-                          //     echo $value2;
-                          //     echo "<br>";
-                          // }
+                          
                           for ($i = 0; $i < count($value1); $i++) { 
-                              // echo $value1[$i];
-                              // echo "<br>";
-                              // echo $value1["$i"]."<br>";
-                              echo sprintf('<button type="submit" name="date" value="%s">%s</button>',
-                                          $value1[$i], // データをスペース区切りで分解する
-                                          date("n月j日H時i分",strtotime($value1[$i]))
+                              $params = explode(' ', $value1[$i]);// データをスペース区切りで分解する
+                              $datetime = $params[0]." ". $params[1];
+                              $lessons_id = $params[2];
+                              $time_id = $params[3];
+                              echo sprintf('<button type="submit" name="lessons_id" value="%s">%s</button>',
+                                          $lessons_id,
+                                          // $datetime,
+                                          //$value1[$i], 
+                                          date("n月j日H時i分",strtotime($datetime))
+                                          //date("n月j日H時i分",strtotime($value1[$i]))
                                           );
                               echo "<br>";
+                              // echo "<br>";
+                              // echo sprintf('<input type="hidden" name="%s" value="%s">',
+                              //               $lessons_id,
+                              //               $lessons_id
+                              //               );
+                              
                           }
                       }
                   ?>
-                  <input type="hidden" name="lesson_id" value="">
-                  <input type="hidden" name="student_id" value="">
+                  
                 </form> 
             </div>
 
