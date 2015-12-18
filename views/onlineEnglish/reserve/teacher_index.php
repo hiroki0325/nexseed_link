@@ -28,7 +28,7 @@
           <input type="hidden" name="id" value="<?php echo $lesson['id'] ;?>">
           <input type="submit" name="cancel" value="Cancel">
         </form>
-        <a href="http://geechscamp.lovepop.jp/7th_batch_camp/nexseed_link/onlineEnglish/<?php $lesson['rand_str'] ;?>">Enter the room</a>
+        <a href="https://lovepop-geechscamp.ssl-lolipop.jp/7th_batch_camp/nexseed_link/onlineEnglish/class/class?<?php echo $lesson['rand_str'] ;?>">Enter the room</a>
         <p>Please enter 5 minutes before the Lesson</p>
         <hr>
     <?php endwhile ;?>
