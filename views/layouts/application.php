@@ -41,7 +41,6 @@
     <link rel="stylesheet" href="../../views/assets/css/<?php echo $function.'/'.$directry.'.css';?>">
   <?php endif; ?>
 
-<!-- /css -->
 </head>
 <body>
   <!-- Header -->
