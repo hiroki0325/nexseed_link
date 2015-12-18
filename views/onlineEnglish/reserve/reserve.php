@@ -1,6 +1,6 @@
 <?php
     // ログイン中ユーザーのお気に入り講師情報を呼び出す
-    $sql_like_teachers = sprintf('SELECT users.id, users.nickname, users.picture, teacher_likes.student_id,lessons.id AS "lessons_id", lessons.date, lessons.teacher_id 
+    $sql_like_teachers = sprintf('SELECT users.id, users.nickname, users.picture, teacher_likes.student_id,lessons.id AS "lesson_id", lessons.date, lessons.teacher_id 
                                   AS "lessons_teacher_id", lessons.student_id AS "lessons_student_id", lessons.reserve_status_id,lesson_times.id AS "time_id", lesson_times.time 
                                   FROM users INNER JOIN teacher_likes ON users.id=teacher_likes.teacher_id AND teacher_likes.student_id=%s 
                                   INNER JOIN lessons ON lessons.teacher_id=teacher_likes.teacher_id AND lessons.reserve_status_id=1 
@@ -78,7 +78,7 @@
 
                           $tmp_ary = array(
                                 $count => array(
-                                      $like_teacher['nickname'] => $like_teacher['date']." ".$like_teacher["time"]." ".$like_teacher["lessons_id"]." ".$like_teacher["time_id"] // 日時と必要IDを連結させていれる
+                                      $like_teacher['nickname'] => $like_teacher['date']." ".$like_teacher["time"]." ".$like_teacher["lesson_id"]." ".$like_teacher["time_id"] // 日時と必要IDを連結させていれる
                                   )
                             );
                           
@@ -136,10 +136,10 @@
                           for ($i = 0; $i < count($value1); $i++) { 
                               $params = explode(' ', $value1[$i]);// データをスペース区切りで分解する
                               $datetime = $params[0]." ". $params[1];
-                              $lessons_id = $params[2];
+                              $lesson_id = $params[2];
                               $time_id = $params[3];
-                              echo sprintf('<button type="submit" name="lessons_id" value="%s">%s</button>',
-                                          $lessons_id,
+                              echo sprintf('<button type="submit" name="lesson_id" value="%s">%s</button>',
+                                          $lesson_id,
                                           // $datetime,
                                           //$value1[$i], 
                                           date("n月j日H時i分",strtotime($datetime))
@@ -148,8 +148,8 @@
                               echo "<br>";
                               // echo "<br>";
                               // echo sprintf('<input type="hidden" name="%s" value="%s">',
-                              //               $lessons_id,
-                              //               $lessons_id
+                              //               $lesson_id,
+                              //               $lesson_id
                               //               );
                               
                           }
@@ -227,21 +227,21 @@
 
                 <!-- 予約可能時間帯の表示 -->
                 <?php if (isset($all_lesson["lesson_id"])) :?>
-                  <form action="confirm" method="post">
-                    <input type="hidden" name="lesson_id" value="<?php echo $all_lesson["lesson_id"]; ?>" >
-                    <input type="hidden" name="nickname" value="<?php echo $all_lesson["nickname"]; ?>" >
-                    <input type="hidden" name="picture" value="<?php echo $all_lesson["picture"]; ?>" >
-                    <input type="hidden" name="time" value="<?php echo $all_lesson["time"]; ?>" >
-                    <button type="submit" name="date" value="<?php echo $all_lesson["date"];?>"><?php echo date("H時i分",strtotime($all_lesson["time"])) ;?></button>
-                  </form>
-                  <?php if (empty($error["duplicate"])) :?>
-                      <!-- <form action="" method="post">
-                        <input type="hidden" name="teacher_id" value="<?php echo $all_lesson["id"]; ?>" >
-                        <input type="submit" name="like" value="お気に入り追加">
-                      </form> -->
-                  <?php else :?>
-                      <!-- <label>登録済み</label> -->
-                  <?php endif ;?>
+                    <form action="confirm" method="post">
+                      <input type="hidden" name="lesson_id" value="<?php echo $all_lesson["lesson_id"]; ?>" >
+                      <input type="hidden" name="nickname" value="<?php echo $all_lesson["nickname"]; ?>" >
+                      <input type="hidden" name="picture" value="<?php echo $all_lesson["picture"]; ?>" >
+                      <input type="hidden" name="time" value="<?php echo $all_lesson["time"]; ?>" >
+                      <button type="submit" name="date" value="<?php echo $all_lesson["date"];?>"><?php echo date("H時i分",strtotime($all_lesson["time"])) ;?></button>
+                    </form>
+                    <?php if (empty($error["duplicate"])) :?>
+                        <!-- <form action="" method="post">
+                          <input type="hidden" name="teacher_id" value="<?php echo $all_lesson["id"]; ?>" >
+                          <input type="submit" name="like" value="お気に入り追加">
+                        </form> -->
+                    <?php else :?>
+                        <!-- <label>登録済み</label> -->
+                    <?php endif ;?>
                 <?php endif ;?>
               </div>
             </div><!-- <div class="col-md-4"> -->
