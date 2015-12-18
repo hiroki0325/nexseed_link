@@ -2190,7 +2190,7 @@
 			}
 
 		/* Header */
-
+/*横の長さ調整に使用する*/
 			#header {
 				width: 300px;
 			}
@@ -2198,13 +2198,13 @@
 		/* Footer */
 
 			#footer {
-				margin-left: 300px;
+				margin-left: 96px;
 			}
 
 		/* Main */
 
 			#main {
-				margin-left: 300px;
+				margin-left: 96px;
 			}
 
 	}
@@ -2254,7 +2254,7 @@
 		/* Header */
 
 			#header {
-				width: 12%;
+				width: 8%;
 			}
 
 			#logo .image {
@@ -2275,22 +2275,15 @@
 					#nav ul li a span:before {
 						left: 100%;
 						margin-left: -1.25em;
-						line-height: 2.25em;
+						line-height: 1.25em;
 					}
-
-		/* Footer */
-/*横幅の指定*/
-			#footer {
-				margin-left: 12%;
-			}
-
-		/* Main */
-/*横幅の手直しするタグ*/
-			#main {
-				margin-left: 12%;
-			}
-
-	}
+		/*scrollbar scr*/
+		.scr {
+  overflow: scroll;   /* スクロール表示 */ 
+/*  width: 1200px;*/
+  height: 300px;
+  background-color: #fff;
+}
 
 /* Narrower */
 
