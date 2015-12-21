@@ -26,6 +26,21 @@
 
 </head>
 <body>
+       <!-- jQuery -->
+       <script src="../../views/assets/js/admin/jquery.js"></script>
+       <!-- table_sort -->
+       <script src="../../views/assets/js/admin/jquery.tablesorter.min.js"></script> 
+    
+     <?php
+         if (!isset($page)) {
+           include('./views/' . $function . '/' . $directry . '.php');
+         } else {
+           include('./views/' . $function . '/' . $directry .  '/' . $page . '.php');
+         }
+
+      ?>
+  </div>
+  
     <div id="wrapper">
 
        <!-- Navigation -->
@@ -222,20 +237,7 @@
            <!-- /.navbar-collapse -->
        </nav>
 
-         <!-- jQuery -->
-         <script src="../../views/assets/js/admin/jquery.js"></script>
-         <!-- table_sort -->
-         <script src="../../views/assets/js/admin/jquery.tablesorter.min.js"></script> 
-      
-       <?php
-           if (!isset($page)) {
-             include('./views/' . $function . '/' . $directry . '.php');
-           } else {
-             include('./views/' . $function . '/' . $directry .  '/' . $page . '.php');
-           }
 
-        ?>
-    </div>
     <!-- /#wrapper -->
 
         <!-- Bootstrap Core JavaScript -->

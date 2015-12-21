@@ -29,6 +29,7 @@
                   $_SESSION['join']['status_id']=$table['status_id'];
                   $_SESSION['join']['image']=$table['picture'];
                   $_SESSION['join']['created']=$table['created'];
+                  
 
 
                 //ログイン情報を記録する
