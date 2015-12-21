@@ -1,4 +1,10 @@
 <?php
+    //teacherアカウントでログインしている場合、専用ページにリダイレクト
+    if ($_SESSION["join"]["status_id"] == 5) {
+        header("Location: /nexseed_link/onlineEnglish/reserve/teacher_index");
+        exit();
+    }
+
     //マッチング完了レッスンの取得
     $sql = sprintf('SELECT lessons.*, users.picture, users.nickname,lesson_times.time FROM lessons INNER JOIN lesson_times ON lessons.time_id=lesson_times.id INNER JOIN users ON lessons.teacher_id=users.id WHERE lessons.student_id=%d AND reserve_status_id=2',
                   $_SESSION["join"]["id"]

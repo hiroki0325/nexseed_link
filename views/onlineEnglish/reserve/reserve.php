@@ -30,7 +30,10 @@
 
     $all_lessons = mysqli_query($db, $sql_all_lessons) or die(mysqli_error($db));
 
-    //お気に入り講師の追加
+      
+
+
+    //お気に入り講師の追加と削除
     if (isset($_POST["like"])) {
         if ($_POST["like"] == "お気に入り追加") {
             $sql = sprintf('INSERT INTO teacher_likes SET student_id=%d , teacher_id=%d , created=NOW()',
@@ -59,7 +62,7 @@
     <div class="col-md-8">
       <!-- お気に入り講師一覧のrow -->
       <div class="row">
-          <!-- <p>お気に入り講師から予約</p> -->
+          <p>お気に入り講師から予約</p>
           <div > <!-- class="col-md-4"を削除 -->
             <div > 
                   <?php 
@@ -87,6 +90,7 @@
                           $data = array_merge($data,array($like_teacher['nickname'] => array()));
                           
                       ?>
+
                       
                   <?php endwhile ;?>
                  <?php 
@@ -106,19 +110,7 @@
                     }
                   ?>
 
-                    <!-- お気に入り講師の写真表示 -->
-                    <?php 
-                      // echo sprintf('<img src="../../views/member/user_picture/%s" alt="画像" width="80" height="80"><p>%s先生</p>',
-                      //                  $like_teacher["picture"],
-                      //                  $like_teacher["nickname"]
-                      //                );
-                    ?>
-
-                    <!-- お気に入り解除ボタンの表示 -->
-                    <!-- <form action="" method="post">
-                      <input type="hidden" name="id" value="<?php echo $like_teacher["id"]; ?>" >
-                      <input type="submit" name="like" value="お気に入り解除">
-                    </form>  -->
+                    
             </div><!-- <div class="col-md-6"> -->
 
            
@@ -138,6 +130,21 @@
                               $datetime = $params[0]." ". $params[1];
                               $lesson_id = $params[2];
                               $time_id = $params[3];
+
+
+                              // お気に入り講師の写真表示
+                                //echo sprintf('<img src="../../views/member/user_picture/%s" alt="画像" width="80" height="80"><p>%s先生</p>',
+                                  //               $like_teacher["picture"],
+                                    //             $like_teacher["nickname"]
+                                      //         );
+
+                              //お気に入り解除ボタンの表示 
+                              //echo '<form action="" method="post">';
+                              //echo '<input type="hidden" name="id" value="<?php echo $like_teacher["id"]; " >';
+                              //echo '<input type="submit" name="like" value="お気に入り解除">';
+                              //echo '</form>'; 
+
+
                               echo sprintf('<button type="submit" name="lesson_id" value="%s">%s</button>',
                                           $lesson_id,
                                           // $datetime,
@@ -207,23 +214,21 @@
                                     // "Daisy"
                                   );
                     }
+                    // お気に入り登録の重複確認
+                    $sql = sprintf('SELECT count(*) AS cnt FROM teacher_likes WHERE student_id=%d AND teacher_id=%d',
+                                    $_SESSION["join"]["id"],
+                                    $all_lesson["id"]
+                                    );
+                    $record = mysqli_query($db, $sql) or die(mysqli_error($db));
+                    $table = mysqli_fetch_assoc($record);
+                    if ($table["cnt"] > 0) {
+                        $error["like"] = "duplicate";
+                    }
+                    echo $error["like"];
                     
                 ?>
               </div>
               <div class="col-md-6">
-                <?php
-                    //お気に入り登録の重複確認
-                    // $sql = sprintf('SELECT count(*) AS cnt FROM teacher_likes WHERE student_id=%d AND teacher_id=%d',
-                    //                 $_SESSION["join"]["id"],
-                    //                 $all_lesson["id"]
-                    //                 );
-                    // $record = mysqli_query($db, $sql) or die(mysqli_error($db));
-                    // $table = mysqli_fetch_assoc($record);
-                    // if ($table["cnt"] > 0) {
-                    //     $error["like"] = "duplicate";
-                    // }
-                    // echo $error["like"];
-                ?>
 
                 <!-- 予約可能時間帯の表示 -->
                 <?php if (isset($all_lesson["lesson_id"])) :?>
