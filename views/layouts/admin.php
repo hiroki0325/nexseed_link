@@ -1,7 +1,7 @@
 <?php 
     $status = status();
     if (!isLoginSuccess() || $status != 1) {
-        header('Location: ../../user/auth/login');
+        header('Location: ../user/auth/login');
         exit();
     }
  ?>
@@ -29,168 +29,193 @@
     <div id="wrapper">
 
        <!-- Navigation -->
-       <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-           <!-- Brand and toggle get grouped for better mobile display -->
-           <div class="navbar-header">
-               <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                   <span class="sr-only">Toggle navigation</span>
-                   <span class="icon-bar"></span>
-                   <span class="icon-bar"></span>
-                   <span class="icon-bar"></span>
-               </button>
-               <a class="navbar-brand" href="index">NexSeedLink -Admin page-</a>
-           </div>
+          <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index">NexSeedLink -Admin page-</a>
+          </div>
            <!-- Top Menu Items -->
-           <ul class="nav navbar-right top-nav">
-               <li class="ユーザー管理">
-                   <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> <b class="caret"></b></a>
-                   <ul class="dropdown-menu message-dropdown">
-                       <li class="message-preview">
-                           <a href="#">
-                               <div class="media">
-                                   <span class="pull-left">
-                                       <img class="media-object" src="http://placehold.it/50x50" alt="">
-                                   </span>
-                                   <div class="media-body">
-                                       <h5 class="media-heading"><strong>Natsuki teruya</strong>
-                                       </h5>
-                                       <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
-                                       <p>Lorem ipsum dolor sit amet, consectetur...</p>
-                                   </div>
-                               </div>
-                           </a>
+          <ul class="nav navbar-right top-nav">
+             <li class="ユーザー管理">
+                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> <b class="caret"></b></a>
+                 <ul class="dropdown-menu message-dropdown">
+                     <li class="message-preview">
+                         <a href="#">
+                             <div class="media">
+                                 <span class="pull-left">
+                                     <img class="media-object" src="http://placehold.it/50x50" alt="">
+                                 </span>
+                                 <div class="media-body">
+                                     <h5 class="media-heading"><strong>Natsuki teruya</strong>
+                                     </h5>
+                                     <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
+                                     <p>Lorem ipsum dolor sit amet, consectetur...</p>
+                                 </div>
+                             </div>
+                         </a>
+                     </li>
+                     <li class="message-preview">
+                         <a href="#">
+                             <div class="media">
+                                 <span class="pull-left">
+                                     <img class="media-object" src="http://placehold.it/50x50" alt="">
+                                 </span>
+                                 <div class="media-body">
+                                     <h5 class="media-heading"><strong>Natsuki teruya</strong>
+                                     </h5>
+                                     <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
+                                     <p>Lorem ipsum dolor sit amet, consectetur...</p>
+                                 </div>
+                             </div>
+                         </a>
+                     </li>
+                     <li class="message-preview">
+                         <a href="#">
+                             <div class="media">
+                                 <span class="pull-left">
+                                     <img class="media-object" src="http://placehold.it/50x50" alt="">
+                                 </span>
+                                 <div class="media-body">
+                                     <h5 class="media-heading"><strong>Natsuki teruya</strong>
+                                     </h5>
+                                     <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
+                                     <p>Lorem ipsum dolor sit amet, consectetur...</p>
+                                 </div>
+                             </div>
+                         </a>
+                     </li>
+                     <li class="message-footer">
+                         <a href="#">Read All New Messages</a>
+                     </li>
+                 </ul>
+             </li>
+             <li class="dropdown">
+                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
+                 <ul class="dropdown-menu alert-dropdown">
+                     <li>
+                         <a href="#">Alert Name <span class="label label-default">Alert Badge</span></a>
+                     </li>
+                     <li>
+                         <a href="#">Alert Name <span class="label label-primary">Alert Badge</span></a>
+                     </li>
+                     <li>
+                         <a href="#">Alert Name <span class="label label-success">Alert Badge</span></a>
+                     </li>
+                     <li>
+                         <a href="#">Alert Name <span class="label label-info">Alert Badge</span></a>
+                     </li>
+                     <li>
+                         <a href="#">Alert Name <span class="label label-warning">Alert Badge</span></a>
+                     </li>
+                     <li>
+                         <a href="#">Alert Name <span class="label label-danger">Alert Badge</span></a>
+                     </li>
+                     <li class="divider"></li>
+                     <li>
+                         <a href="#">View All</a>
+                     </li>
+                 </ul>
+             </li>
+             <li class="dropdown">
+                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw fa-user"></i> Natsuki teruya <b class="caret"></b></a>
+                 <ul class="dropdown-menu">
+                     <li>
+                         <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
+                     </li>
+                     <li>
+                         <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
+                     </li>
+                     <li>
+                         <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
+                     </li>
+                     <li class="divider"></li>
+                     <li>
+                         <a href="../../user/auth/logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                     </li>
+                 </ul>
+             </li>
+          </ul>
+          <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+          <div class="collapse navbar-collapse navbar-ex1-collapse">
+             <ul class="nav navbar-nav side-nav">
+               <li class="active">
+                  <?php if($function == 'join'): ?>
+                      <a href='../index'><i class='fa fa-fw fa-dashboard'></i> Dashboard</a>
+                  <?php else: ?>
+                      <a href='../admin/index'><i class='fa-fw fa-dashboard'></i> Dashboard</a>
+                  <?php endif; ?>
+                  
+               </li>
+               <li>
+                  <?php if($function == 'join'): ?>
+                      <a href="../charts"><i class="fa fa-fw fa-bar-chart-o"></i> Charts</a>
+                  <?php else: ?>
+                      <a href="charts"><i class="fa fa-fw fa-bar-chart-o"></i> Charts</a>
+                  <?php endif; ?>
+               </li>
+               <li>
+                  <?php if($function == 'join'): ?>
+                      <a href="../forms"><i class="fa fa-fw fa-edit"></i> Forms</a>
+                  <?php else: ?>
+                      <a href="../admin/forms"><i class="fa fa-fw fa-edit"></i> Forms</a>
+                  <?php endif; ?>
+               </li>
+               <li>
+                  <?php if($function == 'join'): ?>
+                      <a href="../bootstrap-elements"><i class="fa fa-fw fa-desktop"></i> Bootstrap Elements</a>
+                  <?php else: ?>
+                      <a href="../admin/bootstrap-elements"><i class="fa fa-fw fa-desktop"></i> Bootstrap Elements</a>
+                  <?php endif; ?>
+               </li>
+               <li>
+                  <?php if($function == 'join'): ?>
+                     <a href="../bootstrap-grid"><i class="fa fa-fw fa-wrench"></i> Bootstrap Grid</a>
+                  <?php else: ?>
+                     <a href="../admin/bootstrap-grid"><i class="fa fa-fw fa-wrench"></i> Bootstrap Grid</a>
+                  <?php endif; ?>
+               </li>
+               <li>
+                   <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> ユーザー管理 <i class="fa fa-fw fa-caret-down"></i></a>
+                   <ul id="demo" class="collapse">
+                       <li>
+                           <a href="../join/index">新規ユーザー登録</a>
                        </li>
-                       <li class="message-preview">
-                           <a href="#">
-                               <div class="media">
-                                   <span class="pull-left">
-                                       <img class="media-object" src="http://placehold.it/50x50" alt="">
-                                   </span>
-                                   <div class="media-body">
-                                       <h5 class="media-heading"><strong>Natsuki teruya</strong>
-                                       </h5>
-                                       <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
-                                       <p>Lorem ipsum dolor sit amet, consectetur...</p>
-                                   </div>
-                               </div>
-                           </a>
-                       </li>
-                       <li class="message-preview">
-                           <a href="#">
-                               <div class="media">
-                                   <span class="pull-left">
-                                       <img class="media-object" src="http://placehold.it/50x50" alt="">
-                                   </span>
-                                   <div class="media-body">
-                                       <h5 class="media-heading"><strong>Natsuki teruya</strong>
-                                       </h5>
-                                       <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
-                                       <p>Lorem ipsum dolor sit amet, consectetur...</p>
-                                   </div>
-                               </div>
-                           </a>
-                       </li>
-                       <li class="message-footer">
-                           <a href="#">Read All New Messages</a>
+                       <li>
+                          <?php if($function == 'join'): ?>
+                              <a href="../admin/user_admin">ユーザー管理</a>
+                          <?php else: ?>
+                              <a href="../admin/user_admin">ユーザー管理</a>
+                          <?php endif; ?>
                        </li>
                    </ul>
                </li>
-               <li class="dropdown">
-                   <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
-                   <ul class="dropdown-menu alert-dropdown">
+               <li>
+                   <a href="javascript:;" data-toggle="collapse" data-target="#hoge"><i class="fa fa-fw fa-arrows-v"></i> オンライン英会話 <i class="fa fa-fw fa-caret-down"></i></a>
+                   <ul id="hoge" class="collapse">
                        <li>
-                           <a href="#">Alert Name <span class="label label-default">Alert Badge</span></a>
+                           <a href="#">授業スケジュール</a>
                        </li>
                        <li>
-                           <a href="#">Alert Name <span class="label label-primary">Alert Badge</span></a>
-                       </li>
-                       <li>
-                           <a href="#">Alert Name <span class="label label-success">Alert Badge</span></a>
-                       </li>
-                       <li>
-                           <a href="#">Alert Name <span class="label label-info">Alert Badge</span></a>
-                       </li>
-                       <li>
-                           <a href="#">Alert Name <span class="label label-warning">Alert Badge</span></a>
-                       </li>
-                       <li>
-                           <a href="#">Alert Name <span class="label label-danger">Alert Badge</span></a>
-                       </li>
-                       <li class="divider"></li>
-                       <li>
-                           <a href="#">View All</a>
+                           <a href="#">クラス管理</a>
                        </li>
                    </ul>
                </li>
-               <li class="dropdown">
-                   <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Natsuki teruya <b class="caret"></b></a>
-                   <ul class="dropdown-menu">
+               <li>
+                   <a href="javascript:;" data-toggle="collapse" data-target="#fuga"><i class="fa fa-fw fa-arrows-v"></i> 物流システム <i class="fa fa-fw fa-caret-down"></i></a>
+                   <ul id="fuga" class="collapse">
                        <li>
-                           <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
+                           <a href="#">物流スケジュール</a>
                        </li>
                        <li>
-                           <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
+                           <a href="#">物流管理</a>
                        </li>
-                       <li>
-                           <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
-                       </li>
-                       <li class="divider"></li>
-                       <li>
-                           <a href="../../user/auth/logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
-                       </li>
-                   </ul>
-               </li>
-           </ul>
-           <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-           <div class="collapse navbar-collapse navbar-ex1-collapse">
-               <ul class="nav navbar-nav side-nav">
-                   <li class="active">
-                       <a href="index"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
-                   </li>
-                   <li>
-                       <a href="charts"><i class="fa fa-fw fa-bar-chart-o"></i> Charts</a>
-                   </li>
-                   <li>
-                       <a href="forms"><i class="fa fa-fw fa-edit"></i> Forms</a>
-                   </li>
-                   <li>
-                       <a href="bootstrap-elements"><i class="fa fa-fw fa-desktop"></i> Bootstrap Elements</a>
-                   </li>
-                   <li>
-                       <a href="bootstrap-grid"><i class="fa fa-fw fa-wrench"></i> Bootstrap Grid</a>
-                   </li>
-                   <li>
-                       <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> ユーザー管理 <i class="fa fa-fw fa-caret-down"></i></a>
-                       <ul id="demo" class="collapse">
-                           <li>
-                               <a href="../join/index">新規ユーザー登録</a>
-                           </li>
-                           <li>
-                               <a href="../admin/user_admin">ユーザー管理</a>
-                           </li>
-                       </ul>
-                   </li>
-                   <li>
-                       <a href="javascript:;" data-toggle="collapse" data-target="#hoge"><i class="fa fa-fw fa-arrows-v"></i> オンライン英会話 <i class="fa fa-fw fa-caret-down"></i></a>
-                       <ul id="hoge" class="collapse">
-                           <li>
-                               <a href="#">授業スケジュール</a>
-                           </li>
-                           <li>
-                               <a href="#">クラス管理</a>
-                           </li>
-                       </ul>
-                   </li>
-                   <li>
-                       <a href="javascript:;" data-toggle="collapse" data-target="#fuga"><i class="fa fa-fw fa-arrows-v"></i> 物流システム <i class="fa fa-fw fa-caret-down"></i></a>
-                       <ul id="fuga" class="collapse">
-                           <li>
-                               <a href="#">物流スケジュール</a>
-                           </li>
-                           <li>
-                               <a href="#">物流管理</a>
-                           </li>
-                       </ul>
+                     </ul>
                    </li>
                </ul>
            </div>
