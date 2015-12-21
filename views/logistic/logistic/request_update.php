@@ -58,24 +58,26 @@
 <div id="edit_form">
   <h4>投稿の編集はこちら</h4>
   <form action="" method="post" enctype="multipart/form-data" >
-    <p>依頼するもの</p>
-    <input type="text" name="thing" value="<?php echo $_SESSION['thing']; ?>">
-    <p>ジャンル</p>
-    <select name="category" >
-      <option value="<?php echo $_SESSION['category'] ;?>"></option>
-      <option value="書籍">書籍</option>
-      <option value="食べ物">食べ物</option>
-      <option value="衣類">衣類</option>
-      <option value="アメニティ">アメニティ</option>
-    </select>
-    <p>インセンティブ</p>
-    <input type="text" name="insentive" value="<?php echo $_SESSION['insentive']; ?>">
-    <p>金額</p>
-    <input type="text" name="payment" value="<?php echo $_SESSION['payment']; ?>">
-    <p>到着日</p>
-    <input type="date" name="due" value="<?php echo $_SESSION['due']; ?>">
-    <p>イメージ画像</p>
-    <input type="file" name="image">
+    <div >
+      <p>依頼するもの</p>
+      <input type="text" name="thing" value="<?php echo $_SESSION['thing']; ?>" class="edit_form_contents">
+      <p>ジャンル</p>
+      <select name="category">
+        <option value="<?php echo $_SESSION['category'] ;?>" class="edit_form_contents"></option>
+        <option value="書籍">書籍</option>
+        <option value="食べ物">食べ物</option>
+        <option value="衣類">衣類</option>
+        <option value="アメニティ">アメニティ</option>
+      </select>
+      <p>インセンティブ</p>
+      <input type="text" name="insentive" value="<?php echo $_SESSION['insentive']; ?>" class="edit_form_contents">
+      <p>金額</p>
+      <input type="text" name="payment" value="<?php echo $_SESSION['payment']; ?>" class="edit_form_contents">
+      <p>到着日</p>
+      <input type="date" name="due" value="<?php echo $_SESSION['due']; ?>" class="edit_form_contents">
+      <p>イメージ画像</p>
+      <input type="file" name="image" class="edit_form_contents">
+    </div>
   </fom>
 </div>
 <div>

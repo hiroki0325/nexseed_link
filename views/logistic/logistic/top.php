@@ -1,96 +1,230 @@
 
 <?php
+    //use_idを仮設定
+    $_SESSION['login_id'] = 1;
+    //セブ在学生向け投稿の表示
+    if (status()==3){
+        include('request_form.php');
+        //データの表示
+        //全自分の投稿データ
+        $sql=sprintf('SELECT * FROM logistic_posts WHERE client_id=%d ORDER BY created DESC',
+           $_SESSION['login_id']
+        );
+        $posts=mysqli_query($db, $sql) or die (mysqli_error($db));
+        //承認されたデータのみ
+        $sql=sprintf('SELECT * FROM logistic_posts WHERE client_id=%d AND candidate_id IS NOT NULL ORDER BY created DESC',
+           $_SESSION['login_id']
+        );
+        $accepted_posts=mysqli_query($db, $sql) or die (mysqli_error($db));
+
+        //承認されていないデータのみ
+        $sql=sprintf('SELECT * FROM logistic_posts WHERE client_id=%d AND candidate_id IS NULL ORDER BY created DESC',
+           $_SESSION['login_id']
+        );
+        $unverified_posts=mysqli_query($db, $sql) or die (mysqli_error($db));
+
+        //期限の近い順
+        $sql=sprintf('SELECT * FROM logistic_posts WHERE client_id=%d AND candidate_id IS NULL ORDER BY due ASC',
+           $_SESSION['login_id']
+        );
+        $deadline_posts=mysqli_query($db, $sql) or die (mysqli_error($db));
+    }
+
+    if (status()==2){
+        include('submit_accepted_show.php');
+        //全投稿データ
+        $sql='SELECT * FROM logistic_posts ORDER BY created DESC';
+        $posts=mysqli_query($db, $sql) or die (mysqli_error($db));
+
+        // 自分がリクエストを送ったデータで承認されていないデータのみ
+        $sql=sprintf('SELECT post_id FROM candidates WHERE agent_id=%d',$_SESSION['login_id']);
+        $unverified_candidates=mysqli_query($db, $sql) or die (mysqli_error($db));
+        while($unverified_candidate=mysqli_fetch_assoc($unverified_candidates)){
+            $sql=sprintf('SELECT * FROM logistic_posts WHERE id=%d AND accepted IS NULL ORDER BY created DESC',$unverified_candidate['post_id']);
+        }
+        $unverified_posts=mysqli_query($db, $sql) or die (mysqli_error($db));
+
+        //期限の近い順
+        $sql='SELECT * FROM logistic_posts  ORDER BY due ASC';
+        $deadline_posts=mysqli_query($db, $sql) or die (mysqli_error($db));
+
+        //リクエストが承認された投稿した投稿
+        $sql=sprintf('SELECT id FROM candidates WHERE agent_id=%d AND desicion=1',$_SESSION['login_id']);
+        $accepted_candidates=mysqli_query($db, $sql) or die (mysqli_error($db));
+        while($accepted_candidate=mysqli_fetch_assoc($accepted_candidates)){
+            $sql=sprintf('SELECT * FROM logistic_posts WHERE candidate_id=%d ORDER BY created DESC',$accepted_candidate['id']);
+        }
+        $accepted_posts=mysqli_query($db, $sql) or die (mysqli_error($db));    
+    }
     
-    include('request_form.php');
-    //データの表示
-    //全自分の投稿データ
-    $sql=sprintf('SELECT * FROM logistic_posts WHERE client_id=%d ORDER BY created DESC',
-       $_SESSION['login_id']
-    );
-    $posts=mysqli_query($db, $sql) or die (mysqli_error($db));
-    //承認されたデータのみ
-    $sql=sprintf('SELECT * FROM logistic_posts WHERE client_id=%d AND candidate_id IS NOT NULL ORDER BY created DESC',
-       $_SESSION['login_id']
-    );
-    $accepted_posts=mysqli_query($db, $sql) or die (mysqli_error($db));
-
-    //承認されていないデータのみ
-    $sql=sprintf('SELECT * FROM logistic_posts WHERE client_id=%d AND candidate_id IS NULL ORDER BY created DESC',
-       $_SESSION['login_id']
-    );
-    $unverified_posts=mysqli_query($db, $sql) or die (mysqli_error($db));
-
-    $sql=sprintf('SELECT * FROM logistic_posts WHERE client_id=%d ORDER BY due ASC',
-       $_SESSION['login_id']
-    );
-    $deadline_posts=mysqli_query($db, $sql) or die (mysqli_error($db));
+    
 ?>
 
 <!-- 表示の切り替え -->
-<a href="top?sort=accepted">承認済み</a>
-<a href="top?sort=unaccepted">承認待ち</a>
-<a href="top?sort=all">全投稿データ</a>
-<a href="top?sort=deadline">期限の近い順</a>
-<!--全件表示 -->
-<?php if ( empty($_REQUEST['sort']) || $_REQUEST['sort'] == 'all'):?>
-  <h4>いままでの投稿</h4>
-  <?php while ($post=mysqli_fetch_assoc($posts)):?>
-    <div>
-      <p><?php echo h($post['thing'])?></p>
-      <img src="../../views/logistic/logistic/image_thing/<?php echo h($post['image'])?>" width=100 hight=100>
-      <p>カテゴリー:<?php echo h($post['category'])?></p>
-      <p><?php echo h($post['insentive'])?></p>
-      <p><?php echo h($post['payment'])?> pessos</p>
-      <p>期限:<?php echo h($post['due'])?></p>
-      <p>投稿日:<?php echo h($post['created'])?></p> 
-      [<a href="./show?id=<?php echo h($post['id'])?>">show</a>]
+
+
+
+<div class="container-fluid">
+  <div class="row">   
+    <div class="span12 col-lg-6 col-lg-offset-3 col-xs-12">
+      <div class="btn-group btn-list">
+        <a href="top?sort=all" class="btn btn-large btn-info active">全投稿データ</a>
+        <a href="top?sort=deadline" class="btn btn-large btn-info">期限の近い順</a>
+        <a href="top?sort=unaccepted" class="btn btn-large btn-info">承認待ち</a>
+        <?php if (status()==3):?>
+          <a href="top?sort=request_index" class="btn btn-large btn-info">依頼一覧</a>
+          <a href="top?sort=accepted" class="btn btn-large btn-info">承認済み</a>
+        <?php endif; ?>
+      </div>     
     </div>
-  <?php endwhile;?>
-<?php elseif ($_REQUEST['sort'] == 'accepted'):?>
-  <!-- 承認済みデータの表示 -->
-  <h4>承認済み依頼</h4>
-  <?php while ($post=mysqli_fetch_assoc($accepted_posts)):?>
-    <div>
-      <p><?php echo h($post['thing'])?></p>
-      <img src="../../views/logistic/logistic/image_thing/<?php echo h($post['image'])?>" width=100 hight=100>
-      <p>カテゴリー:<?php echo h($post['category'])?></p>
-      <p><?php echo h($post['insentive'])?></p>
-      <p><?php echo h($post['payment'])?> pessos</p>
-      <p>期限:<?php echo h($post['due'])?></p>
-      <p>投稿日:<?php echo h($post['created'])?></p> 
-      [<a href="./show?id=<?php echo h($post['id'])?>">show</a>]
-    </div>
-  <?php endwhile;?>
-<?php elseif ($_REQUEST['sort'] == 'unaccepted'):?>
-  <!-- 承認待ちデータの表示 -->
-  <h4>承認待ち依頼</h4>
-  <?php while ($post=mysqli_fetch_assoc($unverified_posts)):?>
-    <div>
-      <p><?php echo h($post['thing'])?></p>
-      <img src="../../views/logistic/logistic/image_thing/<?php echo h($post['image'])?>" width=100 hight=100>
-      <p>カテゴリー:<?php echo h($post['category'])?></p>
-      <p><?php echo h($post['insentive'])?></p>
-      <p><?php echo h($post['payment'])?>pesso</p>
-      <p>期限:<?php echo h($post['due'])?></p>
-      <p>投稿日:<?php echo h($post['created'])?></p>
-      [<a href="./show?id=<?php echo h($post['id'])?>">show</a>]
-    </div>
-  <?php endwhile;?>
-<?php elseif ($_REQUEST['sort'] == 'deadline'):?>
-  <!-- 期限の近い順 -->
-  <h4>期限の近い順</h4>
-  <?php while ($post=mysqli_fetch_assoc($deadline_posts)):?>
-    <div>
-      <p><?php echo h($post['thing'])?></p>
-      <img src="../../views/logistic/logistic/image_thing/<?php echo h($post['image'])?>" width=100 hight=100>
-      <p>カテゴリー:<?php echo h($post['category'])?></p>
-      <p><?php echo h($post['insentive'])?></p>
-      <p><?php echo h($post['payment'])?>pesso</p>
-      <p>期限:<?php echo h($post['due'])?></p>
-      <p>投稿日:<?php echo h($post['created'])?></p>
-      [<a href="./show?id=<?php echo h($post['id'])?>">show</a>]
-    </div>
-  <?php endwhile;?>
+  </div>
+</div>
+
+
+<?php if (empty($_REQUEST['sort']) || !empty($_REQUEST['sort']) && $_REQUEST['sort'] == 'all'):?> 
+  <section class="services">
+    <div class="container-fluid no-gutter row-nopadding">
+      <div class= "row"> 
+        <div class= "media-row col-xs-12 bg-primary" style="margin-top:30px">
+        <h3>全ての投稿を見ることができます</h3>  
+          <?php while ($post=mysqli_fetch_assoc($posts)):?>
+            <div class= "col-sm-6 col-xs-12 col-md-4 col-lg-4">
+              <div class="well">
+                <div class="media" >
+                <img src="../../views/logistic/logistic/image_thing/<?php echo h($post['image'])?>" style="float:left">
+                  <div class="media-body" >
+                    <?php if(!empty($post['candidate_id'])):?>
+                      <div class="contracted"><p>CONTRACTED!</p></div>
+                    <?php else:?>
+                      <div class="wanted"><p>WANTED!</p></div>
+                    <?php endif;?>
+                    <h4 class="media-heading"><?php echo h($post['thing'])?></h4>
+                    <div class="list-inline list-unstyled" style="float:left">
+                      <ul><?php echo h($post['category'])?></ul>
+                      <ul>期限:<?php echo h($post['due'])?></ul>
+                      <ul><?php echo h($post['payment'])?> pessos</ul>
+                      <ul><?php echo h($post['insentive'])?> </ul> 
+                      <ul>[<a href="./show?id=<?php echo h($post['id'])?>">詳しく見る</a>]</ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <?php endwhile;?>
+        </div>
+      </div>
+    </div>  
+  </section> 
+<?php endif; ?>
+        
+<?php if (!empty($_REQUEST['sort']) && $_REQUEST['sort'] == 'unaccepted'):?>
+  <section class="services">
+    <div class="container-fluid">
+      <div class= "row"> 
+        <div class= "media-row col-xs-12 bg-primary" style="margin-top:30px">
+        <h3>承認されていない投稿を見ることができます</h3>  
+          <?php while ($post=mysqli_fetch_assoc($unverified_posts)):?>
+            <div class= "col-sm-6 col-xs-12 col-md-4 col-lg-4">
+              <div class="well">
+                <div class="media" >
+                <img src="../../views/logistic/logistic/image_thing/<?php echo h($post['image'])?>" style="float:left">
+                  <div class="media-body" >
+                    <h4 class="media-heading"><?php echo h($post['thing'])?></h4>
+                    <div class="list-inline list-unstyled" style="float:left">
+                      <ul><?php echo h($post['category'])?></ul>
+                      <ul>期限:<?php echo h($post['due'])?></ul>
+                      <ul><?php echo h($post['payment'])?> pessos</ul>
+                      <ul><?php echo h($post['insentive'])?> </ul> 
+                      <ul>[<a href="./show?id=<?php echo h($post['id'])?>">詳しく見る</a>]</ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <?php endwhile;?>
+        </div>
+      </div>
+    </div>  
+  </section>
+<?php endif; ?>
+
+<?php if (!empty($_REQUEST['sort']) && $_REQUEST['sort'] == 'deadline'):?>
+  <section class="services">
+    <div class="container-fluid">
+      <div class= "row"> 
+        <div class= "media-row col-xs-12 bg-primary" style="margin-top:30px">
+        <h3>期限の近い順に投稿を表示します</h3>  
+          <?php while ($post=mysqli_fetch_assoc($deadline_posts)):?>
+            <div class= "col-sm-6 col-xs-12 col-md-4 col-lg-4">
+              <div class="well">
+                <div class="media">
+                <img src="../../views/logistic/logistic/image_thing/<?php echo h($post['image'])?>" style="float:left">
+                  <div class="media-body" >
+                    <?php if(!empty($post['candidate_id'])):?>
+                      <div class="contracted"><p>CONTRACTED!</p></div>
+                    <?php else:?>
+                      <div class="wanted"><p>WANTED!</p></div>
+                    <?php endif;?>
+                    <h4 class="media-heading"><?php echo h($post['thing'])?></h4>
+                    <div class="list-inline list-unstyled" style="float:left">
+                      <ul><?php echo h($post['category'])?></ul>
+                      <ul>期限:<?php echo h($post['due'])?></ul>
+                      <ul><?php echo h($post['payment'])?> pessos</ul>
+                      <ul><?php echo h($post['insentive'])?> </ul> 
+                      <ul>[<a href="./show?id=<?php echo h($post['id'])?>">詳しく見る</a>]</ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <?php endwhile;?>
+        </div>
+      </div>
+    </div>  
+  </section>
+<?php endif; ?>
+<?php if (!empty($_REQUEST['sort']) && $_REQUEST['sort'] == 'accepted'):?>
+  <section class="services">
+    <div class="container-fluid">
+      <div class= "row"> 
+        <div class= "media-row col-xs-12 bg-primary" style="margin-top:30px">
+          <?php if(status()==2):?>
+            <h3>この投稿を準備してください</h3>  
+          <?php elseif(status()==3):?>
+            <h3>受け入れられた投稿です</h3>
+          <?php endif;?>
+          <?php while ($post=mysqli_fetch_assoc($accepted_posts)):?>
+            <div class= "col-sm-6 col-xs-12 col-md-4 col-lg-4">
+              <div class="well">
+                <div class="media">
+                <img src="../../views/logistic/logistic/image_thing/<?php echo h($post['image'])?>" style="float:left">
+                  <div class="media-body" >
+                    <h4 class="media-heading"><?php echo h($post['thing'])?></h4>
+                    <div class="list-inline list-unstyled" style="float:left">
+                      <ul><?php echo h($post['category'])?></ul>
+                      <ul>期限:<?php echo h($post['due'])?></ul>
+                      <ul><?php echo h($post['payment'])?> pessos</ul>
+                      <ul><?php echo h($post['insentive'])?> </ul> 
+                      <ul>[<a href="./show?id=<?php echo h($post['id'])?>">詳しく見る</a>]</ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <?php endwhile;?>
+        </div>
+      </div>
+    </div>  
+  </section>
+<?php endif; ?>
+
+<?php if (!empty($_REQUEST['sort']) && $_REQUEST['sort'] == 'request_index'):?>
+  <section class="services">
+    <?php include('submit_index.php');?>
+  </section> 
 <?php endif; ?>
 
 
+
+
+  

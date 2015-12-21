@@ -12,20 +12,9 @@
   }
 </script>
 <?php
-    //ページの表示
-    //投稿内容の編集
-    //投稿の削除
-    //編集はpopup表示
-    //削除は確認画面の作成
-    //コメントの挿入
-    //コメント投稿フォームの作成
-     
-    $sql = sprintf(
-        'SELECT * FROM logistic_posts WHERE id=%d',
-        $_REQUEST['id']
-    );
-    $sql = mysqli_query($db,$sql) or die (mysqli_error($db));
-    $post = mysqli_fetch_assoc($sql);
+    $sql = sprintf('SELECT * FROM logistic_posts WHERE id=%d',$_REQUEST['id']);
+    $posts = mysqli_query($db,$sql) or die (mysqli_error($db));
+    $post = mysqli_fetch_assoc($posts);
 
     $_SESSION['thing'] = $post['thing'];
     $_SESSION['category'] = $post['category'];
@@ -35,6 +24,12 @@
     $_SESSION['created'] = $post['created'];
     $_SESSION['image'] = $post['image'];
     $image = "image_thing/".$_SESSION['image'];
+
+    if(isset($post['candidate_id'])){
+        $sql = sprintf('SELECT * FROM candidates WHERE id=%d',$post['candidate_id']);
+        $accepted_candidates = mysqli_query($db,$sql) or die (mysqli_error($db));
+        $accepted_candidate = mysqli_fetch_assoc($accepted_candidates);
+    }
 
     //postsの編集があった場合のアップデート
     
@@ -101,19 +96,35 @@
     <img src= "<?php echo sprintf('../../views/logistic/logistic/'.'%s',$image); ?>" class="show_picture">
   </div> 
 </div>
-<div class="button">
-  <a data-target="con1" class="modal-open">投稿の編集</a>
-  <?php echo '<input type="button" value="投稿を削除" onClick="disp()">';?>
-</div>
 
-<div id="con1" class="modal-content">
-  <?php include('request_update.php');?>
-  <p><a class="modal-close">閉じる</a></p>
-</div>
+<?php if (status()==3):?>
+  <div class="container-fluid">
+    <div class="content-wrapper"> 
+      <div class="item-container col-xs-8 col-xs-offset-4">         
+        <div class="btn-group cart">    
+          <button type="button" class="btn btn-success modal-open" data-target="con1">投稿を編集</button>
+        </div>
+          <div class="btn-group btn-delete">
+            <?php echo '<button type="submit" onClick="disp()" class="btn btn-danger" type="button">';?>投稿を削除</button>
+          </div>
+          <div id="con1" class="modal-content" style="height:500px;">
+            <?php include('request_update.php');?>
+            <p><a class="modal-close">閉じる</a></p>
+          </div>    
+        </div>
+      </div>
+    </div>
+  </div>
+  <?php if (isset($post['candidate_id'])):?>
+    <?php include('submit_show.php'); ?>
+  <?php endif;?>
+<?php elseif(status()==2): ?>
+  <?php if (isset($post['candidate_id'])):?>
+    <?php include('submit_show.php'); ?>
+  <?php else:?>
+    <?php  include('submit_form.php'); ?>
+  <?php endif;?>
+<?php endif; ?>
 <?php  include('comment.php'); ?>
-
-
-
-
 
 

@@ -34,6 +34,7 @@
     <link rel="stylesheet" href="../../views/assets/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="../../views/assets/css/mypage/style.css">
     <link rel="stylesheet" href="../../views/assets/css/mypage/main.css" />
+    <link rel="stylesheet" href="../../views/assets/css/bootstrap.css" />
     <link rel="stylesheet" href="../../views/assets/css/<?php echo $function.'/'.$directry.'.css';?>">
   <?php endif; ?>
 
@@ -106,6 +107,11 @@
   <!-- /FOOTER -->
 
   <!-- Scripts -->
+  <script src="../../views/assets/js/jquery.min.js"></script>
+  <script src="../../views/assets/js/bootstrap.js"></script>
+  <script src="../../views/assets/js/mypage/util.js"></script>
+  <script type='text/javascript' src="../../views/assets/js/<?php echo $function.'/'.$directry.'.js';?>"></script>
+
   <?php if($function == 'mypage'):?>
     <script src="views/assets/js/jquery.min.js"></script>
     <script src="views/assets/js/bootstrap.js"></script>
@@ -123,15 +129,7 @@
     <script src="views/assets/js/mypage/jquery.magnific-popup.min.js"></script>
     <script src="views/assets/js/mypage/scripts.js"></script>
     <script src="views/assets/js/mypage/main.js"></script>
-  <?php else: ?>
-    <script src="../../views/assets/js/jquery.min.js"></script>
-    <script src="../../views/assets/js/bootstrap.js"></script>
-    <script src="../../views/assets/js/mypage/jquery.scrolly.min.js"></script>
-    <script src="../../views/assets/js/mypage/jquery.scrollzer.min.js"></script>
-    <script src="../../views/assets/js/mypage/skel.min.js"></script>
-    <script src="../../views/assets/js/mypage/util.js"></script>
-    <script src="../../views/assets/js/mypage/main.js"></script>
-    <script type='tsext/javascript' src="../../views/assets/js/<?php echo $function.'/'.$directry.'.js';?>"></script>
+  
   <?php endif; ?>
 
 </body>
