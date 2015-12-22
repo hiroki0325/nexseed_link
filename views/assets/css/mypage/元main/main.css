@@ -55,12 +55,6 @@
 		-webkit-box-sizing: border-box;
 		box-sizing: border-box;
 	}
-  /* スクロール表示 */ 
-	.scr {
-  overflow: scroll; 
-  height: 300px;
-  background-color: #fff;
-}
 
 /* Containers */
 
@@ -1987,7 +1981,7 @@
 		width: 375px;
 		height: 100%;
 		color: #fff;
-		background: #27333C url("images/overlay.png");
+		background: #2B4350;
 		box-shadow: inset -0.25em 0 0.25em 0 rgba(0, 0, 0, 0.1);
 		text-align: right;
 	}
@@ -2046,6 +2040,7 @@
 			color: rgba(255, 255, 255, 0.5);
 			line-height: 1.25em;
 			margin: 0.5em 0 0 0;
+			margin-left: -1.25cm;
 		}
 
 		#logo .image {
@@ -2076,7 +2071,7 @@
 			#nav ul li a span:before {
 				position: absolute;
 				left: 0;
-				color: #41484c;
+				color: #888A49
 				text-align: center;
 				width: 1.25em;
 				line-height: 1.75em;
@@ -2101,6 +2096,7 @@
 		padding: 3em 0 4em 0;
 		box-shadow: inset 0 1px 0 0 rgba(0, 0, 0, 0.05), inset 0 0.1em 0.1em 0 rgba(0, 0, 0, 0.025);
 		font-size: 0.8em;
+		height: 10px;
 	}
 
 		#footer .copyright {
@@ -2194,7 +2190,7 @@
 			}
 
 		/* Header */
-
+/*横の長さ調整に使用する*/
 			#header {
 				width: 300px;
 			}
@@ -2202,13 +2198,13 @@
 		/* Footer */
 
 			#footer {
-				margin-left: 300px;
+				margin-left: 96px;
 			}
 
 		/* Main */
 
 			#main {
-				margin-left: 300px;
+				margin-left: 96px;
 			}
 
 	}
@@ -2224,7 +2220,7 @@
 			}
 
 			#main section.cover {
-				padding: 5em 0;
+				padding: 0em 0;
 			}
 
 	}
@@ -2258,7 +2254,7 @@
 		/* Header */
 
 			#header {
-				width: 12%;
+				width: 8%;
 			}
 
 			#logo .image {
@@ -2279,22 +2275,15 @@
 					#nav ul li a span:before {
 						left: 100%;
 						margin-left: -1.25em;
-						line-height: 2.25em;
+						line-height: 1.25em;
 					}
-
-		/* Footer */
-
-			#footer {
-				margin-left: 12%;
-			}
-
-		/* Main */
-
-			#main {
-				margin-left: 12%;
-			}
-
-	}
+		/*scrollbar scr*/
+		.scr {
+  overflow: scroll;   /* スクロール表示 */ 
+/*  width: 1200px;*/
+  height: 300px;
+  background-color: #fff;
+}
 
 /* Narrower */
 
@@ -2337,6 +2326,9 @@
 
 		/* Header */
 
+/*新しく作るj*/
+		/* Header */
+
 			#header {
 				-moz-backface-visibility: hidden;
 				-webkit-backface-visibility: hidden;
@@ -2359,10 +2351,18 @@
 				width: 275px;
 				z-index: 10002;
 				width: 275px;
-				background: #27333C url("images/overlay.png");
+				background: #222729 url("images/overlay.png");
 				box-shadow: inset -0.25em 0 0.25em 0 rgba(0, 0, 0, 0.125);
 			}
 
+
+
+
+
+
+			#header {
+/*				-moz-backf*/
+				
 				#header .top {
 					position: relative;
 				}
@@ -2383,7 +2383,7 @@
 				padding: 0.5em 1.25em 0.5em 1.25em;
 			}
 
-			#headerToggle {
+	#headerToggle {
 				-moz-backface-visibility: hidden;
 				-webkit-backface-visibility: hidden;
 				-ms-backface-visibility: hidden;
@@ -2411,7 +2411,7 @@
 					border: 0;
 				}
 
-					#headerToggle .toggle:before {
+#headerToggle .toggle:before {
 						font-family: FontAwesome;
 						text-decoration: none;
 						font-style: normal;
@@ -2540,5 +2540,4 @@
 				#footer .copyright li:first-child {
 					margin-top: 0;
 				}
-
 	}
