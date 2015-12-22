@@ -1,9 +1,9 @@
 <?php
   //情報が入っていなかった場合、index.phpにもどる
-    if(!isset($_SESSION["user"])){
-      header("Location: index");
-      exit();
-    }
+    // if(!isset($_SESSION["user"])){
+    //   header("Location: check");
+    //   exit();
+    // }
 
 
     $fullname = $_SESSION["user"]["first_name"]. ' ' .$_SESSION["user"]["last_name"];
@@ -41,66 +41,68 @@
                     mysqli_real_escape_string($db,$user['id'])
         );
         $user_notification = mysqli_query($db,$sql)or die(mysqli_error($db));
-
-
-        header('Location: ../../user/login');
+        header('Location: ../../user/auth/login');
         exit();
     }
 ?>
 
+<div id="page-wrapper">
+  <div class="container-fluid">
 
-  <h1>入力内容の確認</h1>
 
-<form action="" method="post">
-  <input type="hidden" name="hoge" value="huga">
+    <h1>入力内容の確認</h1>
 
-  <div>
-    <p>Name</p>
-      <?php echo h($fullname); ?>
+    <form action="" method="post">
+      <input type="hidden" name="hoge" value="huga">
+
+      <div>
+        <p>Name</p>
+          <?php echo h($fullname); ?>
+      </div>
+
+      <div>
+        <p>メールアドレス</p>
+          <?php echo h($_SESSION["user"]["email"]); ?>
+      </div>
+
+      <div>
+        <p>パスワード</p>
+           [表示されません]
+      </div>
+
+      <div>
+        <p>留学開始日</p>
+          <?php echo h($_SESSION["user"]["start_day"]); ?>
+      </div>
+
+      <div>
+        <p>留学終了日</p>
+          <?php echo h($_SESSION["user"]["end_day"]); ?>
+      </div>
+
+      <div>
+        <p>ステータス</p>
+          <?php
+            if($_SESSION["user"]["status_id"]==2){
+                echo '来学予定者';
+            }elseif($_SESSION["user"]["status_id"]==3){
+                echo '在学生';
+            }elseif($_SESSION["user"]["status_id"]==4){
+                echo '卒業生';
+            }elseif($_SESSION["user"]["status_id"]==5){
+                echo 'teacher';
+            }else{
+                echo '管理者';
+            }
+          ?>
+      </div>
+
+      <div>
+          <a href="index?action=rewrite">&laquo;&nbsp;書き直す</a> |
+          <button type="submit">登録する</button>
+      </div>
+
+    </form>
   </div>
-
-  <div>
-    <p>メールアドレス</p>
-      <?php echo h($_SESSION["user"]["email"]); ?>
-  </div>
-
-  <div>
-    <p>パスワード</p>
-       [表示されません]
-  </div>
-
-  <div>
-    <p>留学開始日</p>
-      <?php echo h($_SESSION["user"]["start_day"]); ?>
-  </div>
-
-  <div>
-    <p>留学終了日</p>
-      <?php echo h($_SESSION["user"]["end_day"]); ?>
-  </div>
-
-  <div>
-    <p>ステータス</p>
-      <?php
-        if($_SESSION["user"]["status_id"]==2){
-            echo '来学予定者';
-        }elseif($_SESSION["user"]["status_id"]==3){
-            echo '在学生';
-        }elseif($_SESSION["user"]["status_id"]==4){
-            echo '卒業生';
-        }elseif($_SESSION["user"]["status_id"]==5){
-            echo 'teacher';
-        }else{
-            echo '管理者';
-        }
-      ?>
-  </div>
-
-  <div>
-      <a href="index?action=rewrite">&laquo;&nbsp;書き直す</a> |
-      <button type="submit">登録する</button>
-  </div>
- 
-
-</form>
+</div>
 

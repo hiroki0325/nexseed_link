@@ -1,7 +1,7 @@
 <?php 
     $status = status();
     if (!isLoginSuccess() || $status != 1) {
-        header('Location: ../user/auth/login');
+        header('Location: ../../user/auth/login');
         exit();
     }
  ?>
@@ -26,21 +26,9 @@
 
 </head>
 <body>
-       <!-- jQuery -->
-       <script src="../../views/assets/js/admin/jquery.js"></script>
-       <!-- table_sort -->
-       <script src="../../views/assets/js/admin/jquery.tablesorter.min.js"></script> 
-    
-     <?php
-         if (!isset($page)) {
-           include('./views/' . $function . '/' . $directry . '.php');
-         } else {
-           include('./views/' . $function . '/' . $directry .  '/' . $page . '.php');
-         }
 
-      ?>
   </div>
-  
+
     <div id="wrapper">
 
        <!-- Navigation -->
@@ -236,9 +224,22 @@
            </div>
            <!-- /.navbar-collapse -->
        </nav>
-
-
     <!-- /#wrapper -->
+
+      <!-- jQuery -->
+      <script src="../../views/assets/js/admin/jquery.js"></script>
+      <!-- table_sort -->
+      <script src="../../views/assets/js/admin/jquery.tablesorter.min.js"></script> 
+    
+    <?php
+        if (!isset($page)) {
+          include('./views/' . $function . '/' . $directry . '.php');
+        } else {
+          include('./views/' . $function . '/' . $directry .  '/' . $page . '.php');
+        }
+
+     ?>
+
 
         <!-- Bootstrap Core JavaScript -->
         <script src="../../views/assets/js/admin/bootstrap.min.js"></script>
