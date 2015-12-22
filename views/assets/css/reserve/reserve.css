@@ -1,0 +1,14 @@
+.title_k{
+  font-size: 150%;
+}
+
+.float{
+  float:left;
+}
+
+.box{
+  display: inline-block;
+  width: 200px;
+  height: 100px;
+  margin: 1em;
+}

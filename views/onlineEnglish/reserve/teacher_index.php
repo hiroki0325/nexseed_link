@@ -19,7 +19,7 @@
     <?php mysqli_data_seek($lessons, 0);?>
     <?php while ($lesson = mysqli_fetch_assoc($lessons)): ?>
         <?php
-            echo sprintf('<img src="../../views/member/user_picture/%s" alt="profile_picture" width="80" height="80"><p>Student neme : %s</p>',
+            echo sprintf('<img src="../../views/user/user_picture/%s" alt="profile_picture" width="80" height="80"><p>Student neme : %s</p>',
                           $lesson["picture"],
                           $lesson["nickname"]
                         );

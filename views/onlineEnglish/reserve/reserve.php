@@ -55,14 +55,16 @@
  
 
 ?>
-
+<link rel="stylesheet" type="text/css" href="../../views/assets/css/reserve/reserve.css">
 <div class="container">
   <div class="row">
     <!-- メイン画面 -->
     <div class="col-md-8">
       <!-- お気に入り講師一覧のrow -->
-      <div class="row">
+      <div class="row title_k">
           <p>お気に入り講師から予約</p>
+      </div>
+      <div class="row">
           <div > <!-- class="col-md-4"を削除 -->
             <div > 
                   <?php 
@@ -109,12 +111,12 @@
                         }
                     }
                   ?>
-
                     
             </div><!-- <div class="col-md-6"> -->
 
            
             <div >
+
 
                 <!-- お気に入り講師からの予約フォーム -->
                 
@@ -132,20 +134,25 @@
                               $time_id = $params[3];
 
 
-                              // お気に入り講師の写真表示
-                                //echo sprintf('<img src="../../views/member/user_picture/%s" alt="画像" width="80" height="80"><p>%s先生</p>',
-                                  //               $like_teacher["picture"],
-                                    //             $like_teacher["nickname"]
-                                      //         );
+                              //お気に入り講師の写真/ニックネーム表示
+                              // echo '<div class="box">';
+                              // echo sprintf('<img src="../../views/user/user_picture/%s" alt="画像" width="80" height="80"><p>%s先生</p>',
+                              //                 $like_teacher["picture"],
+                              //                 $key1
+                              //               );
 
                               //お気に入り解除ボタンの表示 
-                              //echo '<form action="" method="post">';
-                              //echo '<input type="hidden" name="id" value="<?php echo $like_teacher["id"]; " >';
-                              //echo '<input type="submit" name="like" value="お気に入り解除">';
-                              //echo '</form>'; 
+                              // echo '<form action="" method="post">';
+                              // echo '<input type="hidden" name="id" value="<?php echo $like_teacher["id"]; " >';
+                              // echo '<input class="btn btn-info" type="submit" name="like" value="お気に入り解除">';
+                              // echo '</form>'; 
+                              // echo '</div>';
 
+                              
 
-                              echo sprintf('<button type="submit" name="lesson_id" value="%s">%s</button>',
+                              //お気に入り講師の予約可能時間帯表示
+                              echo '<div class="box">';
+                              echo sprintf('<button class="btn btn-info" type="submit" name="lesson_id" value="%s">%s</button>',
                                           $lesson_id,
                                           // $datetime,
                                           //$value1[$i], 
@@ -154,10 +161,12 @@
                                           );
                               echo "<br>";
                               // echo "<br>";
-                              // echo sprintf('<input type="hidden" name="%s" value="%s">',
-                              //               $lesson_id,
-                              //               $lesson_id
-                              //               );
+                              echo sprintf('<input type="hidden" name="%s" value="%s">',
+                                            $lesson_id,
+                                            $lesson_id
+                                            );
+                              // echo '</div>';
+                              // echo "</div>";
                               
                           }
                       }
@@ -181,7 +190,13 @@
 
       <!-- 日付指定用のrow -->
       <div class="row">
-        <p>日付を指定して予約</p>
+        <p class="title_k">日付を指定して予約</p>
+        <?php
+          if (isset($_REQUEST)) {
+             echo '<p>※<?php echo date("Y-m-d", strtotime($REQUEST));?></p>';
+           } 
+        ;?>
+        
         <div class="col-md-12">
           <ul>
           <?php
@@ -207,7 +222,7 @@
                 <!-- 講師の写真表示 -->
                 <?php 
                     if (isset($all_lesson["nickname"])) {
-                      echo sprintf('<img src="../../views/member/user_picture/%s" alt="画像" width="80" height="80"><p>%s先生</p>',
+                      echo sprintf('<img src="../../views/user/user_picture/%s" alt="画像" width="80" height="80"><p>%s先生</p>',
                                     $all_lesson["picture"],
                                     // "default.png",
                                     $all_lesson["nickname"]
@@ -224,7 +239,6 @@
                     if ($table["cnt"] > 0) {
                         $error["like"] = "duplicate";
                     }
-                    echo $error["like"];
                     
                 ?>
               </div>
