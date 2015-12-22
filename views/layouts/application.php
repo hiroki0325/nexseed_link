@@ -15,11 +15,12 @@
   <title>NexSeedLink</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta charset="UTF-8">
+<!-- <link rel="shortcut icon" href="views/assets/images/apple.ico" > -->
 <!-- css -->
-
-  
+  <!-- っっっこk -->
   <?php if($function == 'mypage'):?>
     <!-- マイページに必要 -->
+    <link rel="shortcut icon" href="views/assets/images/apple.ico" >
     <link rel="stylesheet" href="views/assets/css/bootstrap.css">
     <link rel="stylesheet" href="views/assets/font-awesome/css/font-awesome.css">
     <link rel="stylesheet" href="views/assets/css/mypage/style.css">
@@ -28,8 +29,10 @@
     <link rel="stylesheet" href="views/assets/css/mypage/magnific-popup.css" />
     <link rel="stylesheet" href="views/assets/css/mypage/body.css" />
     <link rel="stylesheet" href="views/assets/css/mypage/responsive.css" />
+    
   <?php else: ?>
     <!-- マイページ以外に必要 (パスが違う) -->
+    <link rel="shortcut icon" href="../../views/assets/images/apple.ico" >
     <link rel="stylesheet" href="../../views/assets/css/bootstrap.css">
     <link rel="stylesheet" href="../../views/assets/font-awesome/css/font-awesome.css">
     <link rel="stylesheet" href="../../views/assets/css/mypage/style.css" />
