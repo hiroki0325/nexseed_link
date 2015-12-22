@@ -2326,6 +2326,9 @@
 
 		/* Header */
 
+/*新しく作るj*/
+		/* Header */
+
 			#header {
 				-moz-backface-visibility: hidden;
 				-webkit-backface-visibility: hidden;
@@ -2348,10 +2351,18 @@
 				width: 275px;
 				z-index: 10002;
 				width: 275px;
-				background: #2B4350;
+				background: #222729 url("images/overlay.png");
 				box-shadow: inset -0.25em 0 0.25em 0 rgba(0, 0, 0, 0.125);
 			}
 
+
+
+
+
+
+			#header {
+/*				-moz-backf*/
+				
 				#header .top {
 					position: relative;
 				}
@@ -2372,7 +2383,7 @@
 				padding: 0.5em 1.25em 0.5em 1.25em;
 			}
 
-			#headerToggle {
+	#headerToggle {
 				-moz-backface-visibility: hidden;
 				-webkit-backface-visibility: hidden;
 				-ms-backface-visibility: hidden;
@@ -2400,7 +2411,7 @@
 					border: 0;
 				}
 
-					#headerToggle .toggle:before {
+#headerToggle .toggle:before {
 						font-family: FontAwesome;
 						text-decoration: none;
 						font-style: normal;
