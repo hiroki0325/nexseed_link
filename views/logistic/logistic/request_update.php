@@ -57,7 +57,7 @@
 <!-- 投稿の編集form バリデーション済み -->
 <div id="edit_form">
   <h4>投稿の編集はこちら</h4>
-  <form action="" method="post" enctype="multipart/form-data" >
+  <form action="request_update?id=<?php echo $_REQUEST['id']?>" method="post" enctype="multipart/form-data" >
     <div >
       <p>依頼するもの</p>
       <input type="text" name="thing" value="<?php echo $_SESSION['thing']; ?>" class="edit_form_contents">
@@ -77,12 +77,11 @@
       <input type="date" name="due" value="<?php echo $_SESSION['due']; ?>" class="edit_form_contents">
       <p>イメージ画像</p>
       <input type="file" name="image" class="edit_form_contents">
+      <input type="submit" name='update' value="編集を実行">
     </div>
-  </fom>
+  </form>
 </div>
-<div>
- <input type= "submit" value="編集を実行" name="update">
-</div>
+
 
 
 

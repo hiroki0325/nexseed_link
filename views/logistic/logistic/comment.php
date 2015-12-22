@@ -55,7 +55,7 @@
             <?php else:?>
               <textarea type="text" name="comment" placeholder="コメントを投稿します。" ></textarea>
             <?php endif; ?>
-            <input type="file" name="image_comment">
+            <input type="file" name="image_comment" style="font-size:10px">
             <button type="submit" class="btn btn-success green" name="comment-form"><i class="fa fa-share"></i>コメントする</button>
           </form>
         </div>
@@ -71,7 +71,15 @@
         <div class="testimonials">
           <div class="active item">
             <blockquote>
-              <p><?php echo $comment['user_id'].' '.$comment['comment'];?></p>
+              <?php 
+                //ユーザの名前を取得
+                $sql=sprintf("SELECT fullname FROM users WHERE id=%d",
+                    $comment['user_id']
+                );
+                $get_user_name=mysqli_query($db, $sql) or die (mysqli_error($db));
+                $user_name=mysqli_fetch_assoc($get_user_name);
+              ?>
+              <p><?php echo $user_name['fullname'].' '.$comment['comment'];?></p>
               <?php if(!empty($comment['comment_image'])):?>
                 <img src="../../views/logistic/logistic/image_comment/<?php echo $comment['comment_image']?>">
               <?php endif; ?>

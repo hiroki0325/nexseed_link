@@ -13,8 +13,8 @@
   // create socket
   var socketReady = false;
   var socketReady = false;
-  var port = 80;
-  var socket = io.connect('http://27.120.111.43:' + port + '/');
+  var port = 443;
+  var socket = io.connect('https://nexseed.tk:' + port + '/', {secure: true});
 
   // socket: channel connected
   socket.on('connect', onOpened)
@@ -333,7 +333,7 @@ function getRoomName() {
   function quit(){
     socket.emit('send-log',user_name + 'が退室しました');
     // ToDo 予約ページのURLを設定
-    location.assign("hoge");
+    location.assign("../reserve/index");
   }
 
   // 通信が突如きれた場合のログ
@@ -342,8 +342,9 @@ function getRoomName() {
     $log = time()+ escapeHTML2(text) +"<br>";
     // 正常な退出でない場合のみ、出力する処理
     var logComment = document.getElementById("log").innerText;
+    var lastLog = logComment.substr(-10);
 
-    if (!logComment.match(/退室しました/) ) {
+    if (!lastLog.match(/退室しました/) ) {
       $('#log').append($log).fadeIn();
     }
 

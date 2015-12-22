@@ -29,7 +29,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-8 col-md-offset-2 col-xs-12 button-field">
-      <h4>受け入れのリクエストを送信します。</h4>
+      <h3>受け入れのリクエストを送信します。</h3>
       <form action=""method='post'enctype="multipart/form-data">
         <fieldset>
           <span>謝礼</span>

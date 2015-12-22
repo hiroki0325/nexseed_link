@@ -1,11 +1,4 @@
 /*
-	Author: ShapedTheme
-	Template: Cluster
-	Version: 1.0
-	URL: http://shapedtheme.com
-*/
-
-
 /* TABLE OF CONTENTS
 
 	1. Import section
@@ -26,8 +19,6 @@
 	16. SCROLL TO TOP
 
 */
-
-
 
 /* 1. IMPORT SECTION */
 
@@ -207,7 +198,6 @@
 		position: absolute;
 		width: 100%;
 	}
-
 	.carousel-caption {
 		left: 15px;
 		right: 15px;

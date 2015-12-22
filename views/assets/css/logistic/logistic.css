@@ -6,10 +6,8 @@
   border-color: black;
   padding: 10px 50px 10px 50px;
   text-align: center;
- 
   width: 400px;
   padding-left: 100px;
-  margin-left: 200px;
   height: 320px;
 
 }
@@ -24,6 +22,7 @@ img.show_picture {
 
 .show_row {
   border-bottom: ridge;
+  height:60px;
 }
 
 #edit_form {
@@ -31,7 +30,22 @@ img.show_picture {
   height: 0px;
   padding-left: 0px;
   width: 300px;
-  height: 400px;
+  height: 350px;
+}
+
+#edit_form input{
+  text-align: center;
+  padding: 0px;
+  width: 200px;
+  height: 30px;
+  font-size: 10px;
+}
+#edit_form select{
+  text-align: center;
+  padding: 0px;
+  width: 200;
+  height: 30px;
+  font-size: 20px;
 }
 
 input .edit_form_contents{
@@ -445,24 +459,35 @@ hr.small {
   padding: 30px;
   margin: 0 auto; 
   border-radius: 4px;
-  margin-bottom: 100px;
   color: #FFFFFF;
+  margin-bottom: 10px;
 }
 .form_layout input{
   color: black;
-  height: 15px;
+  height: 30px;
+}
+.form_layout span{
+ font-size: 15px;
+}
+.panel-form select {
+  font-size:12px;
+  height:35px;
+}
+.panel-form input {
+  font-size: 15px;
+  height:30px;
 }
 
-.panel-form select {
-  color: black;
-  height: 15px;
-}
+
 #input-form input {
-  height:30px;
+  height:20px;
   margin-top: 20px;
   padding-top: 0px;
   padding-bottom: 0px;
+  font-size: 20px;
 }
+
+
 
 .row-nopadding {
   margin-left: 0;
@@ -503,9 +528,15 @@ hr.small {
   -ms-transition: all 0.35s ease-in-out;
   transition: all 0.35s ease-in-out;
 }
-
+ul{
+  margin-bottom: 0px;
+}
 .btn-list{
   margin-top: 30px;
+}
+.list_title h3{
+  color:#fff;
+  margin-top: 15px;
 }
 
 .request-list a {
