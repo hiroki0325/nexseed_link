@@ -4,6 +4,67 @@
         header('Location: ../../user/auth/login');
         exit();
     }
+
+    if (!empty($_POST)) {
+      echo "hoge";
+      if ($_POST["first_name"] == '') {
+         $error["first_name"] = 'blank';
+      }
+      if ($_POST["last_name"] == '') {
+         $error["last_name"] = 'blank';
+      }
+       if ($_POST["email"] == '') {
+        $error["email"]='blank';
+      }
+      if (strlen($_POST["password"]) < 4) {
+        $eroor["password"] = 'length';
+      }
+      if ($_POST["password"] == '') {
+        $error["password"] = 'blank';
+      } 
+
+      //重複アカウントのチェック
+      if (empty($error)) {
+        $sql = sprintf('SELECT count(*) AS cnt FROM users
+          WHERE email = "%s"',
+          mysqli_real_escape_string($db,$_POST['email'])
+          );
+        $record = mysqli_query($db,$sql)or die(mysqli_error($db));
+        $table = mysqli_fetch_assoc($record);
+        if ($table['cnt'] > 0) {
+          $error['email'] = 'duplicate';
+        }
+      }
+
+      // 登録時点でのステータス判定
+      // $_POST['start_day']に入っているユーザーが入力した開始日と、
+      // 現在の日付(date関数？)を取得して比べる
+
+      if (isset($_POST['teacher'])) {
+          $addUserStatus = 5;
+      } elseif (isset($_POST['admin'])){
+          $addUserStatus = 1;
+      } else {
+              // もし$_POST['start_day']が後だったら入学前なので、
+          if (date("Y-m-d") < $_POST['start_day']) {
+              $addUserStatus = 2;
+              // もし$_POST['start_day']が前で、かつ$_POST['end_day']が後だったら在学生なので、
+          } elseif ($_POST['start_day'] < date("Y-m-d") && date("Y-m-d") < $_POST['end_day']) {
+              $addUserStatus = 3;
+              // もし$_POST['start_day']が前で、かつ$_POST['end_day']が前だったら卒業生なので、
+          } else {
+              $addUserStatus = 4;
+          }
+      }
+
+      if (empty($error)) {
+        $_SESSION["user"] = $_POST;
+        $_SESSION["user"]["status_id"] = $addUserStatus;
+        header('Location: check');
+        exit();
+      }
+
+    }
  ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -20,14 +81,9 @@
         <link rel="stylesheet" href="../../views/assets/font-awesome/css/font-awesome.css">
         <link rel="stylesheet" href="../../views/assets/css/admin/sb-admin.css">
         <link rel="stylesheet" href="../../views/assets/css/admin/plugins/morris.css">
-
-
-    
-
+        <link rel="stylesheet" href="../../views/assets/css/admin/join_check.css">
 </head>
 <body>
-
-  </div>
 
     <div id="wrapper">
 
