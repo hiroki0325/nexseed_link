@@ -16,10 +16,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta charset="UTF-8">
 <!-- css -->
-
-  
   <?php if($function == 'mypage'):?>
     <!-- マイページに必要 -->
+    <link rel="shortcut icon" href="views/assets/images/seedkun.ico" >
     <link rel="stylesheet" href="views/assets/css/bootstrap.css">
     <link rel="stylesheet" href="views/assets/font-awesome/css/font-awesome.css">
     <link rel="stylesheet" href="views/assets/css/mypage/style.css">
@@ -28,8 +27,10 @@
     <link rel="stylesheet" href="views/assets/css/mypage/magnific-popup.css" />
     <link rel="stylesheet" href="views/assets/css/mypage/body.css" />
     <link rel="stylesheet" href="views/assets/css/mypage/responsive.css" />
+    
   <?php else: ?>
     <!-- マイページ以外に必要 (パスが違う) -->
+    <link rel="shortcut icon" href="../../views/assets/images/seedkun.ico" >
     <link rel="stylesheet" href="../../views/assets/css/bootstrap.css">
     <link rel="stylesheet" href="../../views/assets/font-awesome/css/font-awesome.css">
     <link rel="stylesheet" href="../../views/assets/css/mypage/style.css" />
@@ -64,7 +65,7 @@
       <nav id="nav">
         <ul>
           <li><a href="/nexseed_link/mypage" id="top-link" class="skel-layers-ignoreHref"><span class="icon fa-home">ホーム</span></a></li>
-          <li><a href="/nexseed_link/onlineEnglish/class/class" id="portfolio-link" class="skel-layers-ignoreHref"><span class="fa fa-commenting">英会話</span></a></li>
+          <li><a href="/nexseed_link/onlineEnglish/reserve/index" id="portfolio-link" class="skel-layers-ignoreHref"><span class="fa fa-commenting">英会話</span></a></li>
           <li><a href="/nexseed_link/logistic/logistic/top" id="about-link" class="skel-layers-ignoreHref"><span class="fa fa-plane">物流</span></a></li>
           <li><a href="#" id="contact-link" class="skel-layers-ignoreHref"><span class="icon fa fa-cog">詳細ページ</span></a></li>
         </ul>
@@ -110,7 +111,7 @@
 
     <!-- /SOCIAL ICONS -->
     <div class="copyright">
-      <p>&copy; 2016 <a href="">NexseedLink</a> made by kade</p>
+      <p>&copy; 2016 <a href="">NexseedLink</a>made by nexseed_link製作委員会</p>
     </div>
   </footer>
   <!-- /FOOTER -->
@@ -141,13 +142,14 @@
     <script src="views/assets/js/mypage/scripts.js"></script>
     <script src="views/assets/js/mypage/main.js"></script>
   <?php else: ?>
+
     <script src="../../views/assets/js/jquery.min.js"></script>
     <script src="../../views/assets/js/bootstrap.js"></script>
-    <script src="../../views/assets/js/mypage/mypage/jquery.scrolly.min.js"></script>
-    <!--<script src="../../views/assets/js/mypage/mypage/jquery.scrollzer.min.js"></script> -->
-    <script src="../../views/assets/js/mypage/mypage/skel.min.js"></script>
-    <script src="../../views/assets/js/mypage/mypage/util.js"></script>
-    <script src="../../views/assets/js/mypage/mypage/main.js"></script>
+    <script src="../../views/assets/js/mypage/jquery.scrolly.min.js"></script>
+    <script src="../../views/assets/js/mypage/jquery.scrollzer.min.js"></script> 
+    <script src="../../views/assets/js/mypage/skel.min.js"></script>
+    <script src="../../views/assets/js/mypage/util.js"></script>
+    <script src="../../views/assets/js/mypage/main.js"></script>
     <script type='tsext/javascript' src="../../views/assets/js/<?php echo $function.'/'.$directry.'.js';?>"></script>
 
 <?php endif; ?>

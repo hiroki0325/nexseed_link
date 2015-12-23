@@ -69,7 +69,7 @@
 
              <div class="timeline-body">
                <p>英会話の予約が確定されました！五分前には入室してね。
-                    <img src="views/assets/images/teacher.jpg" alt="" />
+<!--                     <img src="views/assets/images/teacher.jpg" alt="" /> -->
                 <br>
                      2 ええ会話
                </p>
