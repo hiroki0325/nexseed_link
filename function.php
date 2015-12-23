@@ -76,7 +76,7 @@
     function status(){
         include('dbconnect.php');
         $sql = sprintf('SELECT*FROM users WHERE id=%d',
-            mysqli_real_escape_string($db,$_SESSION['join']['id'])
+            mysqli_real_escape_string($db,current_user('id'))
         );
         $record = mysqli_query($db,$sql)or die(mysqli_error($db));
         $user = mysqli_fetch_assoc($record);
@@ -145,7 +145,7 @@
     function visit_log_time(){
         include('dbconnect.php');
         $sql=sprintf('UPDATE users SET visit_log_time=NOW() WHERE id=%d ',
-            mysqli_real_escape_string($db,$_SESSION['join']['id'])
+            mysqli_real_escape_string($db,currenet_user('id'))
             );
             mysqli_query($db, $sql) or die(mysqli_error($db));
     }
@@ -154,7 +154,7 @@
     function visit_log_time_show(){
         include('dbconnect.php');
         $sql = sprintf('SELECT*FROM users WHERE id=%d',
-            mysqli_real_escape_string($db,$_SESSION['join']['id'])
+            mysqli_real_escape_string($db,current_user('id'))
         );
         $record = mysqli_query($db,$sql)or die(mysqli_error($db));
         $user = mysqli_fetch_assoc($record);

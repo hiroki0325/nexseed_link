@@ -1,0 +1,55 @@
+#regist_form th {
+    text-align: left;
+    border: 1px solid #aaa;
+    width: 215px;
+    vertical-align: middle;
+    padding: 10px;
+    background: #F0F0F0;
+    margin: auto;
+}
+
+#regist_form td {
+    text-align: left;
+    border: 1px solid #aaa;
+    vertical-align: middle;
+    padding: 10px;
+}
+
+button.send_btn {
+    background: #09b7ef url(../images/icon_arrow.png) no-repeat;
+    background-position: 91% center;
+    margin-left: 25px;
+    float: right;
+    width: 238px;
+    text-align: center;
+    font-size: 18px;
+    line-height: 18px;
+    padding: 14px 0 12px 0;
+    display: inline-block;
+    margin: 27px 0 0 0;
+    border-style: none;
+    color: #fff;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+}
+
+a.back_btn {
+    background: #7c7c7c url(../images/icon_back.png) no-repeat;
+    background-position: 9% center;
+    float: left;
+    width: 238px;
+    text-align: center;
+    font-size: 18px;
+    line-height: 18px;
+    padding: 14px 0 12px 0;
+    display: inline-block;
+    margin: 10px 0 0 0;
+    border-style: none;
+    color: #fff;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+}
