@@ -19,10 +19,10 @@
       }
     }
 
-    var_dump($_POST);
+    // var_dump($_POST);
     if (!empty($_POST)) {
       $sql=sprintf('UPDATE users SET nickname="%s", picture="%s" WHERE id=%d',
-        mysqli_real_escape_string($db,$_POST['nickname']),
+        mysqli_real_escape_string($db,$_SESSION['join']['nickname']),
         mysqli_real_escape_string($db,$_SESSION['join']['image']),
         mysqli_real_escape_string($db,$_SESSION['join']['id'])
         );

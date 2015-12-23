@@ -37,7 +37,7 @@
                     setcookie('email',$_POST['email'],time()+60*60*24*14);
                     setcookie('password',$_POST['password'],time()+60*60*24*14);
                   }
-                header('Location: ../../admin/admin/index');
+                header('Location: index');
                 exit();
               }else{
                 $error['login']='failed';
@@ -51,8 +51,6 @@
 ?>
 
 
-
-  
 <div class="container">
   <div class="row">
     <div class="col-xs-offset-4 col-xs-4">

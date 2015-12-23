@@ -1,5 +1,4 @@
 <?php
-
     if(isset($_COOKIE['email'])){
         if($_COOKIE['email']!=''){
           $_POST['email']=$_COOKIE['email'];
@@ -30,6 +29,7 @@
                   $_SESSION['join']['status_id']=$table['status_id'];
                   $_SESSION['join']['image']=$table['picture'];
                   $_SESSION['join']['created']=$table['created'];
+                  
 
 
                 //ログイン情報を記録する
@@ -43,12 +43,12 @@
                 //ログイン回数のカウントとログインした時間の更新
                   $sql=sprintf('UPDATE users SET login_count=%d WHERE id=%d ',
                       $table['login_count']+1,
-                      mysqli_real_escape_string($db,$_SESSION['join']['id'])
+                      mysqli_real_escape_string($db,current_user('id'))
                   );
                   mysqli_query($db, $sql) or die(mysqli_error());
                 //初回ログインのみユーザー編集画面に遷移
                   if ($table['login_count'] == 0){
-                    header('Location: ../user_index');
+                    header('Location: ../user_edit');
                     exit();
                   } else {
                     header('Location: ../../mypage');
@@ -64,6 +64,13 @@
 
         }
     }
+
+    if (isLoginSuccess()) {
+        header('Location: ../index');
+        exit();
+    }
+
+
 
 ?>
 
