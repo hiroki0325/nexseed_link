@@ -9,7 +9,7 @@
         $ext=substr($fileName, -3);
         if ($ext != 'jpg' && $ext != 'gif') {
           $error["image"] = "type";
-        } 
+        }
       }
 
       if (empty($error)) {
@@ -28,7 +28,7 @@
         );
         var_dump($sql);
         mysqli_query($db,$sql)or die(mysqli_error($db));
-        header('Location: index');
+        header('Location: ../mypage');
         exit();
     }
 
