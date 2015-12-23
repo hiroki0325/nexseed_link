@@ -2,7 +2,8 @@
 <?php
     $post_id = $_REQUEST['id'];
     $user_id = $_SESSION['login_id'];
-    if (!empty($_POST)) {
+
+    if (!empty($_POST) && empty($_POST['request_insentive'])&& empty($_POST['request_payment'])&& empty($_POST['request_a'])) {
         //入力漏れエラー判定
         if ($_POST['comment']  == '') {
             $error['comment'] = 'Blanck';
@@ -35,6 +36,7 @@
             mysqli_query($db, $sql) or die (mysqli_error($db));
         } 
     } 
+
     $sql = sprintf(
         'SELECT * FROM comments WHERE post_id=%d ORDER BY created DESC',
         $_REQUEST['id']
@@ -42,19 +44,19 @@
     $comments = mysqli_query($db, $sql) or die (mysqli_error($db));
 ?>
 <!-- 投稿に対するコメントの入力フォーム -->
-<div class="container">
+<div class="container-fluid">
   <div class="row">
-    <div class="col-md-offset-3 col-lg-offset-3">
+    <div class="col-md-6 col-md-offset-3 col-xs-8 col-xs-offset-2">
       <div class="widget-area no-padding blank">
-        <div class="status-upload" style="width: 600px;">
+        <div class="status-upload">
           <form action="" method="post" enctype="multipart/form-data" >
-            <?php if (isset($error['comment'])):?>
-              <textarea ype="text" name="comment" placeholder="コメントを入力してください" ></textarea>
+            <?php if (!empty($error['comment'])):?>
+              <textarea type="text" name="comment" placeholder="コメントを入力してください" ></textarea>
             <?php else:?>
-              <textarea ype="text" name="comment" placeholder="コメントを投稿します。" ></textarea>
+              <textarea type="text" name="comment" placeholder="コメントを投稿します。" ></textarea>
             <?php endif; ?>
-            <input type="file" name="image_comment">
-            <button type="submit" class="btn btn-success green"><i class="fa fa-share"></i>コメントする</button>
+            <input type="file" name="image_comment" style="font-size:10px">
+            <button type="submit" class="btn btn-success green" name="comment-form"><i class="fa fa-share"></i>コメントする</button>
           </form>
         </div>
       </div>
@@ -63,13 +65,21 @@
 </div>
 <!-- コメントの表示 -->
 <?php while($comment = mysqli_fetch_assoc($comments)):?>
-  <div class="container content">
+  <div class="container-fluid">
     <div class="row">
-      <div class="col-md-6 col-md-offset-3">
+      <div class="col-md-6 col-md-offset-3 col-xs-8 col-xs-offset-2">
         <div class="testimonials">
           <div class="active item">
             <blockquote>
-              <p><?php echo $comment['user_id'].' '.$comment['comment'];?></p>
+              <?php 
+                //ユーザの名前を取得
+                $sql=sprintf("SELECT fullname FROM users WHERE id=%d",
+                    $comment['user_id']
+                );
+                $get_user_name=mysqli_query($db, $sql) or die (mysqli_error($db));
+                $user_name=mysqli_fetch_assoc($get_user_name);
+              ?>
+              <p><?php echo $user_name['fullname'].' '.$comment['comment'];?></p>
               <?php if(!empty($comment['comment_image'])):?>
                 <img src="../../views/logistic/logistic/image_comment/<?php echo $comment['comment_image']?>">
               <?php endif; ?>

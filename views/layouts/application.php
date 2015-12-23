@@ -39,6 +39,7 @@
     <link rel="stylesheet" href="../../views/assets/css/mypage/magnific-popup.css" />
     <link rel="stylesheet" href="../../views/assets/css/mypage/body.css" />
     <link rel="stylesheet" href="../../views/assets/css/mypage/responsive.css" />
+
     <link rel="stylesheet" href="../../views/assets/css/<?php echo $function.'/'.$directry.'.css';?>">
   <?php endif; ?>
 
@@ -116,7 +117,6 @@
   <!-- /FOOTER -->
 
   <!-- Scripts -->
-
   <?php if($function == 'mypage'):?>
     <script src="views/assets/js/jquery.min.js"></script>
     <script src="views/assets/js/bootstrap.js"></script>

@@ -12,20 +12,10 @@
   }
 </script>
 <?php
-    //ページの表示
-    //投稿内容の編集
-    //投稿の削除
-    //編集はpopup表示
-    //削除は確認画面の作成
-    //コメントの挿入
-    //コメント投稿フォームの作成
-     
-    $sql = sprintf(
-        'SELECT * FROM logistic_posts WHERE id=%d',
-        $_REQUEST['id']
-    );
-    $sql = mysqli_query($db,$sql) or die (mysqli_error($db));
-    $post = mysqli_fetch_assoc($sql);
+    //個別投稿の読み込み
+    $sql = sprintf('SELECT * FROM logistic_posts WHERE id=%d',$_REQUEST['id']);
+    $posts = mysqli_query($db,$sql) or die (mysqli_error($db));
+    $post = mysqli_fetch_assoc($posts);
 
     $_SESSION['thing'] = $post['thing'];
     $_SESSION['category'] = $post['category'];
@@ -36,7 +26,12 @@
     $_SESSION['image'] = $post['image'];
     $image = "image_thing/".$_SESSION['image'];
 
-    //postsの編集があった場合のアップデート
+    if(isset($post['candidate_id'])){
+        $sql = sprintf('SELECT * FROM candidates WHERE id=%d',$post['candidate_id']);
+        $accepted_candidates = mysqli_query($db,$sql) or die (mysqli_error($db));
+        $accepted_candidate = mysqli_fetch_assoc($accepted_candidates);
+    }
+
     
     //コメントに画像を挿入する場合の画像拡張子でのエラー判定
     if (!empty($_POST['comment_push'])) {
@@ -73,47 +68,70 @@
 
 ?>
 <a href="top">物流topへ</a>
-<div class="show">
-  <div class="show_block">
-    <div class="show_row">
-      <span>[お願いしたいもの]</span>
-      <p><?php echo $_SESSION['thing']; ?></p>
+<div class="container-fulid">
+  <div class="row">
+    <div class="show">
+      <div class="col-lg-6 show_block">
+        <div class="show_row">
+          <span>[お願いしたいもの]</span>
+          <p><?php echo $_SESSION['thing']; ?></p>
+        </div>
+        <div class="show_row">
+          <span>[カテゴリー]</span>
+          <p><?php echo $_SESSION['category']; ?></p>
+        </div>
+        <div class="show_row">
+          <span>[謝礼]</span>
+          <p><?php echo $_SESSION['insentive']; ?></p>   
+        </div>
+        <div class="show_row">
+          <span>[必要な金額]</span>
+          <p><?php echo $_SESSION['payment']; ?></p>
+        </div>
+        <div class="show_row">
+          <span>[期限]</span>
+          <p><?php echo $_SESSION['due']; ?></p>
+        </div>
+      </div>
     </div>
-    <div class="show_row">
-      <span>[カテゴリー]</span>
-      <p><?php echo $_SESSION['category']; ?></p>
-    </div>
-    <div class="show_row">
-      <span>[謝礼]</span>
-      <p><?php echo $_SESSION['insentive']; ?></p>   
-    </div>
-    <div class="show_row">
-      <span>[必要な金額]</span>
-      <p><?php echo $_SESSION['payment']; ?></p>
-    </div>
-    <div class="show_row">
-      <span>[期限]</span>
-      <p><?php echo $_SESSION['due']; ?></p>
+    <div>
+      <div class="col-lg-8 show_image">
+        <p>[イメージ画像]</p>
+        <img src= "<?php echo sprintf('../../views/logistic/logistic/'.'%s',$image); ?>" class="show_picture">
+      </div>
     </div>
   </div>
-  <div class="show_image">
-    <p>[イメージ画像]</p>
-    <img src= "<?php echo sprintf('../../views/logistic/logistic/'.'%s',$image); ?>" class="show_picture">
-  </div> 
 </div>
-<div class="button">
-  <a data-target="con1" class="modal-open">投稿の編集</a>
-  <?php echo '<input type="button" value="投稿を削除" onClick="disp()">';?>
-</div>
-
-<div id="con1" class="modal-content">
-  <?php include('request_update.php');?>
-  <p><a class="modal-close">閉じる</a></p>
-</div>
+<!-- 編集/削除ボタン -->
+<?php if (status()==3):?>
+  <div class="container-fluid">
+    <div class="content-wrapper"> 
+      <div class="item-container col-xs-8 col-xs-offset-4">         
+        <div class="btn-group cart">    
+          <button type="button" class="btn btn-success modal-open" data-target="con1">投稿を編集</button>
+        </div>
+          <div class="btn-group">
+            <?php echo '<button type="submit" onClick="disp()" class="btn btn-danger" type="button">';?>投稿を削除</button>
+          </div>
+          <div id="con1" class="modal-content" style="height:400px;">
+            <?php require('request_update.php');?>
+            <p><a class="modal-close">閉じる</a></p>
+          </div>  
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 承認された投稿のとき承認内容を表示 -->
+  <?php if (isset($post['candidate_id'])):?>
+    <?php include('submit_show.php'); ?>
+  <?php endif;?>
+<?php elseif(status()==2): ?>
+  <?php if (isset($post['candidate_id'])):?>
+    <?php include('submit_show.php'); ?>
+  <?php else:?>
+    <?php  include('submit_form.php'); ?>
+  <?php endif;?>
+<?php endif; ?>
 <?php  include('comment.php'); ?>
-
-
-
-
 
 
