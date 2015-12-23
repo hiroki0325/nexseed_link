@@ -1,5 +1,4 @@
 <?php
-    var_dump($_POST);
     //ランダム英数字文字列の作成
     function makeRandStr($length) {
         $str = array_merge(range('a', 'z'), range('0', '9'), range('A', 'Z'));
@@ -65,14 +64,19 @@
 
   <div class="row">
     <p>※必ず内容をご確認の上で、「予約する」ボタンを押してください。</p>
-    <input type="button" value="選択画面に戻る" onClick="document.location='reserve';">
+  </div>
+
+  <div class="row" >
     <?php if(isset($_POST["lesson_id"])) : ?>
         <form action="" method="post">       
           <input type="hidden" name="lesson_id" value="<?php echo $_POST["lesson_id"]; ?>" >
           <input type="hidden" name="confirm" value="on">
-          <input type="submit" value="予約する">
+          <input class="btn btn-danger disabled" type="submit" value="予約する">
         </form>
     <?php endif ;?>
+  </div>
+  <div class="row">
+    <input class="btn btn-primary disabled" type="button" value="選択画面に戻る" onClick="document.location='reserve';">
   </div>
 </div>
 

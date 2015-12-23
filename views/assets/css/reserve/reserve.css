@@ -1,0 +1,18 @@
+.title_k{
+  font-size: 150%;
+}
+
+.float{
+  float:left;
+}
+
+.box{
+  display: inline-block;
+  width: 200px;
+  height: 100px;
+  margin: 1em;
+}
+
+.lesson{
+  background-image:  url("http://yuki930.v-colors.com/wp-content/themes/portfolio_pastel/images/bgBody.jpg");
+}
