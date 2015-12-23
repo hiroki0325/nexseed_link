@@ -27,7 +27,7 @@
     <link rel="stylesheet" href="views/assets/css/mypage/magnific-popup.css" />
     <link rel="stylesheet" href="views/assets/css/mypage/body.css" />
     <link rel="stylesheet" href="views/assets/css/mypage/responsive.css" />
-    
+
   <?php else: ?>
     <!-- マイページ以外に必要 (パスが違う) -->
     <link rel="shortcut icon" href="../../views/assets/images/seedkun.ico" >
@@ -56,7 +56,7 @@
         <?php else: ?>
             <span class="image avatar48"><img src="../../views/user/user_picture/<?php echo current_user('image'); ?>" alt="" /></span>
         <?php endif; ?>
-        
+
         <h1 id="title"><?php echo current_user('fullname'); ?></h1>
     <!--     <p>hogeID</p> -->
       </div>
@@ -68,6 +68,7 @@
           <li><a href="/nexseed_link/onlineEnglish/reserve/index" id="portfolio-link" class="skel-layers-ignoreHref"><span class="fa fa-commenting">英会話</span></a></li>
           <li><a href="/nexseed_link/logistic/logistic/top" id="about-link" class="skel-layers-ignoreHref"><span class="fa fa-plane">物流</span></a></li>
           <li><a href="#" id="contact-link" class="skel-layers-ignoreHref"><span class="icon fa fa-cog">詳細ページ</span></a></li>
+          <li><a href="/nexseed_link/user/auth/logout" class="skel-layers-ignoreHref"><span class="fa fa-sign-out">ログアウト</span></a></li>
         </ul>
       </nav>
     </div>
@@ -139,7 +140,7 @@
     <script src="../../views/assets/js/jquery.min.js"></script>
     <script src="../../views/assets/js/bootstrap.js"></script>
     <script src="../../views/assets/js/mypage/jquery.scrolly.min.js"></script>
-    <script src="../../views/assets/js/mypage/jquery.scrollzer.min.js"></script> 
+    <script src="../../views/assets/js/mypage/jquery.scrollzer.min.js"></script>
     <script src="../../views/assets/js/mypage/skel.min.js"></script>
     <script src="../../views/assets/js/mypage/util.js"></script>
     <script src="../../views/assets/js/mypage/main.js"></script>
