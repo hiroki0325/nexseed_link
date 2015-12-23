@@ -1,4 +1,7 @@
 <?php
+    ini_set("display_errors", 1);
+    error_reporting(E_ALL);
+
     //入力しなかった場合入力を促す
     if (!empty($_POST)) {
       if ($_POST["nickname"] == '') {
@@ -17,20 +20,19 @@
         move_uploaded_file($_FILES["image"]["tmp_name"], './views/user/user_picture/' . $image);
         $_SESSION["join"]["image"] = $image;
       }
+      if (!empty($_POST)) {
+        $sql=sprintf('UPDATE users SET nickname="%s", picture="%s" WHERE id=%d',
+          mysqli_real_escape_string($db,$_SESSION['join']['nickname']),
+          mysqli_real_escape_string($db,$_SESSION['join']['image']),
+          mysqli_real_escape_string($db,$_SESSION['join']['id'])
+          );
+          mysqli_query($db,$sql)or die(mysqli_error($db));
+          header('Location: ../mypage');
+          exit();
+      }
     }
 
-    // var_dump($_POST);
-    if (!empty($_POST)) {
-      $sql=sprintf('UPDATE users SET nickname="%s", picture="%s" WHERE id=%d',
-        mysqli_real_escape_string($db,$_SESSION['join']['nickname']),
-        mysqli_real_escape_string($db,$_SESSION['join']['image']),
-        mysqli_real_escape_string($db,$_SESSION['join']['id'])
-        );
-        var_dump($sql);
-        mysqli_query($db,$sql)or die(mysqli_error($db));
-        header('Location: ../mypage');
-        exit();
-    }
+
 
 ?>
 
@@ -56,7 +58,6 @@
     <?php endif; ?>
   </div>
 
-
   <div>
     <lavel for="">プロフィール画像</lavel>
     <?php if (isset($error["image"])): ?>
@@ -71,7 +72,6 @@
   </div>
 
 <button type="submit">追加する</button>
-
 
 </form>
 
