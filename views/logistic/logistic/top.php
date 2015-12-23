@@ -1,6 +1,6 @@
 
 <?php
-    //use_idを仮設定
+    //use_idを設定
     $_SESSION['login_id'] = current_user('id');
     //セブ在学生向け投稿の表示
     if (status()==3){
@@ -81,6 +81,7 @@
     </div>
   </div>
 </div>
+<!-- 自分の全投稿 -->
 <?php if (empty($_REQUEST['sort']) || !empty($_REQUEST['sort']) && $_REQUEST['sort'] == 'posts'):?> 
   <section class="services">
     <div class="container-fluid no-gutter row-nopadding">
@@ -127,7 +128,7 @@
     </div>  
   </section> 
 <?php endif; ?>
-
+<!-- 全投稿 -->
 <?php if (!empty($_REQUEST['sort']) && $_REQUEST['sort'] == 'all'):?>
   <section class="services">
     <div class="container-fluid">
@@ -174,7 +175,7 @@
     </div>  
   </section>
 <?php endif; ?>
-        
+<!-- 承認待ち -->
 <?php if (!empty($_REQUEST['sort']) && $_REQUEST['sort'] == 'unaccepted'):?>
   <section class="services">
     <div class="container-fluid">
@@ -184,7 +185,7 @@
             <h3>この投稿にリクエストを送信します</h3>  
           </div> 
           <?php while ($post=mysqli_fetch_assoc($unverified_posts)):?>
-            <dsiv class= "col-sm-6 col-xs-12 col-md-4 col-lg-4">
+            <div class= "col-sm-6 col-xs-12 col-md-4 col-lg-4">
               <div class="well">
                 <div class="media" >
                 <img src="../../views/logistic/logistic/image_thing/<?php echo h($post['image'])?>" style="float:left">
@@ -216,7 +217,7 @@
     </div>  
   </section>
 <?php endif; ?>
-
+<!-- 期限の近い順 -->
 <?php if (!empty($_REQUEST['sort']) && $_REQUEST['sort'] == 'deadline'):?>
   <section class="services">
     <div class="container-fluid">
@@ -263,7 +264,7 @@
     </div>  
   </section>
 <?php endif; ?>
-
+<!-- 承認済み -->
 <?php if (!empty($_REQUEST['sort']) && $_REQUEST['sort'] == 'accepted'):?>
   <section class="services">
     <div class="container-fluid">
@@ -311,7 +312,7 @@
     </div>  
   </section>
 <?php endif; ?>
-
+<!-- 投稿にきたリクエスト -->
 <?php if (!empty($_REQUEST['sort']) && $_REQUEST['sort'] == 'request_index'):?>
   <section class="services">
     <?php include('submit_index.php');?>

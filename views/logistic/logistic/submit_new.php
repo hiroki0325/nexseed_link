@@ -1,4 +1,5 @@
 <?php
+    // 投稿が承認された場合にその投稿に対する他の投稿を論理削除するためにdesicionをアップデート
     if (isset($_REQUEST['id'])) {
         $sql = sprintf('SELECT  post_id FROM candidates WHERE id=%d',$_REQUEST['id']);
         $sql = mysqli_query($db,$sql) or die (mysqli_error($db));

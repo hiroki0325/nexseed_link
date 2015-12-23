@@ -1,4 +1,5 @@
 <?php
+    //編集のエラー判定
     if(!empty($_POST['update'])) {
         if ($_SESSION['thing'] != $_POST['thing']) {
             $_SESSION['thing'] = $_POST['thing'];

@@ -1,3 +1,4 @@
+<!-- その投稿がすでに承認されている場合個別ページで受け入れ内容を表示 -->
 <div class="container-fluid">
   <div class="row">
     <div class="col-xs-8 col-xs-offset-2">

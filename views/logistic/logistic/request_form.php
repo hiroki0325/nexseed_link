@@ -49,6 +49,7 @@
     }
     
 ?>
+<!-- 投稿の入力フォーム -->
 <header id="form_header">
   <div class="container-fluid no-gutter row-nopadding">
     <div class="no-gutter row-nopadding">
@@ -120,8 +121,6 @@
     </div>   
   </div>
 </header>
-
-
 <!-- 投稿が成功できたらデータを表示 -->
 <?php if (isset($post_check)) { ?>
   <section class="services">

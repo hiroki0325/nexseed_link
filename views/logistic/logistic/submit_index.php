@@ -1,10 +1,4 @@
-   
-
-
-
-
-
-
+<!-- 投稿に対する依頼を表示 -->
 <div class="container-fluid">
   <div class= "row"> 
     <div class= "media-row col-xs-12 bg-primary" style="margin-top:30px">
@@ -12,9 +6,10 @@
       <h3>届いているリクエストはこちら</h3>  
     </div>  
     <?php
-        //
+        //ログインユーザーの投稿のidを取得
         $sql = sprintf('SELECT id FROM logistic_posts WHERE client_id=%d ORDER BY created DESC',$_SESSION['login_id']);
         $posts = mysqli_query($db,$sql) or die (mysqli_error($db));
+        //投稿idに対して承認されているリクエストを取得
         while ($post=mysqli_fetch_assoc($posts)) {
             $sql = sprintf('SELECT * FROM candidates WHERE post_id=%d AND desicion IS NULL ORDER BY created DESC',$post['id']);
             $requests = mysqli_query($db,$sql) or die (mysqli_error($db));
@@ -26,10 +21,12 @@
             <div class="media-body" >
               <div class="list-inline list-unstyled" style="float:left">
                 <?php
+                  //欲しいものを取得
                   $sql = sprintf('SELECT thing FROM logistic_posts WHERE id=%d',$request['post_id']);
                   $thing = mysqli_query($db,$sql) or die (mysqli_error($db));
                   $thing=mysqli_fetch_assoc($thing);
                 ?>
+                <!-- ログインユーザーの投稿に対するリクエストを表示 -->
                 <span>[投稿した物]</span><h4><?php echo h($thing['thing']);?></h4>
                 <ul><span>[お礼]</span><?php echo h($request['insentive']);?></ul>
                 <ul><span>[必要経費]</span><?php echo h($request['payment']);?> pessos</ul>

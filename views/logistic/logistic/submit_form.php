@@ -1,4 +1,5 @@
 <?php
+    // リクエストを投稿
     if(empty($_POST["comment"])){
         if (isset($_POST['request_insentive']) && isset($_POST['request_payment']) && isset($_POST['request_arrival_date'])){
             $sql = 'SELECT id FROM logistic_posts WHERE candidate_id IS NOT NULL';
@@ -19,16 +20,16 @@
                 mysqli_query($db,$sql) or die (mysqli_error($db));  
                 echo "リクエストを送信しました";      
             } else {
-                $error = 'alredy';
+                $error = 'already';
             }  
         }   
     } 
     
 ?>
-
+<!-- リクエストの送信フォーム -->
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-8 col-md-offset-2 col-xs-12 button-field">
+    <div class="col-md-8 col-md-offset-2 col-xs-12 button-field" style="margin-top:40px;">
       <h3>受け入れのリクエストを送信します。</h3>
       <form action=""method='post'enctype="multipart/form-data">
         <fieldset>
@@ -41,7 +42,7 @@
           <button type="submit" class="btn btn-warning pull-right">Submit</button>
         </fieldset>
       </form>
-      <?php if (isset($error) && $error=='alredy'):?>
+      <?php if (isset($error) && $error=='already'):?>
         <h4>この投稿に対するリクエストは締め切られました</h4>
       <?php endif; ?>
     </div>

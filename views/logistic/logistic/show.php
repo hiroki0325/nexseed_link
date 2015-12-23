@@ -12,6 +12,7 @@
   }
 </script>
 <?php
+    //個別投稿の読み込み
     $sql = sprintf('SELECT * FROM logistic_posts WHERE id=%d',$_REQUEST['id']);
     $posts = mysqli_query($db,$sql) or die (mysqli_error($db));
     $post = mysqli_fetch_assoc($posts);
@@ -101,7 +102,7 @@
     </div>
   </div>
 </div>
-   
+<!-- 編集/削除ボタン -->
 <?php if (status()==3):?>
   <div class="container-fluid">
     <div class="content-wrapper"> 
@@ -120,6 +121,7 @@
       </div>
     </div>
   </div>
+  <!-- 承認された投稿のとき承認内容を表示 -->
   <?php if (isset($post['candidate_id'])):?>
     <?php include('submit_show.php'); ?>
   <?php endif;?>

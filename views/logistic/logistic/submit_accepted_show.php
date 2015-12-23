@@ -1,4 +1,5 @@
 <?php
+    //日本ユーザー 受け入れられた投稿を表示
     $sql = sprintf(
         'SELECT p.thing, c.insentive, c.payment, c.arrival_date FROM logistic_posts p , candidates c
          WHERE p.candidate_id=c.id AND c.agent_id=%d',
