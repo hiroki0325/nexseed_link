@@ -15,9 +15,7 @@
   <title>NexSeedLink</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta charset="UTF-8">
-<!-- <link rel="shortcut icon" href="views/assets/images/apple.ico" > -->
 <!-- css -->
-  <!-- っっっこk -->
   <?php if($function == 'mypage'):?>
     <!-- マイページに必要 -->
     <link rel="shortcut icon" href="views/assets/images/seedkun.ico" >
