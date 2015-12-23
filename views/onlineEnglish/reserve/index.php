@@ -18,7 +18,7 @@
 ?>
 <link rel="stylesheet" type="text/css" href="../../views/assets/css/reserve/reserve.css">
 <div class="container-fluid">
-  <div class="row">
+  <div class="well">
     <h1>レッスン予約状況</h1>
   </div>
 
@@ -30,45 +30,37 @@
 
   <div class="container">
     
-      <div class="row">
-        <p>現在予約済みのレッスンはありません</p>
-          <input type="button" value="レッスン予約画面へ" onClick="document.location='reserve'">
-      </div>
       
-            <?php if ($lesson = mysqli_fetch_assoc($lessons)) :?>
-                    <?php mysqli_data_seek($lessons, 0);?>
-                    <?php while ($lesson = mysqli_fetch_assoc($lessons)): ?>
-                        <div class="well">
-                        <div class="media">
-                            
-                        <div class="" style="float:left;">
-                          <?php
-                              echo sprintf('<img src="../../views/user/user_picture/%s" alt="画像" width="80" height="80"><p>%s先生</p>',
-                                            $lesson["picture"],
-                                            $lesson["nickname"]
-                                          );
-                          ?>
-                          </div>
 
-                          <div class="" style="float:left;">
-                          <p>開始時間：<?php echo date("n月j日", strtotime($lesson["date"])).date("H時i分", strtotime($lesson["time"])) ;?></p>
-                          <input type="button" class="btn btn-info" onclick="window.open('https://lovepop-geechscamp.ssl-lolipop.jp/7th_batch_camp/nexseed_link/onlineEnglish/class/class?<?php echo $lesson['rand_str'] ;?>')" value="入室する">
-                          <p>※開始5分前までは入室しないでください。</p>
-                          <br>
-                          <form action="" method="post">
-                            <input type="hidden" name="id" value="<?php echo $lesson['id'] ;?>">
-                            <input class="btn" type="submit" name="cancel" value="キャンセル">
-                          </form>
-                        </div>
-                          <hr>
-                        </div>
+            <?php if ($lesson = mysqli_fetch_assoc($lessons)) :?>
+              <?php mysqli_data_seek($lessons, 0);?>
+              <?php while ($lesson = mysqli_fetch_assoc($lessons)): ?>
+                <div class="well lesson">
+                  <div class="media">
+                    <div class="" style="float:left;">
+                      <?php
+                          echo sprintf('<img src="../../views/user/user_picture/%s" alt="画像" width="80" height="80"><p>%s先生</p>',
+                                        $lesson["picture"],
+                                        $lesson["nickname"]
+                                      );
+                      ?>
+
+                      <p>開始時間：<?php echo date("n月j日", strtotime($lesson["date"])).date("H時i分", strtotime($lesson["time"])) ;?></p>
+                      <input type="button" class="btn btn-info" onclick="window.open('https://lovepop-geechscamp.ssl-lolipop.jp/7th_batch_camp/nexseed_link/onlineEnglish/class/class?<?php echo $lesson['rand_str'] ;?>')" value="入室する">
+                      <p>※開始5分前までは入室しないでください。</p>
+                      <br>
+                      <form action="" method="post">
+                        <input type="hidden" name="id" value="<?php echo $lesson['id'] ;?>">
+                        <input class="btn" type="submit" name="cancel" value="キャンセル">
+                      </form>
                     </div>
-                    <input class="btn" type="button" value="レッスン予約画面へ" onClick="document.location='reserve'">
-                    </div>
-                    <?php endwhile ;?>
-                <?php else :?>
-        
-    
-  </div>
-  <?php endif ;?>
+                  </div>
+                </div>
+              <?php endwhile ;?>
+            <?php else :?>
+              <div class="row">
+                <p>現在予約済みのレッスンはありません</p>
+                  <input type="button" value="レッスン予約画面へ" onClick="document.location='reserve'">
+              </div>
+            <?php endif ;?>
 </div>
