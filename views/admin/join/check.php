@@ -6,44 +6,7 @@
     // }
 
 
-    $fullname = $_SESSION["user"]["first_name"]. ' ' .$_SESSION["user"]["last_name"];
 
-    if(!empty($_POST)){
-        if ($_SESSION["user"]["start_day"] && $_SESSION["user"]["end_day"]) {
-            $sql=sprintf('INSERT INTO users SET fullname="%s",
-              email="%s",password="%s",start_day="%s",login_count=0,end_day="%s",status_id=%d,created=NOW()',
-              mysqli_real_escape_string($db,$fullname),
-              mysqli_real_escape_string($db,$_SESSION["user"]["email"]),
-              mysqli_real_escape_string($db,sha1($_SESSION["user"]["password"])),
-              mysqli_real_escape_string($db,$_SESSION["user"]["start_day"]),
-              mysqli_real_escape_string($db,$_SESSION["user"]["end_day"]),
-              mysqli_real_escape_string($db,$_SESSION["user"]["status_id"])
-            );
-        } else {
-            $sql = sprintf('INSERT INTO users SET fullname = "%s",
-              email = "%s",password = "%s",loing_count = 0,status_id = %d,created = NOW()',
-              mysqli_real_escape_string($db,$fullname),
-              mysqli_real_escape_string($db,$_SESSION["user"]["email"]),
-              mysqli_real_escape_string($db,sha1($_SESSION["user"]["password"])),
-              mysqli_real_escape_string($db,$_SESSION["user"]["status_id"])
-            );
-        }
-        mysqli_query($db,$sql)or die(mysqli_error($db));
-        unset($_SESSION["user"]);
-
-
-        $sql = 'SELECT * FROM users ORDER BY created DESC';
-        $users = mysqli_query($db,$sql)or die(mysqli_error($db));
-        $user = mysqli_fetch_assoc($users);
-        //新しくユーザーが登録されたことを通知する
-        $sql = sprintf('INSERT INTO notifications SET user_id = %d,
-                         notificaton_message_id = 1, created = NOW()',
-                    mysqli_real_escape_string($db,$user['id'])
-        );
-        $user_notification = mysqli_query($db,$sql)or die(mysqli_error($db));
-        header('Location: ../../user/auth/login');
-        exit();
-    }
 ?>
 
 <div id="page-wrapper">
