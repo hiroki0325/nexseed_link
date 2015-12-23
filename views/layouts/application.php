@@ -117,13 +117,6 @@
   <!-- /FOOTER -->
 
   <!-- Scripts -->
-
-
-  <script src="../../views/assets/js/jquery.min.js"></script>
-  <script src="../../views/assets/js/bootstrap.js"></script>
-  <script src="../../views/assets/js/mypage/util.js"></script>
-  <script type='text/javascript' src="../../views/assets/js/<?php echo $function.'/'.$directry.'.js';?>"></script>
-
   <?php if($function == 'mypage'):?>
     <script src="views/assets/js/jquery.min.js"></script>
     <script src="views/assets/js/bootstrap.js"></script>
