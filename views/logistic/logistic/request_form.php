@@ -26,7 +26,12 @@
         if (empty($error)) {
             if($filename != "" ) {
                 $image = $filename;  
-                move_uploaded_file($_FILES['image']['tmp_name'],'/var/www/html/nexseed_link/views/logistic/logistic/image_thing/'.$image);  
+                move_uploaded_file($_FILES['image']['tmp_name'],"views/logistic/logistic/image_thing/".$image);
+                //'../logistic/logistic/image_thing/' application.php
+                //'views/logistic/logistic/image_thing/' routes.php
+                //'../../views/logistic/logistic/image_thing/' 表示させている画像のパス
+
+
             }
         }
         //エラーがない場合logistic_postsにinsert

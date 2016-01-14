@@ -28,7 +28,7 @@
         if (empty($error)) {
             if($filename != "" ) {
                 $image = $filename;  
-                move_uploaded_file($_FILES['image']['tmp_name'],'/var/www/html/nexseed_link/views/logistic/logistic/image_thing/'.$image);  
+                move_uploaded_file($_FILES['image']['tmp_name'],"views/logistic/logistic/image_thing/".$image);  
       
                 if($_SESSION['image'] != $_FILES['image']['name']){
                     $new_image = $_FILES['image']['name'];

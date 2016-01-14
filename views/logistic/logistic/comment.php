@@ -21,7 +21,7 @@
         if (empty($error)) {
             if($filename != "" ) {
                 $image_comment = $filename;  
-                move_uploaded_file($_FILES['image_comment']['tmp_name'],'/var/www/html/nexseed_link/views/logistic/logistic/image_comment/'.$image_comment);  
+                move_uploaded_file($_FILES['image_comment']['tmp_name'],"views/logistic/logistic/image_comment/".$image_comment); 
             }
         }
         //エラーがない場合logistic_postsにinsert
