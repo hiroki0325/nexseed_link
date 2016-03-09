@@ -1,7 +1,7 @@
 <?php
     // ログイン判定
     if (!isLoginSuccess()) {
-        header('Location: /nexseed_link/user/auth/login');
+        header('Location: /7th_batch_camp//nexseed_link/user/auth/login');
         exit();
     }
 

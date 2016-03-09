@@ -1,4 +1,4 @@
-<?php 
+<?php
     $status = status();
     if (!isLoginSuccess() || $status != 1) {
         header('Location: ../../user/auth/login');
@@ -21,7 +21,7 @@
         }
         if ($_POST["password"] == '') {
           $error["password"] = 'blank';
-        } 
+        }
         //重複アカウントのチェック
         if (empty($error)) {
           $sql = sprintf('SELECT count(*) AS cnt FROM users
@@ -241,7 +241,7 @@
                   <?php else: ?>
                       <a href='../admin/index'><i class='fa-fw fa-dashboard'></i> Dashboard</a>
                   <?php endif; ?>
-                  
+
                </li>
                <li>
                   <?php if($function == 'join'): ?>
@@ -317,8 +317,8 @@
       <!-- jQuery -->
       <script src="../../views/assets/js/admin/jquery.js"></script>
       <!-- table_sort -->
-      <script src="../../views/assets/js/admin/jquery.tablesorter.min.js"></script> 
-    
+      <script src="../../views/assets/js/admin/jquery.tablesorter.min.js"></script>
+
     <?php
         if (!isset($page)) {
           include('./views/' . $function . '/' . $directry . '.php');
