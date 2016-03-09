@@ -46,7 +46,7 @@
         if (empty($error)) {
             if($filename != "" ) {
                 $image = $filename;  
-                move_uploaded_file($_FILES['comment_image']['tmp_name'],'/var/www/html/nexseed_link/views/logistic/logistic/comment_image/'.$image);           
+                move_uploaded_file($_FILES['comment_image']['tmp_name'],'../logistic/image_comment/'.$image);           
             } 
         }
 
