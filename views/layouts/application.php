@@ -64,11 +64,11 @@
       <!-- Nav -->
       <nav id="nav">
         <ul>
-          <li><a href="/nexseed_link/mypage" id="top-link" class="skel-layers-ignoreHref"><span class="icon fa-home">ホーム</span></a></li>
-          <li><a href="/nexseed_link/onlineEnglish/reserve/index" id="portfolio-link" class="skel-layers-ignoreHref"><span class="fa fa-commenting">英会話</span></a></li>
-          <li><a href="/nexseed_link/logistic/logistic/top" id="about-link" class="skel-layers-ignoreHref"><span class="fa fa-plane">物流</span></a></li>
-          <li><a href="#" id="contact-link" class="skel-layers-ignoreHref"><span class="icon fa fa-cog">詳細ページ</span></a></li>
-          <li><a href="/nexseed_link/user/auth/logout" class="skel-layers-ignoreHref"><span class="fa fa-sign-out">ログアウト</span></a></li>
+          <li><a href="/7th_batch_camp/nexseed_link/mypage" id="top-link" class="skel-layers-ignoreHref"><span class="icon fa-home">ホーム</span></a></li>
+          <li><a href="/7th_batch_camp/nexseed_link/onlineEnglish/reserve/index" id="portfolio-link" class="skel-layers-ignoreHref"><span class="fa fa-commenting">英会話</span></a></li>
+          <li><a href="/7th_batch_camp/nexseed_link/logistic/logistic/top" id="about-link" class="skel-layers-ignoreHref"><span class="fa fa-plane">物流</span></a></li>
+          <!-- <li><a href="#" id="contact-link" class="skel-layers-ignoreHref"><span class="icon fa fa-cog">詳細ページ</span></a></li> -->
+          <li><a href="/7th_batch_camp/nexseed_link/user/auth/logout" class="skel-layers-ignoreHref"><span class="fa fa-sign-out">ログアウト</span></a></li>
         </ul>
       </nav>
     </div>
