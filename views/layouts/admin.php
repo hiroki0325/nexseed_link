@@ -1,7 +1,7 @@
 <?php
     $status = status();
     if (!isLoginSuccess() || $status != 1) {
-        header('Location: ../../user/auth/login');
+        header('Location: /7th_batch_camp/nexseed_link/user/auth/login');
         exit();
     }
 
